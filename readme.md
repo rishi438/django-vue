@@ -1,1 +1,1 @@
-this is django and vuejs
+this is django and vuejs comined
