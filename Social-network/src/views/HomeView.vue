@@ -39,7 +39,7 @@
           <div class="flex items-center space-x-6">
             <img src="../assets/1639256761455.jpeg" class="w-[40px] rounded-full" />
 
-            <p><strong>Code With Stein</strong></p>
+            <p><strong>Rishi</strong></p>
           </div>
 
           <p class="text-gray-600">18 minutes ago</p>
@@ -115,7 +115,7 @@
           <div class="flex items-center space-x-6">
             <img src="../assets/1639256761455.jpeg" class="w-[40px] rounded-full" />
 
-            <p><strong>Code With Stein</strong></p>
+            <p><strong>Rishi</strong></p>
           </div>
 
           <p class="text-gray-600">28 minutes ago</p>
@@ -197,7 +197,7 @@
             <div class="flex items-center space-x-2">
               <img src="../assets/1639256761455.jpeg" class="w-[40px] rounded-full" />
 
-              <p class="text-xs"><strong>Code With Stein</strong></p>
+              <p class="text-xs"><strong>Rishi</strong></p>
             </div>
 
             <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
@@ -207,7 +207,7 @@
             <div class="flex items-center space-x-2">
               <img src="../assets/1639256761455.jpeg" class="w-[40px] rounded-full" />
 
-              <p class="text-xs"><strong>Code With Stein</strong></p>
+              <p class="text-xs"><strong>Rishi</strong></p>
             </div>
 
             <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
@@ -217,7 +217,7 @@
             <div class="flex items-center space-x-2">
               <img src="../assets/1639256761455.jpeg" class="w-[40px] rounded-full" />
 
-              <p class="text-xs"><strong>Code With Stein</strong></p>
+              <p class="text-xs"><strong>Rishi</strong></p>
             </div>
 
             <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
