@@ -165,23 +165,23 @@
 
               <span class="text-gray-500 text-xs">3 comments</span>
             </div>
-          </div>
 
-          <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-              />
-            </svg>
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+                />
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -189,102 +189,21 @@
     <div
       class="main-right lg:col-span-3 md:col-span-4 space-y-2 sm:col-span-5 col-span-12 sm:order-3 order-2"
     >
-      <div class="p-4 bg-white border border-gray-200 rounded-lg">
-        <h3 class="mb-6 text-xl">People you may know</h3>
-
-        <div class="space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <img src="../assets/1639256761455.jpeg" class="w-[40px] rounded-full" />
-
-              <p class="text-xs"><strong>Rishi</strong></p>
-            </div>
-
-            <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
-          </div>
-
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <img src="../assets/1639256761455.jpeg" class="w-[40px] rounded-full" />
-
-              <p class="text-xs"><strong>Rishi</strong></p>
-            </div>
-
-            <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
-          </div>
-
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <img src="../assets/1639256761455.jpeg" class="w-[40px] rounded-full" />
-
-              <p class="text-xs"><strong>Rishi</strong></p>
-            </div>
-
-            <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-4 bg-white border border-gray-200 rounded-lg">
-        <h3 class="mb-6 text-xl">Trends</h3>
-
-        <div class="space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <p class="text-xs">
-                <strong>#codewithstein</strong><br />
-                <span class="text-gray-500">180 posts</span>
-              </p>
-            </div>
-
-            <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Explore</a>
-          </div>
-
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <p class="text-xs">
-                <strong>#codewithstein</strong><br />
-                <span class="text-gray-500">180 posts</span>
-              </p>
-            </div>
-
-            <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Explore</a>
-          </div>
-
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <p class="text-xs">
-                <strong>#codewithstein</strong><br />
-                <span class="text-gray-500">180 posts</span>
-              </p>
-            </div>
-
-            <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Explore</a>
-          </div>
-
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <p class="text-xs">
-                <strong>#codewithstein</strong><br />
-                <span class="text-gray-500">180 posts</span>
-              </p>
-            </div>
-
-            <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Explore</a>
-          </div>
-
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <p class="text-xs">
-                <strong>#codewithstein</strong><br />
-                <span class="text-gray-500">180 posts</span>
-              </p>
-            </div>
-
-            <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Explore</a>
-          </div>
-        </div>
-      </div>
+      <PeopleYouMayKnow />
+      <Trends />
     </div>
   </div>
 </template>
+
+<script>
+import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
+import Trends from '../components/TrendsNetwork.vue'
+
+export default {
+  name: 'FeedView',
+  components: {
+    PeopleYouMayKnow,
+    Trends
+  }
+}
+</script>
