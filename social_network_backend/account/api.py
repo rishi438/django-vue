@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from loguru import logger
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
 from .forms import SigupForm
@@ -18,6 +19,7 @@ def signup(request):
     """
     data = request.data
     message = "success"
+    logger.debug(data)
     form = SigupForm(
         {
             "email": data.get("email"),
@@ -26,6 +28,7 @@ def signup(request):
             "password2": data.get("password2"),
         }
     )
+    logger.debug(form.errors)
     if form.is_valid():
         form.save()
         # send verfication email later!
