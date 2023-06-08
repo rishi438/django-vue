@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 // eslint-disable-next-line no-undef
-export let useUserStore = define({
+export let useUserStore = defineStore({
   id: 'user',
 
   state: () => ({
@@ -29,66 +29,59 @@ export let useUserStore = define({
 
         console.log('Initialized user: ', this.user)
       }
+    },
+
+    setToken(data) {
+      this.user.access = data.access
+      this.user.refresh = data.refresh
+      this.user.isAuthenticated = true
+      localStorage.setItem('user.access', data.access)
+      localStorage.setItem('user.access', data.refresh)
+    },
+
+    removeToken() {
+      console.log('removeToken')
+
+      this.user.refresh = null
+      this.user.access = null
+      this.user.id = false
+      this.user.name = false
+      this.user.id = false
+      this.user.email = false
+
+      localStorage.setItem('user.access', '')
+      localStorage.setItem('user.refresh', '')
+      localStorage.setItem('user.id', '')
+      localStorage.setItem('user.name', '')
+      localStorage.setItem('user.email', '')
+    },
+
+    setUserInfo(user) {
+      this.user.id = user.id
+      this.user.name = user.name
+      this.user.email = user.email
+
+      localStorage.setItem('user.id', this.user.id)
+      localStorage.setItem('user.name', this.user.name)
+      localStorage.setItem('user.email', this.user.email)
+    },
+
+    refreshToken() {
+      axios
+        .post('/api/account/refresh', {
+          refresh: this.user.refresh
+        })
+        .then((response) => {
+          this.user.access = response.data.access
+
+          localStorage.setItem('user.access', response.data.access)
+
+          axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access
+        })
+        .catch((error) => {
+          console.log(error)
+          this.removeToken()
+        })
     }
-  },
-
-  setToken(data) {
-    console.log('setToken ', data)
-
-    this.user.access = data.access
-    this.user.refresh = data.refresh
-    this.user.isAuthenticated = true
-
-    localStorage.setItem('user.access', data.access)
-    localStorage.setItem('user.access', data.refresh)
-  },
-
-  removeToken() {
-    console.log('removeToken')
-
-    this.user.refresh = null
-    this.user.access = null
-    this.user.id = false
-    this.user.name = false
-    this.user.id = false
-    this.user.email = false
-
-    localStorage.setItem('user.access', '')
-    localStorage.setItem('user.refresh', '')
-    localStorage.setItem('user.id', '')
-    localStorage.setItem('user.name', '')
-    localStorage.setItem('user.email', '')
-  },
-
-  setUserInfo(user) {
-    console.log('setUserInfo', user)
-
-    this.user.id = user.id
-    this.user.name = user.name
-    this.user.email = user.email
-
-    localStorage.setItem('user.id', this.user.id)
-    localStorage.setItem('user.name', this.user.name)
-    localStorage.setItem('user.email', this.user.email)
-
-    console.log('User', this.user)
-  },
-
-  refreshToken() {
-    axios
-      .post('/api/account/refresh', {
-        refresh: this.user.refresh
-      })
-      .then((response) => {
-        this.user.access = response.data.access
-
-        localStorage.setItem('user.access', response.data.access)
-
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access
-      })
-      .catch((error) => {
-        console.log(error)
-        this.removeToken()
-      })
   }
 })

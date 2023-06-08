@@ -5,6 +5,25 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from .forms import SigupForm
 
 
+@api_view(["GET"])
+def me(request):
+    """_summary_
+
+    Args:
+        request (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    return JsonResponse(
+        {
+            "id": request.user.id,
+            "name": request.user.name,
+            "email": request.user.email,
+        }
+    )
+
+
 @api_view(["POST"])
 @authentication_classes([])
 @permission_classes([])
