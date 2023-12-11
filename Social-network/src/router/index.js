@@ -6,6 +6,7 @@ import MessengerView from '../views/MessengerView.vue'
 import SearchView from '../views/SearchView.vue'
 
 const router = createRouter({
+  // @ts-ignore
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
