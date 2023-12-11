@@ -3,8 +3,10 @@
     <div class="main-left lg:col-span-3 md:col-span-3 col-span-12 order-1">
       <div class="main-left md:col-span-1 col-span-4">
         <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
-          <img src="../assets/1639256761455.jpeg" width="300px" class="mb-6 rounded-full" />
-          <p><strong>Rishi</strong></p>
+          <div class="text-center">
+            <img src="/src/assets/1639256761455.jpeg" width="300px" class="mb-6 rounded-full mx-auto">
+            <p><strong>Rishi</strong></p>
+          </div>
           <div class="mt-6 flex space-x-8 justify-around">
             <p class="text-xs text-gray-500">182 friends</p>
             <p class="text-xs text-gray-500">120 posts</p>
@@ -42,7 +44,7 @@
             <p><strong>Rishi</strong></p>
           </div>
 
-          <p class="text-gray-600">18 minutes ago</p>
+          <p class="text-gray-600 text-xs">18 minutes ago</p>
         </div>
 
         <img
@@ -111,14 +113,15 @@
       </div>
 
       <div class="p-4 bg-white border border-gray-200 rounded-lg">
-        <div class="mb-6 flex items-center justify-between">
+        <div class="mb-6 flex justify-between">
           <div class="flex items-center space-x-6">
             <img src="../assets/1639256761455.jpeg" class="w-[40px] rounded-full" />
 
             <p><strong>Rishi</strong></p>
           </div>
-
-          <p class="text-gray-600">28 minutes ago</p>
+          <div class="z-0 flex items-end">
+            <p class="text-xs text-gray-600 mb-[-5px]"><span>28 minutes ago</span></p>
+          </div>
         </div>
 
         <p>

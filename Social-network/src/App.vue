@@ -1,5 +1,5 @@
 <template>
-  <nav class="py-10 px-8 border-b border-gray-200">
+  <nav class="py-4 px-8 border-b border-gray-200">
     <div class="max-w-screen-2xl mx-auto">
       <div class="flex items-center justify-between">
         <div class="menu-left">
@@ -7,7 +7,7 @@
         </div>
 
         <div class="menu-center flex space-x-3 sm:space-x-12">
-          <a href="#" class="text-purple-700">
+          <a href="/home" class="text-teal-300">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -24,7 +24,7 @@
             </svg>
           </a>
 
-          <a href="#">
+          <a href="/messenger">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -41,7 +41,7 @@
             </svg>
           </a>
 
-          <a href="#">
+          <a href="/notification">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -58,7 +58,7 @@
             </svg>
           </a>
 
-          <a href="#">
+          <a href="/search">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -91,8 +91,10 @@
 </template>
 
 <script>
+// @ts-ignore
 import Toast from '@/components/ToastMessage.vue'
 
+// @ts-ignore
 export default {
   components: {
     Toast
