@@ -182,9 +182,11 @@
 
 <script>
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
+// @ts-ignore
 import Trends from '../components/TrendsNetwork.vue'
+
 export default {
-  name: 'FeedView',
+  name: 'Home',
   components: {
     PeopleYouMayKnow,
     Trends

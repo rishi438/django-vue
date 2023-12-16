@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import signupView from '../views/SignupView.vue'
-import LoginView from '../views/LoginView.vue'
-import MessengerView from '../views/MessengerView.vue'
-import SearchView from '../views/SearchView.vue'
+import Home from '../views/HomeView.vue'
+import signup from '../views/SignupView.vue'
+import Login from '../views/LoginView.vue'
+import Messenger from '../views/MessengerView.vue'
+import Search from '../views/SearchView.vue'
+import Notification from '../views/NotificationView.vue'
 
 const router = createRouter({
   // @ts-ignore
@@ -12,27 +13,32 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: HomeView
+      component: Home
     },
     {
       path: '/signup',
       name: 'signup',
-      component: signupView
+      component: signup
     },
     {
       path: '/',
       name: 'login',
-      component: LoginView
+      component: Login
     },
     {
       path: '/messenger',
       name: 'messenger',
-      component: MessengerView
+      component: Messenger
     },
     {
       path: '/search',
       name: 'search',
-      component: SearchView
+      component: Search
+    },
+    {
+      path: '/notification',
+      name: 'notification',
+      component: Notification
     }
   ]
 })

@@ -69,7 +69,9 @@
 <script>
 import axios from 'axios'
 import { useToastStore } from '../stores/toast'
+
 export default {
+  name: 'Signup',
   setup() {
     let toastStore = useToastStore()
     return {

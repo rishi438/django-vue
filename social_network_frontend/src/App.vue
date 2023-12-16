@@ -6,7 +6,7 @@
           <a href="#" class="text-xl">Network</a>
         </div>
         <div class="menu-center space-x-3 sm:space-x-12 sm:flex hidden">
-          <a href="/home" class="text-teal-300">
+          <a href="/home" :class="{ 'text-teal-300': route_name === 'home' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -22,7 +22,7 @@
               ></path>
             </svg>
           </a>
-          <a href="/messenger">
+          <a href="/messenger" :class="{ 'text-teal-300': route_name === 'messenger' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -38,7 +38,7 @@
               ></path>
             </svg>
           </a>
-          <a href="/notification">
+          <a href="/notification" :class="{ 'text-teal-300': route_name === 'notification' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -54,7 +54,7 @@
               ></path>
             </svg>
           </a>
-          <a href="/search">
+          <a href="/search" :class="{ 'text-teal-300': route_name === 'search' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -93,10 +93,15 @@
 // @ts-ignore
 import Toast from '@/components/ToastMessage.vue'
 
-// @ts-ignore
 export default {
   components: {
     Toast
+  },
+  computed: {
+    // @ts-ignore
+    route_name() {
+      return this.$route.name
+    }
   }
 }
 </script>
