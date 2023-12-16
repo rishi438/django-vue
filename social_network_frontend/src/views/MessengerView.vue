@@ -98,3 +98,9 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'Messenger'
+}
+</script>

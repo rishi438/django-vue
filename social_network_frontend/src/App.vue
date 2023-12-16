@@ -3,10 +3,10 @@
     <div class="max-w-screen-2xl mx-auto">
       <div class="flex items-center justify-between">
         <div class="menu-left">
-          <a href="#" class="text-xl">Network</a>
+          <a href="/home" class="text-xl">Network</a>
         </div>
         <div class="menu-center space-x-3 sm:space-x-12 sm:flex hidden">
-          <a href="/home" class="text-teal-300">
+          <a href="/home" :class="{ 'text-teal-300': route_name === 'home' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -22,7 +22,7 @@
               ></path>
             </svg>
           </a>
-          <a href="/messenger">
+          <a href="/messenger" :class="{ 'text-teal-300': route_name === 'messenger' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -38,7 +38,7 @@
               ></path>
             </svg>
           </a>
-          <a href="/notification">
+          <a href="/notification" :class="{ 'text-teal-300': route_name === 'notification' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -54,7 +54,7 @@
               ></path>
             </svg>
           </a>
-          <a href="/search">
+          <a href="/search" :class="{ 'text-teal-300': route_name === 'search' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -83,7 +83,7 @@
       </div>
     </div>
   </nav>
-  <main class="px-8 py-6 bg-gray-100 h-auto">
+  <main class="px-8 py-6 bg-gray-100 h-full">
     <RouterView />
   </main>
   <Toast />
@@ -93,10 +93,15 @@
 // @ts-ignore
 import Toast from '@/components/ToastMessage.vue'
 
-// @ts-ignore
 export default {
   components: {
     Toast
+  },
+  computed: {
+    // @ts-ignore
+    route_name() {
+      return this.$route.name
+    }
   }
 }
 </script>
