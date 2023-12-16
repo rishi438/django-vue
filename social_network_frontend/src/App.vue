@@ -83,7 +83,7 @@
       </div>
     </div>
   </nav>
-  <main class="px-8 py-6 bg-gray-100 md:h-full h-screen">
+  <main class="px-8 py-6 bg-gray-100 h-auto">
     <RouterView />
   </main>
   <Toast />

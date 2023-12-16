@@ -88,9 +88,9 @@
             <img src="../assets/1639256761455.jpeg" class="w-[40px] h-[40px] rounded-full" />
             <p><strong>Rishi</strong></p>
           </div>
-          <p class="text-gray-600">28 minutes ago</p>
+          <p class="text-gray-600 text-[12px]">28 minutes ago</p>
         </div>
-        <p>
+        <p class="md:text-base/6 text-sm">
           This is just a random text post. This is just a random text post. This is just a random
           text post. This is just a random text post.
         </p>
