@@ -1,2 +1,2 @@
 # django-vue
-# Social-Network website 
+# Social-Network
