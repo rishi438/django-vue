@@ -5,7 +5,7 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <p class="text-xs">
-            <strong>#codewithstein</strong><br />
+            <strong>#trending</strong><br />
             <span class="text-gray-500">180 posts</span>
           </p>
         </div>
@@ -14,7 +14,7 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <p class="text-xs">
-            <strong>#codewithstein</strong><br />
+            <strong>#trending</strong><br />
             <span class="text-gray-500">180 posts</span>
           </p>
         </div>
@@ -23,7 +23,7 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <p class="text-xs">
-            <strong>#codewithstein</strong><br />
+            <strong>#trending</strong><br />
             <span class="text-gray-500">180 posts</span>
           </p>
         </div>
@@ -32,7 +32,7 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <p class="text-xs">
-            <strong>#codewithstein</strong><br />
+            <strong>#trending</strong><br />
             <span class="text-gray-500">180 posts</span>
           </p>
         </div>
@@ -41,7 +41,7 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <p class="text-xs">
-            <strong>#codewithstein</strong><br />
+            <strong>#trending</strong><br />
             <span class="text-gray-500">180 posts</span>
           </p>
         </div>

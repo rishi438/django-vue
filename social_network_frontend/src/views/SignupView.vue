@@ -58,7 +58,7 @@
             </div>
           </template>
           <div>
-            <button class="py-4 px-6 bg-teal-500 text-white rounded-lg">Sign up</button>
+            <button class="py-3 px-6 bg-teal-500 text-white rounded-lg">Sign up</button>
           </div>
         </form>
       </div>
