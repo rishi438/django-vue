@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.profile-img {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
