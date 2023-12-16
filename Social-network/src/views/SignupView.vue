@@ -34,7 +34,6 @@
               class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"
             />
           </div>
-
           <div>
             <label>Password</label><br />
             <input
@@ -44,7 +43,6 @@
               class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"
             />
           </div>
-
           <div>
             <label>Repeat Password</label><br />
             <input
@@ -60,7 +58,7 @@
             </div>
           </template>
           <div>
-            <button class="py-4 px-6 bg-purple-600 text-white rounded-lg">Sign up</button>
+            <button class="py-4 px-6 bg-teal-500 text-white rounded-lg">Sign up</button>
           </div>
         </form>
       </div>
@@ -71,7 +69,6 @@
 <script>
 import axios from 'axios'
 import { useToastStore } from '../stores/toast'
-
 export default {
   setup() {
     let toastStore = useToastStore()
@@ -92,19 +89,24 @@ export default {
   },
   methods: {
     submitForm() {
+      // @ts-ignore
       this.error = []
 
       if (this.form.email === '') {
+        // @ts-ignore
         this.errors.push('Your e-mail is missing')
       }
 
       if (this.form.name === '') {
+        // @ts-ignore
         this.errors.push('Your name is missing')
       }
       if (this.form.password1 === '') {
+        // @ts-ignore
         this.errors.push('Your password is missing')
       }
       if (this.form.password1 !== this.form.password2) {
+        // @ts-ignore
         this.errors.push('Your password does not match')
       }
 

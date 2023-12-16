@@ -5,8 +5,7 @@
         <div class="menu-left">
           <a href="#" class="text-xl">Network</a>
         </div>
-
-        <div class="menu-center flex space-x-3 sm:space-x-12">
+        <div class="menu-center space-x-3 sm:space-x-12 sm:flex hidden">
           <a href="/home" class="text-teal-300">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +22,6 @@
               ></path>
             </svg>
           </a>
-
           <a href="/messenger">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +38,6 @@
               ></path>
             </svg>
           </a>
-
           <a href="/notification">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +54,6 @@
               ></path>
             </svg>
           </a>
-
           <a href="/search">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -75,16 +71,19 @@
             </svg>
           </a>
         </div>
-
         <div class="menu-right">
           <a href="#">
-            <img src="../src/assets/1639256761455.jpeg" width="40px" class="rounded-full" />
+            <img
+              src="../src/assets/1639256761455.jpeg"
+              width="40px"
+              class="rounded-full h-[40px] w-[40px]"
+            />
           </a>
         </div>
       </div>
     </div>
   </nav>
-  <main class="px-8 py-6 bg-gray-100">
+  <main class="px-8 py-6 bg-gray-100 md:h-full h-screen">
     <RouterView />
   </main>
   <Toast />
