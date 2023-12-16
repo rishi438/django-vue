@@ -25,7 +25,6 @@
               class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"
             />
           </div>
-
           <div>
             <label>Password</label><br />
             <input
@@ -35,15 +34,13 @@
               class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"
             />
           </div>
-
           <template v-if="errors.length > 0">
             <div class="bg-red-300 text-white rounded-lg p-6">
               <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
             </div>
           </template>
-
           <div>
-            <button class="py-4 px-6 bg-purple-600 text-white rounded-lg">Log in</button>
+            <button class="py-4 px-6 bg-teal-500 text-white rounded-lg">Log in</button>
           </div>
         </form>
       </div>
@@ -53,6 +50,7 @@
 
 <script>
 import axios from 'axios'
+// @ts-ignore
 import { useUserStore } from '@/stores/user'
 
 export default {
@@ -75,10 +73,12 @@ export default {
     async submitForm() {
       this.errors = []
       if (this.form.email === '') {
+        // @ts-ignore
         this.errors.push('Your e-mail is missing')
       }
 
       if (this.form.password === '') {
+        // @ts-ignore
         this.errors.push('Your password is missing')
       }
 
@@ -97,6 +97,7 @@ export default {
           .then((response) => {
             this.userStore.setUserInfo(response.data)
 
+            // @ts-ignore
             this.$router.push('/home')
           })
           .catch((error) => {

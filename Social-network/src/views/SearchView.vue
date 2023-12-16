@@ -1,91 +1,99 @@
 <template>
   <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
-    <div class="main-center col-span-3 space-y-4">
+    <div class="main-center md:col-span-3 col-span-4 space-y-4">
       <div class="bg-white border border-gray-200 rounded-lg">
-        <div class="p-4 flex space-x-4">
+        <div class="p-6 flex space-x-4">
           <input
             type="search"
-            class="p-4 w-full bg-gray-100 rounded-lg"
+            class="p-3 w-full bg-gray-100 rounded-lg"
             placeholder="What are you looking for?"
           />
-
-          <a href="#" class="inline-block py-4 px-6 bg-purple-600 text-white rounded-lg">Post</a>
+          <a href="#" class="inline-block py-2 px-6 bg-teal-500 text-white rounded-lg self-center"
+            >Post</a
+          >
         </div>
       </div>
-
-      <div class="p-4 bg-white border border-gray-200 rounded-lg grid grid-cols-4 gap-4">
+      <div
+        class="p-4 bg-white border border-gray-200 rounded-lg grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 lg:gap-5 md:gap-3 grid-cols-1 gap-2"
+      >
         <div class="p-4 text-center bg-gray-100 rounded-lg">
-          <img src="../assets/1639256761455.jpeg" class="mb-6 rounded-full" />
-
-          <p><strong>Rishi</strong></p>
-
+          <div class="text-center">
+            <img
+              src="../assets/1639256761455.jpeg"
+              class="mb-6 rounded-full w-[130px] h-[130px] mx-auto"
+            />
+            <p><strong>Rishi</strong></p>
+          </div>
           <div class="mt-6 flex space-x-8 justify-around">
             <p class="text-xs text-gray-500">182 friends</p>
             <p class="text-xs text-gray-500">120 posts</p>
           </div>
         </div>
-
         <div class="p-4 text-center bg-gray-100 rounded-lg">
-          <img src="../assets/1639256761455.jpeg" class="mb-6 rounded-full" />
-
-          <p><strong>Rishi</strong></p>
-
+          <div class="text-center">
+            <img
+              src="../assets/1639256761455.jpeg"
+              class="mb-6 rounded-full w-[130px] h-[130px] mx-auto"
+            />
+            <p><strong>Rishi</strong></p>
+          </div>
           <div class="mt-6 flex space-x-8 justify-around">
             <p class="text-xs text-gray-500">182 friends</p>
             <p class="text-xs text-gray-500">120 posts</p>
           </div>
         </div>
-
         <div class="p-4 text-center bg-gray-100 rounded-lg">
-          <img src="../assets/1639256761455.jpeg" class="mb-6 rounded-full" />
-
-          <p><strong>Rishi</strong></p>
-
+          <div class="text-center">
+            <img
+              src="../assets/1639256761455.jpeg"
+              class="mb-6 rounded-full w-[130px] h-[130px] mx-auto"
+            />
+            <p><strong>Rishi</strong></p>
+          </div>
           <div class="mt-6 flex space-x-8 justify-around">
             <p class="text-xs text-gray-500">182 friends</p>
             <p class="text-xs text-gray-500">120 posts</p>
           </div>
         </div>
-
         <div class="p-4 text-center bg-gray-100 rounded-lg">
-          <img src="../assets/1639256761455.jpeg" class="mb-6 rounded-full" />
-
-          <p><strong>Rishi</strong></p>
-
+          <div class="text-center">
+            <img
+              src="../assets/1639256761455.jpeg"
+              class="mb-6 rounded-full w-[130px] h-[130px] mx-auto"
+            />
+            <p><strong>Rishi</strong></p>
+          </div>
           <div class="mt-6 flex space-x-8 justify-around">
             <p class="text-xs text-gray-500">182 friends</p>
             <p class="text-xs text-gray-500">120 posts</p>
           </div>
         </div>
-
         <div class="p-4 text-center bg-gray-100 rounded-lg">
-          <img src="../assets/1639256761455.jpeg" class="mb-6 rounded-full" />
-
-          <p><strong>Rishi</strong></p>
-
+          <div class="text-center">
+            <img
+              src="../assets/1639256761455.jpeg"
+              class="mb-6 rounded-full w-[130px] h-[130px] mx-auto"
+            />
+            <p><strong>Rishi</strong></p>
+          </div>
           <div class="mt-6 flex space-x-8 justify-around">
             <p class="text-xs text-gray-500">182 friends</p>
             <p class="text-xs text-gray-500">120 posts</p>
           </div>
         </div>
       </div>
-
       <div class="p-4 bg-white border border-gray-200 rounded-lg">
         <div class="mb-6 flex items-center justify-between">
           <div class="flex items-center space-x-6">
-            <img src="../assets/1639256761455.jpeg" class="w-[40px] rounded-full" />
-
+            <img src="../assets/1639256761455.jpeg" class="w-[40px] h-[40px] rounded-full" />
             <p><strong>Rishi</strong></p>
           </div>
-
           <p class="text-gray-600">28 minutes ago</p>
         </div>
-
         <p>
           This is just a random text post. This is just a random text post. This is just a random
           text post. This is just a random text post.
         </p>
-
         <div class="my-6 flex justify-between">
           <div class="flex space-x-6">
             <div class="flex items-center space-x-2">
@@ -103,10 +111,8 @@
                   d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
                 />
               </svg>
-
               <span class="text-gray-500 text-xs">82 likes</span>
             </div>
-
             <div class="flex items-center space-x-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -122,11 +128,9 @@
                   d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"
                 />
               </svg>
-
               <span class="text-gray-500 text-xs">3 comments</span>
             </div>
           </div>
-
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -146,8 +150,7 @@
         </div>
       </div>
     </div>
-
-    <div class="main-right col-span-1 space-y-4">
+    <div class="main-right md:col-span-1 col-span-4 space-y-4">
       <PeopleYouMayKnow />
       <Trends />
     </div>
@@ -157,7 +160,6 @@
 <script>
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 import Trends from '../components/TrendsNetwork.vue'
-
 export default {
   name: 'SearchView',
   components: {

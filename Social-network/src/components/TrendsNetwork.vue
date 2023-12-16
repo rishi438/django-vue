@@ -9,10 +9,8 @@
             <span class="text-gray-500">180 posts</span>
           </p>
         </div>
-
-        <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Explore</a>
+        <a href="#" class="py-2 px-3 bg-teal-500 text-white text-xs rounded-lg">Explore</a>
       </div>
-
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <p class="text-xs">
@@ -20,10 +18,8 @@
             <span class="text-gray-500">180 posts</span>
           </p>
         </div>
-
-        <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Explore</a>
+        <a href="#" class="py-2 px-3 bg-teal-500 text-white text-xs rounded-lg">Explore</a>
       </div>
-
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <p class="text-xs">
@@ -31,10 +27,8 @@
             <span class="text-gray-500">180 posts</span>
           </p>
         </div>
-
-        <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Explore</a>
+        <a href="#" class="py-2 px-3 bg-teal-500 text-white text-xs rounded-lg">Explore</a>
       </div>
-
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <p class="text-xs">
@@ -42,10 +36,8 @@
             <span class="text-gray-500">180 posts</span>
           </p>
         </div>
-
-        <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Explore</a>
+        <a href="#" class="py-2 px-3 bg-teal-500 text-white text-xs rounded-lg">Explore</a>
       </div>
-
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <p class="text-xs">
@@ -53,8 +45,7 @@
             <span class="text-gray-500">180 posts</span>
           </p>
         </div>
-
-        <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Explore</a>
+        <a href="#" class="py-2 px-3 bg-teal-500 text-white text-xs rounded-lg">Explore</a>
       </div>
     </div>
   </div>
