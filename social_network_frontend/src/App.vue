@@ -5,7 +5,10 @@
         <div class="menu-left">
           <a href="/home" class="text-xl">Network</a>
         </div>
-        <div class="menu-center space-x-3 sm:space-x-12 sm:flex hidden">
+        <div
+          class="menu-center space-x-3 sm:space-x-12 sm:flex hidden"
+          v-if="userStore.user.isAuthenticated"
+        >
           <a href="/home" :class="{ 'text-teal-300': route_name === 'home' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -72,13 +75,25 @@
           </a>
         </div>
         <div class="menu-right">
-          <a href="#">
+          <a href="#" v-if="userStore.user.isAuthenticated">
             <img
               src="../src/assets/1639256761455.jpeg"
               width="40px"
               class="rounded-full h-[40px] w-[40px]"
             />
           </a>
+          <div class="my-3" v-else>
+            <RouterLink
+              :to="{ name: 'login' }"
+              class="py-3 px-6 bg-teal-500 text-white rounded-lg mx-1"
+              >Log in</RouterLink
+            >
+            <RouterLink
+              :to="{ name: 'signup' }"
+              class="py-3 px-6 bg-zinc-500 text-white rounded-lg mx-1"
+              >sign up</RouterLink
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -92,14 +107,22 @@
 <script>
 // @ts-ignore
 import Toast from '@/components/ToastMessage.vue'
+// @ts-ignore
+import { useUserStore } from '@/stores/user'
 
 export default {
+  setup() {
+    let userStore = useUserStore()
+    return {
+      userStore
+    }
+  },
   components: {
     Toast
   },
   computed: {
-    // @ts-ignore
     route_name() {
+      // @ts-ignore
       return this.$route.name
     }
   }
