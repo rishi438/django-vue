@@ -25,12 +25,12 @@ repos:
     hooks:
       - id: python-use-type-annotations
     # ...
-  - repo: https://github.com/psf/black
-    rev: "23.3.0" # Use the sha / tag you want to point at
-    hooks:
-      - id: black
-        language_version: python3.10
-        args: [--line-length=100]
+  # - repo: https://github.com/psf/black
+  #   rev: "23.3.0" # Use the sha / tag you want to point at
+  #   hooks:
+  #     - id: black
+  #       language_version: python3.10
+  #       args: [--line-length=100]
   - repo: https://github.com/PyCQA/pylint
     rev: "v3.0.0a6" # Use the sha / tag you want to point at
     hooks:
