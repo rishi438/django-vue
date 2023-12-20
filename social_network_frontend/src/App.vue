@@ -75,13 +75,16 @@
           </a>
         </div>
         <div class="menu-right">
-          <a href="#" v-if="userStore.user.isAuthenticated">
+          <!-- <a href="#" v-if="userStore.user.isAuthenticated">
             <img
               src="../src/assets/1639256761455.jpeg"
               width="40px"
               class="rounded-full h-[40px] w-[40px]"
             />
-          </a>
+          </a> -->
+          <div v-if="userStore.user.isAuthenticated">
+            <DropDown :removeToken="userStore.removeToken" :options="list_opt" />
+          </div>
           <div class="my-3" v-else>
             <RouterLink
               :to="{ name: 'login' }"
@@ -100,6 +103,7 @@
   </nav>
   <main class="px-8 py-6 bg-gray-100 h-full">
     <RouterView />
+    <!-- <RouterView v-if="userStore.user.isAuthenticated" /> -->
   </main>
   <Toast />
 </template>
@@ -109,6 +113,7 @@
 import Toast from '@/components/ToastMessage.vue'
 // @ts-ignore
 import { useUserStore } from '@/stores/user'
+import DropDown from '@/components/DropDown.vue'
 
 export default {
   setup() {
@@ -118,8 +123,15 @@ export default {
       userStore
     }
   },
+  data() {
+    let list_opt = ['Your Account', 'profile', 'Logout']
+    return {
+      list_opt
+    }
+  },
   components: {
-    Toast
+    Toast,
+    DropDown
   },
   computed: {
     // // @ts-ignore
