@@ -103,7 +103,7 @@ export default {
   components: {
     Toast
   },
-  methods: {
+  computed: {
     // // @ts-ignore
     // login_check(){
     //   this.userStore.initStore()
