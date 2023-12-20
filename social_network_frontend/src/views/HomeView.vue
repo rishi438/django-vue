@@ -46,7 +46,7 @@
           src="https://images.unsplash.com/photo-1661956602868-6ae368943878?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80"
           class="w-full rounded-lg"
         />
-        <div class="my-6 flex justify-between">
+        <!-- <div class="my-6 flex justify-between">
           <div class="flex space-x-6">
             <div class="flex items-center space-x-2">
               <svg
@@ -99,22 +99,25 @@
               />
             </svg>
           </div>
-        </div>
+        </div> -->
       </div>
-      <div class="p-4 bg-white border border-gray-200 rounded-lg">
+      <div
+        class="p-4 bg-white border border-gray-200 rounded-lg"
+        v-for="post in posts"
+        v-bind:key="post.id"
+      >
         <div class="mb-6 flex justify-between">
           <div class="flex items-center space-x-6">
             <img src="../assets/1639256761455.jpeg" class="w-[40px] h-[40px] rounded-full" />
             <p><strong>Rishi</strong></p>
           </div>
           <div class="z-0 flex items-end">
-            <p class="text-xs text-gray-600 mb-[-5px]"><span>28 minutes ago</span></p>
+            <p class="text-xs text-gray-600 mb-[-5px]">
+              <span>{{ post.created_at_formatted }} ago</span>
+            </p>
           </div>
         </div>
-        <p>
-          This is just a random text post. This is just a random text post. This is just a random
-          text post. This is just a random text post.
-        </p>
+        <p>{{ post.body }}</p>
         <div class="my-6 flex justify-between">
           <div class="flex space-x-6">
             <div class="flex items-center space-x-2">
@@ -181,15 +184,47 @@
 </template>
 
 <script>
+import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 // @ts-ignore
 import Trends from '../components/TrendsNetwork.vue'
+import { useUserStore } from '../stores/user'
+import axiosInstance from '../stores/axios'
 
 export default {
   name: 'Home',
   components: {
     PeopleYouMayKnow,
     Trends
+  },
+  mounted() {
+    this.get_feed()
+    this.user_token()
+  },
+  data() {
+    return {
+      posts: []
+    }
+  },
+  methods: {
+    get_feed() {
+      let userStore = this.user_token().userStore
+      axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.user.access}`
+      axios
+        .get('/api/posts/')
+        .then((response) => {
+          this.posts = response.data
+        })
+        .catch((error) => {
+          console.log('error', error)
+        })
+    },
+    user_token() {
+      let userStore = useUserStore()
+      return {
+        userStore
+      }
+    }
   }
 }
 </script>

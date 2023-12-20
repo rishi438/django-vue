@@ -92,14 +92,24 @@
 <script>
 // @ts-ignore
 import Toast from '@/components/ToastMessage.vue'
+// @ts-ignore
+import { useUserStore } from '@/stores/user'
 
 export default {
+  setup() {
+    let userStore = useUserStore()
+    userStore.initStore()
+  },
   components: {
     Toast
   },
-  computed: {
-    // @ts-ignore
+  methods: {
+    // // @ts-ignore
+    // login_check(){
+    //   this.userStore.initStore()
+    // },
     route_name() {
+      // @ts-ignore
       return this.$route.name
     }
   }
