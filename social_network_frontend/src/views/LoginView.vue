@@ -100,7 +100,6 @@ export default {
           .get('/api/me/')
           .then((response) => {
             this.userStore.setUserInfo(response.data)
-
             // @ts-ignore
             this.$router.push('/home')
           })
