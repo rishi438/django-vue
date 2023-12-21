@@ -83,7 +83,11 @@
             />
           </a> -->
           <div v-if="userStore.user.isAuthenticated">
-            <DropDown :removeToken="userStore.removeToken" :options="list_opt" />
+            <DropDown
+              :removeToken="userStore.removeToken"
+              :d_name="option_details"
+              :options="list_opt"
+            />
           </div>
           <div class="my-3" v-else>
             <RouterLink
@@ -125,8 +129,10 @@ export default {
   },
   data() {
     let list_opt = ['Your Account', 'profile', 'Logout']
+    let option_details = { image: true, url: '../src/assets/1639256761455.jpeg' }
     return {
-      list_opt
+      list_opt,
+      option_details
     }
   },
   components: {

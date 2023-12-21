@@ -2,10 +2,10 @@
   <Menu as="div" class="relative inline-block text-left">
     <div>
       <MenuButton
-        class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        class="justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900s hover:bg-gray-50"
       >
-        Options
-        <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+        <img v-if="d_name['image']" :src="d_name['url']" class="w-[30px] h-[30px] rounded-full" />
+        <span v-else>{{ d_name }}</span>
       </MenuButton>
     </div>
 
@@ -44,6 +44,10 @@ import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 const props = defineProps({
   removeToken: {
     type: Function
+  },
+  d_name: {
+    type: Object,
+    required: true
   },
   options: {
     type: Array,
