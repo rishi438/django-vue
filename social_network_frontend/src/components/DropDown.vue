@@ -55,6 +55,8 @@ const logout = async () => {
   try {
     await props.removeToken?.()
     await $router.push('/')
-  } catch {}
+  } catch (error) {
+    console.error('error occured: ', error)
+  }
 }
 </script>
