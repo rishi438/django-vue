@@ -126,8 +126,6 @@ import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 // @ts-ignore
 import Trends from '../components/TrendsNetwork.vue'
-import { useUserStore } from '../stores/user'
-import axiosInstance from '../stores/axios'
 
 export default {
   name: 'Home',
@@ -137,7 +135,6 @@ export default {
   },
   mounted() {
     this.get_feed()
-    this.user_token()
   },
   data() {
     return {
@@ -147,8 +144,6 @@ export default {
   },
   methods: {
     get_feed() {
-      let userStore = this.user_token().userStore
-      axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.user.access}`
       axios
         .get('/api/post/')
         .then((response) => {
@@ -158,15 +153,7 @@ export default {
           console.log('error', error)
         })
     },
-    user_token() {
-      let userStore = useUserStore()
-      return {
-        userStore
-      }
-    },
     submit_form() {
-      let userStore = this.user_token().userStore
-      axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.user.access}`
       axios
         .post('/api/post/create/', {
           body: this.body
