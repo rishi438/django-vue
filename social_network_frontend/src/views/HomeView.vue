@@ -137,7 +137,7 @@ export default {
   },
   mounted() {
     this.get_feed()
-    this.user_token()
+    // this.user_token()
   },
   data() {
     return {
@@ -147,8 +147,8 @@ export default {
   },
   methods: {
     get_feed() {
-      let userStore = this.user_token().userStore
-      axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.user.access}`
+      // let userStore = this.user_token().userStore
+      // axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.user.access}`
       axios
         .get('/api/post/')
         .then((response) => {
@@ -158,15 +158,15 @@ export default {
           console.log('error', error)
         })
     },
-    user_token() {
-      let userStore = useUserStore()
-      return {
-        userStore
-      }
-    },
+    // user_token() {
+    //   let userStore = useUserStore()
+    //   return {
+    //     userStore
+    //   }
+    // },
     submit_form() {
-      let userStore = this.user_token().userStore
-      axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.user.access}`
+      // let userStore = this.user_token().userStore
+      // axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.user.access}`
       axios
         .post('/api/post/create/', {
           body: this.body

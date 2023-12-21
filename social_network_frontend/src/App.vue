@@ -114,11 +114,11 @@ import Toast from '@/components/ToastMessage.vue'
 // @ts-ignore
 import { useUserStore } from '@/stores/user'
 import DropDown from '@/components/DropDown.vue'
+import axios from 'axios'
 
 export default {
   setup() {
     let userStore = useUserStore()
-    userStore.initStore()
     return {
       userStore
     }
@@ -142,6 +142,17 @@ export default {
       // @ts-ignore
       return this.$route.name
     }
+  },
+  beforeCreate() {
+      this.userStore.initStore()
+
+      const token = this.userStore.user.access
+
+      if (token) {
+          axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+      } else {
+          axios.defaults.headers.common["Authorization"] = "";
+      }
   }
 }
 </script>
