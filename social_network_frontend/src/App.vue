@@ -134,25 +134,21 @@ export default {
     DropDown
   },
   computed: {
-    // // @ts-ignore
-    // login_check(){
-    //   this.userStore.initStore()
-    // },
     route_name() {
       // @ts-ignore
       return this.$route.name
     }
   },
   beforeCreate() {
-      this.userStore.initStore()
+    this.userStore.initStore()
 
-      const token = this.userStore.user.access
+    const token = this.userStore.user.access
 
-      if (token) {
-          axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-      } else {
-          axios.defaults.headers.common["Authorization"] = "";
-      }
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+    } else {
+      axios.defaults.headers.common['Authorization'] = ''
+    }
   }
 }
 </script>
