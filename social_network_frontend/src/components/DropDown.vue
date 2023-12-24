@@ -2,10 +2,10 @@
   <Menu as="div" class="relative inline-block text-left">
     <div>
       <MenuButton
-        class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        class="justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900s hover:bg-gray-50"
       >
-        Options
-        <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+        <img v-if="d_name['image']" :src="d_name['url']" class="w-[30px] h-[30px] rounded-full" />
+        <span v-else>{{ d_name }}</span>
       </MenuButton>
     </div>
 
@@ -23,13 +23,23 @@
         <div class="py-1">
           <MenuItem v-slot="{ active }" v-for="(option, index) in options" :key="index">
             <a
-              :href="option == 'Logout' ? '/' : '/' + option"
-              v-on:click="option === 'Logout' ? logout() : ''"
+              v-if="typeof option == 'string'"
+              :href="'/'"
+              v-on:click="logout()"
               :class="[
                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                 'block px-4 py-2 text-sm'
               ]"
               >{{ option }}</a
+            >
+            <RouterLink
+              v-else
+              :to="{ name: option['name'].toLowerCase(), params: { id: option['user'].user.id } }"
+              :class="[
+                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                'block px-4 py-2 text-sm'
+              ]"
+              >{{ option['name'] }}</RouterLink
             >
           </MenuItem>
         </div>
@@ -40,10 +50,14 @@
 
 <script setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+import { RouterLink } from 'vue-router'
 const props = defineProps({
   removeToken: {
     type: Function
+  },
+  d_name: {
+    type: Object,
+    required: true
   },
   options: {
     type: Array,
@@ -51,10 +65,9 @@ const props = defineProps({
   }
 })
 const logout = async () => {
-  let removing_token = true
+  // let removing_token = true
   try {
     await props.removeToken?.()
-    await $router.push('/')
   } catch (error) {
     console.error('error occured: ', error)
   }

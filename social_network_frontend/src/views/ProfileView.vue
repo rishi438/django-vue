@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-7xl mx-auto grid grid-cols-12 gap-4">
-    <div class="main-left lg:col-span-3 md:col-span-3 col-span-12 order-1">
+    <div class="main-left md:col-span-3 col-span-12 order-1">
       <div class="main-left md:col-span-1 col-span-4">
         <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
           <div class="text-center">
@@ -9,7 +9,7 @@
               class="profile-img w-[100px] h-[100px] mb-6 rounded-full mx-auto"
             />
             <p>
-              <strong>{{ userStore.user.name }}</strong>
+              <strong>{{ user.name }}</strong>
             </p>
           </div>
           <div class="mt-6 flex space-x-8 justify-around">
@@ -19,10 +19,8 @@
         </div>
       </div>
     </div>
-    <div
-      class="main-left lg:col-span-6 md:col-span-5 space-y-2 sm:col-span-7 col-span-12 sm:order-2 order-3"
-    >
-      <div class="bg-white border border-gray-200 rounded-lg">
+    <div class="main-left md:col-span-9 space-y-2 sm:col-span-7 col-span-12 sm:order-2 order-2">
+      <div class="bg-white border border-gray-200 rounded-lg" v-if="userStore.user.id === user.id">
         <form v-on:submit.prevent="submit_form" method="post">
           <div class="p-4">
             <textarea
@@ -114,12 +112,6 @@
         </div>
       </div>
     </div>
-    <div
-      class="main-right lg:col-span-3 md:col-span-4 space-y-2 sm:col-span-5 col-span-12 sm:order-3 order-2"
-    >
-      <PeopleYouMayKnow />
-      <Trends />
-    </div>
   </div>
 </template>
 
@@ -132,31 +124,42 @@ import { useUserStore } from '@/stores/user'
 
 export default {
   name: 'Home',
-  components: {
-    PeopleYouMayKnow,
-    Trends
-  },
   setup() {
     const userStore = useUserStore()
     return {
       userStore
     }
   },
-  mounted() {
-    this.get_feed()
+  components: {
+    PeopleYouMayKnow,
+    Trends
   },
+  // mounted() {
+  //     this.get_feed()
+  // },
   data() {
     return {
       posts: [],
+      user: {},
       body: ''
+    }
+  },
+  watch: {
+    '$route.params.id': {
+      handler() {
+        this.get_feed()
+      },
+      deep: true,
+      immediate: true
     }
   },
   methods: {
     get_feed() {
       axios
-        .get('/api/post/')
+        .get(`/api/post/profile/${this.$route.params.id}/`)
         .then((response) => {
-          this.posts = response.data
+          this.posts = response.data.post
+          this.user = response.data.user
         })
         .catch((error) => {
           console.log('error', error)

@@ -5,6 +5,8 @@ import Login from '../views/LoginView.vue'
 import Messenger from '../views/MessengerView.vue'
 import Search from '../views/SearchView.vue'
 import Notification from '../views/NotificationView.vue'
+import Profile from '../views/ProfileView.vue'
+// import Logout from '../views/LogoutView.vue'
 
 const router = createRouter({
   // @ts-ignore
@@ -39,7 +41,17 @@ const router = createRouter({
       path: '/notification',
       name: 'notification',
       component: Notification
+    },
+    {
+      path: '/profile/:id',
+      name: 'profile',
+      component: Profile
     }
+    // {
+    //   path: '/logout',
+    //   name: 'logout',
+    //   component: Logout
+    // },
   ]
 })
 
