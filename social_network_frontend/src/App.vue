@@ -86,19 +86,19 @@
             <RouterLink
               :to="{ name: 'login' }"
               class="py-3 px-6 bg-teal-500 text-white rounded-lg mx-1"
-              >Log in</RouterLink
-            >
+              >Log in
+            </RouterLink>
             <RouterLink
               :to="{ name: 'signup' }"
               class="py-3 px-6 bg-zinc-500 text-white rounded-lg mx-1"
-              >sign up</RouterLink
-            >
+              >sign up
+            </RouterLink>
           </div>
         </div>
       </div>
     </div>
   </nav>
-  <main class="px-8 py-6 bg-gray-100 h-full">
+  <main class="px-8 py-6 bg-gray-100 h-full max-h-full">
     <RouterView />
     <!-- <RouterView v-if="userStore.user.isAuthenticated" /> -->
   </main>
