@@ -80,12 +80,10 @@ export default {
         // @ts-ignore
         this.errors.push('Your e-mail is missing')
       }
-
       if (this.form.password === '') {
         // @ts-ignore
         this.errors.push('Your password is missing')
       }
-
       if (this.errors.length === 0) {
         await axios
           .post('/api/login/', this.form)
