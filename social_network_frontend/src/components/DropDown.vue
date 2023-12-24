@@ -23,13 +23,23 @@
         <div class="py-1">
           <MenuItem v-slot="{ active }" v-for="(option, index) in options" :key="index">
             <a
-              :href="option == 'Logout' ? '/' : '/' + option"
-              v-on:click="option === 'Logout' ? logout() : ''"
+              v-if="typeof option == 'string'"
+              :href="'/'"
+              v-on:click="logout()"
               :class="[
                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                 'block px-4 py-2 text-sm'
               ]"
               >{{ option }}</a
+            >
+            <RouterLink
+              v-else
+              :to="{ name: option['name'].toLowerCase(), params: { id: option['user'].user.id } }"
+              :class="[
+                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                'block px-4 py-2 text-sm'
+              ]"
+              >{{ option['name'] }}</RouterLink
             >
           </MenuItem>
         </div>
@@ -40,7 +50,7 @@
 
 <script setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+import { RouterLink } from 'vue-router'
 const props = defineProps({
   removeToken: {
     type: Function
@@ -55,10 +65,9 @@ const props = defineProps({
   }
 })
 const logout = async () => {
-  let removing_token = true
+  // let removing_token = true
   try {
     await props.removeToken?.()
-    await $router.push('/')
   } catch (error) {
     console.error('error occured: ', error)
   }
