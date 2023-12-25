@@ -1,3 +1,5 @@
+import uuid
+from enum import IntEnum, unique
 from typing import Any
 from uuid import uuid4
 
@@ -44,14 +46,36 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=225, unique=True, default="")
     avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
-
+    friends = models.ManyToManyField('self')
+    friends_count = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-
     date_joined = models.DateTimeField(default=timezone.now)
     last_login = models.DateTimeField(blank=True, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['name']
     objects = CustomUserManager()
+
+
+@unique
+class FriendRequestStatus(IntEnum):
+    SENT = 0
+    ACCEPTED = 1
+    REJECTED = 2
+
+
+class FriendRequest(models.Model):
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    created_for = models.ForeignKey(
+        User, related_name="recieved_friend_request", on_delete=models.CASCADE)
+    created_at = models.DateField(auto_now_add=True)
+    created_by = models.ForeignKey(
+        User, related_name="created_friend_request", on_delete=models.CASCADE)
+    status = models.IntegerField(
+        choices=[(status.value, status.name)
+                 for status in FriendRequestStatus],
+        default=FriendRequestStatus.SENT.value
+    )

@@ -1,21 +1,25 @@
 <template>
-  <div class="max-w-7xl mx-auto grid grid-cols-12 gap-4">
+  <div class="max-w-8xl mx-auto grid grid-cols-12 gap-lg-4 gap-2">
     <div class="main-left lg:col-span-3 md:col-span-3 col-span-12 order-1">
-      <div class="main-left md:col-span-1 col-span-4">
-        <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
-          <div class="text-center">
-            <img
-              src="/src/assets/1639256761455.jpeg"
-              class="profile-img w-[100px] h-[100px] mb-6 rounded-full mx-auto"
-            />
-            <p>
-              <strong>{{ userStore.user.name }}</strong>
-            </p>
-          </div>
-          <div class="mt-6 flex space-x-8 justify-around">
-            <p class="text-xs text-gray-500">182 friends</p>
-            <p class="text-xs text-gray-500">120 posts</p>
-          </div>
+      <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
+        <div class="text-center py-4">
+          <img
+            src="/src/assets/1639256761455.jpeg"
+            class="profile-img lg:w-[150px] lg:h-[150px] md:h-[80px] md:w-[80px] mb-6 rounded-full mx-auto"
+          />
+          <p>
+            <strong>{{ userStore.user.name }}</strong>
+          </p>
+        </div>
+        <div class="mt-6 flex space-x-8 justify-around">
+          <RouterLink
+            :to="{ name: 'friends', params: { id: userStore.user.id } }"
+            class="text-xs text-gray-500"
+          >
+            {{ userStore.user.friends_count }}
+            {{ userStore.user.friends_count == 1 ? 'friend' : 'friends' }}
+          </RouterLink>
+          <p class="text-xs text-gray-500">120 posts</p>
         </div>
       </div>
     </div>
@@ -61,9 +65,8 @@
 <script>
 import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-// @ts-ignore
 import Trends from '../components/TrendsNetwork.vue'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '../stores/user'
 import FeedItem from '../components/FeedItem.vue'
 
 export default {

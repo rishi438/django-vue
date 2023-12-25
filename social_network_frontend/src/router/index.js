@@ -6,7 +6,7 @@ import Messenger from '../views/MessengerView.vue'
 import Search from '../views/SearchView.vue'
 import Notification from '../views/NotificationView.vue'
 import Profile from '../views/ProfileView.vue'
-// import Logout from '../views/LogoutView.vue'
+import Friends from '../views/FriendsView.vue'
 
 const router = createRouter({
   // @ts-ignore
@@ -46,12 +46,12 @@ const router = createRouter({
       path: '/profile/:id',
       name: 'profile',
       component: Profile
+    },
+    {
+      path: '/profile/:id/friends',
+      name: 'friends',
+      component: Friends
     }
-    // {
-    //   path: '/logout',
-    //   name: 'logout',
-    //   component: Logout
-    // },
   ]
 })
 

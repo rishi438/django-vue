@@ -32,14 +32,15 @@
               ]"
               >{{ option }}</a
             >
-            <RouterLink
+            <a
               v-else
-              :to="{ name: option['name'].toLowerCase(), params: { id: option['user'].user.id } }"
+              :href="'/' + option['name'].toLowerCase() + '/' + option['user'].user.id"
               :class="[
                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                 'block px-4 py-2 text-sm'
               ]"
-              >{{ option['name'] }}</RouterLink
+              @click.native="$emit('close')"
+              >{{ option['name'] }}</a
             >
           </MenuItem>
         </div>
@@ -50,7 +51,6 @@
 
 <script setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { RouterLink } from 'vue-router'
 const props = defineProps({
   removeToken: {
     type: Function

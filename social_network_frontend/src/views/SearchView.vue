@@ -50,7 +50,11 @@
             </p>
           </div>
           <div class="mt-6 flex space-x-8 justify-around">
-            <p class="text-xs text-gray-500">182 friends</p>
+            <RouterLink
+              :to="{ name: 'friends', params: { id: user.id } }"
+              class="text-xs text-gray-500"
+              >{{ user.friends_count }} {{ user.friends_count == 1 ? 'friend' : 'friends' }}
+            </RouterLink>
             <p class="text-xs text-gray-500">120 posts</p>
           </div>
         </div>

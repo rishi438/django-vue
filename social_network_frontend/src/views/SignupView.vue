@@ -73,7 +73,7 @@ import { useToastStore } from '../stores/toast'
 export default {
   name: 'Signup',
   setup() {
-    let toastStore = useToastStore()
+    const toastStore = useToastStore()
     return {
       toastStore
     }
