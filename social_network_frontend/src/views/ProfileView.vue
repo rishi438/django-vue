@@ -1,25 +1,33 @@
 <template>
   <div class="max-w-7xl mx-auto grid grid-cols-12 gap-4">
     <div class="main-left md:col-span-3 col-span-12 order-1">
-      <div class="main-left md:col-span-1 col-span-4">
-        <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
-          <div class="text-center">
-            <img
-              src="/src/assets/1639256761455.jpeg"
-              class="profile-img w-[100px] h-[100px] mb-6 rounded-full mx-auto"
-            />
-            <p>
-              <strong>{{ user.name }}</strong>
-            </p>
-          </div>
-          <div class="mt-6 flex space-x-8 justify-around">
-            <p class="text-xs text-gray-500">182 friends</p>
-            <p class="text-xs text-gray-500">120 posts</p>
-          </div>
+      <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
+        <div class="text-center">
+          <img
+            src="/src/assets/1639256761455.jpeg"
+            class="profile-img lg:w-[150px] lg:h-[150px] md:h-[90px] md:w-[90px] mb-6 rounded-full mx-auto"
+          />
+          <p>
+            <strong>{{ user.name }}</strong>
+          </p>
         </div>
+        <div class="mt-6 flex space-x-8 justify-around">
+          <RouterLink
+            :to="{ name: 'friends', params: { id: user.id } }"
+            class="text-xs text-gray-500"
+            >{{ user.friends_count }} {{ user.friends_count == 1 ? 'friend' : 'friends' }}
+          </RouterLink>
+          <p class="text-xs text-gray-500">120 posts</p>
+        </div>
+        <button
+          class="mt-6 inline-block py-2 sm:px-6 px-4 bg-cyan-500 text-white rounded"
+          @click="send_friend_request"
+        >
+          Add friend
+        </button>
       </div>
     </div>
-    <div class="main-left md:col-span-9 space-y-2 sm:col-span-7 col-span-12 sm:order-2 order-2">
+    <div class="main-left md:col-span-9 space-y-2 col-span-12 sm:order-2 order-2">
       <div class="bg-white border border-gray-200 rounded-lg" v-if="userStore.user.id === user.id">
         <form v-on:submit.prevent="submit_form" method="post">
           <div class="p-4">
@@ -53,17 +61,19 @@
 <script>
 import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-// @ts-ignore
 import Trends from '../components/TrendsNetwork.vue'
 import FeedItem from '../components/FeedItem.vue'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '../stores/user'
+import { useToastStore } from '../stores/toast'
 
 export default {
-  name: 'Home',
+  name: 'Profile',
   setup() {
     const userStore = useUserStore()
+    const toastStore = useToastStore()
     return {
-      userStore
+      userStore,
+      toastStore
     }
   },
   components: {
@@ -88,6 +98,20 @@ export default {
     }
   },
   methods: {
+    send_friend_request() {
+      axios
+        .post(`/api/friends/${this.$route.params.id}/request/`)
+        .then((response) => {
+          if (response.data.msg == 'Friend request already sent!') {
+            this.toastStore.showToast(5000, response.data.msg, 'bg-red-400')
+          } else {
+            this.toastStore.showToast(5000, response.data.msg, 'bg-green-500')
+          }
+        })
+        .catch((error) => {
+          console.error('Error Occured: ', error)
+        })
+    },
     get_feed() {
       axios
         .get(`/api/post/profile/${this.$route.params.id}/`)
