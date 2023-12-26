@@ -63,6 +63,9 @@ export default {
       userStore
     }
   },
+  mounted() {
+    this.login_check()
+  },
   data() {
     return {
       form: {
@@ -103,6 +106,11 @@ export default {
           .catch((error) => {
             console.log('error ', error)
           })
+      }
+    },
+    login_check() {
+      if (this.userStore.user.isAuthenticated) {
+        this.$router.push('/home')
       }
     }
   }
