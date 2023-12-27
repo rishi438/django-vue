@@ -13,5 +13,6 @@ class PostSerializer(serializers.ModelSerializer):
             "id",
             "body",
             "created_by",
+            "likes_count",
             "created_at_formatted",
         )

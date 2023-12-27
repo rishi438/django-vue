@@ -66,7 +66,7 @@ import FeedItem from '../components/FeedItem.vue'
 import { useUserStore } from '../stores/user'
 import { useToastStore } from '../stores/toast'
 
-export default {
+export default (await import('vue')).defineComponent({
   name: 'Profile',
   setup() {
     const userStore = useUserStore()
@@ -140,5 +140,5 @@ export default {
         })
     }
   }
-}
+})
 </script>
