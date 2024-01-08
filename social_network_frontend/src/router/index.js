@@ -7,6 +7,7 @@ import Search from '../views/SearchView.vue'
 import Notification from '../views/NotificationView.vue'
 import Profile from '../views/ProfileView.vue'
 import Friends from '../views/FriendsView.vue'
+import PostView from '../views/PostDetailsView.vue'
 
 const router = createRouter({
   // @ts-ignore
@@ -44,13 +45,23 @@ const router = createRouter({
     },
     {
       path: '/profile/:id',
-      name: 'profile',
-      component: Profile
+      children: [
+        {
+          path: '',
+          name: 'profile',
+          component: Profile
+        },
+        {
+          path: 'friends',
+          name: 'friends',
+          component: Friends
+        }
+      ]
     },
     {
-      path: '/profile/:id/friends',
-      name: 'friends',
-      component: Friends
+      path: '/post/:id',
+      name: 'post_details',
+      component: PostView
     }
   ]
 })
