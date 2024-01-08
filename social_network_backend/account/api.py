@@ -94,9 +94,9 @@ def send_friend_request(request, pk):
             return JsonResponse({"msg": "Friend request sent."})
         return JsonResponse({"msg": "Friend request already sent!"})
     new_request = FriendRequest.objects.create(
-        created_for=user, 
+        created_for=user,
         created_by=request.user
-        )
+    )
     new_request.save()
     return JsonResponse({"msg": "Friend request sent!"})
 
