@@ -5,10 +5,9 @@ from uuid import uuid4
 
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils import timezone
-
-# Create your models here.
 
 
 class CustomUserManager(BaseUserManager):
@@ -79,3 +78,5 @@ class FriendRequest(models.Model):
                  for status in FriendRequestStatus],
         default=FriendRequestStatus.SENT.value
     )
+    rejection_count = models.IntegerField(
+        default=0, validators=[MaxValueValidator(3)])

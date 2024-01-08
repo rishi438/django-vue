@@ -164,6 +164,7 @@ export default {
         .post(`/api/friends/${id}/${status}/`)
         .then((response) => {
           console.log('data', response.data)
+          window.location.reload()
         })
         .catch((error) => {
           console.error('Error Occured: ', error)

@@ -116,10 +116,10 @@ export default {
         axios
           .post('/api/signup/', this.form)
           .then((response) => {
-            if (response.data.status === 'success') {
+            if (response.data.msg == 'User created successfully') {
               this.toastStore.showToast(
                 5000,
-                'The user is registered. Please log in',
+                `${response.data.msg}. Please log in`,
                 'bg-emerald-500'
               )
               this.form.email = ''
@@ -127,11 +127,7 @@ export default {
               this.form.password1 = ''
               this.form.password2 = ''
             } else {
-              this.toastStore.showToast(
-                5000,
-                'Something went wrong. Please try again',
-                'bg-red-300'
-              )
+              this.toastStore.showToast(5000, response.data.msg, 'bg-red-300')
             }
           })
           .catch((error) => {

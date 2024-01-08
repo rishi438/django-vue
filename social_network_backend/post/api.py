@@ -5,8 +5,9 @@ from rest_framework.decorators import (api_view, authentication_classes,
                                        permission_classes)
 
 from .forms import PostForm
-from .models import Like, Post
-from .serializers import PostSerializer
+from .models import Comment, Like, Post
+from .serializers import (CommentSerializer, PostDetailSerializer,
+                          PostSerializer)
 
 
 @api_view(["GET"])
@@ -53,3 +54,25 @@ def post_like(request, pk):
         post.save()
         return JsonResponse({"msg": "liked"})
     return JsonResponse({"msg": "already liked"})
+
+
+@api_view(['GET'])
+def post_detail(request, pk):
+    post = Post.objects.get(pk=pk)
+    if post:
+        return JsonResponse({"post": PostDetailSerializer(post).data}, safe=False)
+    return JsonResponse({"msg": "Error Occured contact Tech Team"})
+
+
+@api_view(["POST"])
+def post_create_comment(request, pk):
+    comment = Comment.objects.create(
+        body=request.data.get("body"), created_by=request.user)
+    post = Post.objects.get(pk=pk)
+    post.comments.add(comment)
+    post.comments_count += 1
+    post.save()
+    serailizer = CommentSerializer(comment)
+    if serailizer.data:
+        return JsonResponse(serailizer.data, safe=False)
+    return JsonResponse({"msg": "Error Occured contact Tech Team"})
