@@ -5,7 +5,7 @@ from .models import Conversation, ConversationMessage
 
 
 class ConversationSerializer(serializers.ModelSerializer):
-    users = UserSerializer(read_only=True)
+    users = UserSerializer(read_only=True, many=True)
 
     class Meta:
         model = Conversation
