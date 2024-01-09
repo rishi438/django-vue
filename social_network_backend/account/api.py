@@ -1,8 +1,11 @@
 from account.serializers import FriendRequestSerializer, UserSerializer
 from django.db.models import Q
 from django.http import JsonResponse
-from rest_framework.decorators import (api_view, authentication_classes,
-                                       permission_classes)
+from rest_framework.decorators import (
+    api_view,
+    authentication_classes,
+    permission_classes,
+)
 
 from .forms import SigupForm
 from .models import FriendRequest, FriendRequestStatus, User
@@ -64,23 +67,25 @@ def friends(request, pk):
     requests = []
     if user == request.user:
         requests = FriendRequest.objects.filter(
-            created_for=request.user,
-            status=FriendRequestStatus.SENT.value
+            created_for=request.user, status=FriendRequestStatus.SENT.value
         )
     all_friends = user.friends.all()
-    return JsonResponse({
-        "user": UserSerializer(user).data,
-        "friends": UserSerializer(all_friends, many=True).data,
-        "requests": FriendRequestSerializer(requests, many=True).data,
-    }, safe=False)
+    return JsonResponse(
+        {
+            "user": UserSerializer(user).data,
+            "friends": UserSerializer(all_friends, many=True).data,
+            "requests": FriendRequestSerializer(requests, many=True).data,
+        },
+        safe=False,
+    )
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 def send_friend_request(request, pk):
     user = User.objects.get(pk=pk)
     existing_request = FriendRequest.objects.filter(
-        (Q(created_for=request.user) & Q(created_by=user)) | (
-            Q(created_for=user) & Q(created_by=request.user))
+        (Q(created_for=request.user) & Q(created_by=user))
+        | (Q(created_for=user) & Q(created_by=request.user))
     ).first()
     if existing_request:
         if existing_request.status == FriendRequestStatus.REJECTED.value:
@@ -94,18 +99,18 @@ def send_friend_request(request, pk):
             return JsonResponse({"msg": "Friend request sent."})
         return JsonResponse({"msg": "Friend request already sent!"})
     new_request = FriendRequest.objects.create(
-        created_for=user,
-        created_by=request.user
+        created_for=user, created_by=request.user
     )
     new_request.save()
     return JsonResponse({"msg": "Friend request sent!"})
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 def handle_friend_request(request, pk, status):
     user = User.objects.get(pk=pk)
-    friend_request = FriendRequest.objects.filter(
-        created_for=request.user).get(created_by=user)
+    friend_request = FriendRequest.objects.filter(created_for=request.user).get(
+        created_by=user
+    )
     if status == FriendRequestStatus.ACCEPTED.name:
         friend_request.status = FriendRequestStatus.ACCEPTED.value
         user.friends.add(request.user)

@@ -3,8 +3,11 @@ from enum import IntEnum, unique
 from typing import Any
 from uuid import uuid4
 
-from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
-                                        PermissionsMixin)
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils import timezone
@@ -31,10 +34,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         user = self.create_user(
-            email=email,
-            password=password,
-            name=name,
-            **extra_fields
+            email=email, password=password, name=name, **extra_fields
         )
         user.save(using=self._db)
         return user
@@ -45,7 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=225, unique=True, default="")
     avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
-    friends = models.ManyToManyField('self')
+    friends = models.ManyToManyField("self")
     friends_count = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
@@ -54,7 +54,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_login = models.DateTimeField(blank=True, null=True)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ["name"]
     objects = CustomUserManager()
 
 
@@ -66,17 +66,16 @@ class FriendRequestStatus(IntEnum):
 
 
 class FriendRequest(models.Model):
-
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created_for = models.ForeignKey(
-        User, related_name="recieved_friend_request", on_delete=models.CASCADE)
+        User, related_name="recieved_friend_request", on_delete=models.CASCADE
+    )
     created_at = models.DateField(auto_now_add=True)
     created_by = models.ForeignKey(
-        User, related_name="created_friend_request", on_delete=models.CASCADE)
-    status = models.IntegerField(
-        choices=[(status.value, status.name)
-                 for status in FriendRequestStatus],
-        default=FriendRequestStatus.SENT.value
+        User, related_name="created_friend_request", on_delete=models.CASCADE
     )
-    rejection_count = models.IntegerField(
-        default=0, validators=[MaxValueValidator(3)])
+    status = models.IntegerField(
+        choices=[(status.value, status.name) for status in FriendRequestStatus],
+        default=FriendRequestStatus.SENT.value,
+    )
+    rejection_count = models.IntegerField(default=0, validators=[MaxValueValidator(3)])

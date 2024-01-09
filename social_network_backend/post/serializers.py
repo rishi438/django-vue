@@ -45,5 +45,5 @@ class PostDetailSerializer(serializers.ModelSerializer):
             "comments_count",
             "comments",
             "created_by",
-            "created_at_formatted"
+            "created_at_formatted",
         )
