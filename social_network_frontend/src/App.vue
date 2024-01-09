@@ -25,7 +25,7 @@
               ></path>
             </svg>
           </a>
-          <a href="/messenger" :class="{ 'text-teal-300': route_name === 'messenger' }">
+          <a href="/chat" :class="{ 'text-teal-300': route_name === 'messenger' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

@@ -29,7 +29,7 @@ const router = createRouter({
       component: Login
     },
     {
-      path: '/messenger',
+      path: '/chat',
       name: 'messenger',
       component: Messenger
     },

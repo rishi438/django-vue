@@ -20,10 +20,18 @@
           <p class="text-xs text-gray-500">120 posts</p>
         </div>
         <button
-          class="mt-6 inline-block py-2 sm:px-6 px-4 bg-cyan-500 text-white rounded"
+        class="mt-6 inline-block py-2 sm:px-6 px-4 bg-cyan-500 text-white rounded"
+          v-if="userStore.user.id != user.id"
           @click="send_friend_request"
         >
           Add friend
+        </button>
+        <button
+        class="mt-4 inline-block py-2 sm:px-6 px-4 bg-cyan-500 text-white rounded"
+          v-if="userStore.user.id != user.id"
+          @click="send_message"
+        >
+          Message
         </button>
       </div>
     </div>
@@ -138,6 +146,16 @@ export default (await import('vue')).defineComponent({
         .catch((error) => {
           console.error('error occured', error)
         })
+    },
+    send_message(){
+      axios
+          .post(`/api/chat/${this.$route.params.id}/get-or-create/`)
+          .then(response=>{
+              this.$router.push("/chat")
+          })
+          .catch(error => {
+            console.error(error)
+          })
     }
   }
 })
