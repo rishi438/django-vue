@@ -19,20 +19,22 @@
           </RouterLink>
           <p class="text-xs text-gray-500">120 posts</p>
         </div>
+        <div class="flex flex-col">
         <button
-        class="mt-6 inline-block py-2 sm:px-6 px-4 bg-cyan-500 text-white rounded"
+        class="mt-6 flex-auto py-2 sm:px-6 px-4 bg-cyan-500 text-white rounded"
           v-if="userStore.user.id != user.id"
           @click="send_friend_request"
         >
           Add friend
         </button>
         <button
-        class="mt-4 inline-block py-2 sm:px-6 px-4 bg-cyan-500 text-white rounded"
+        class="mt-3 flex-auto py-2 sm:px-6 px-4 bg-cyan-500 text-white rounded"
           v-if="userStore.user.id != user.id"
           @click="send_message"
         >
           Message
         </button>
+        </div>
       </div>
     </div>
     <div class="main-left md:col-span-9 space-y-2 col-span-12 sm:order-2 order-2">

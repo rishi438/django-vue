@@ -1,21 +1,28 @@
 <template>
   <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
     <div class="main-left md:col-span-1 col-span-4">
-      <div class="p-4 bg-white border border-gray-200 text-center rounded-lg"
+      <div class="bg-white border border-gray-200 text-center rounded-lg"
       >
-        <div class="space-y-4">
-          <div class="flex items-center justify-between" v-for="conversation in conversations" :key="conversation.id"
-          v-on:click="set_active_conversation(conversation.id)"
+        <ul class="space-y-4" role="list">
+          <li class="p-4 group/item flex items-center justify-between hover:bg-teal-200 hover:ring-teal-200 rounded-lg"
+            v-for="conversation in conversations"
+            :key="conversation.id"
+            v-on:click="set_active_conversation(conversation.id)"
           >
             <div class="flex items-center space-x-2">
-              <template v-for="user in conversation.user" :key="user.id" v-if="user.id !== userStore.user.id">
-                <img src="../assets/1639256761455.jpeg" class="w-[40px] h-[40px] rounded-full" />
-                <p class="text-xs"><strong>{{ user.name }}</strong></p>
+              <img src="../assets/1639256761455.jpeg" class="w-[40px] h-[40px] rounded-full" />
+              <template
+                v-for="user in conversation.users"
+                :key="user.id"
+              >
+                <p class="text-xs"
+                  v-if="user.id!==userStore.user.id"
+                ><strong>{{ user.name }}</strong></p>
               </template>
             </div>
             <span class="text-xs text-gray-500">{{ conversation.modified_at_formatted }}</span>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="main-center md:col-span-3 md:block hidden col-span-4 space-y-4">
@@ -24,7 +31,7 @@
         <div class="flex flex-col flex-grow p-4">
           <template v-for="message in active_conversation.messages" :key="message.id">
             <div class="flex w-full mt-2 space-x-3 max-w-md ml-auto justify-end"
-              v-if="message.created_by.id == userStore.user.id">
+              v-if="message.created_by.id === userStore.user.id">
               <div>
                 <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
                   <p class="text-sm">
@@ -37,15 +44,17 @@
                 <img src="../assets/1639256761455.jpeg" class="w-[40px] h-[40px] rounded-full" />
               </div>
             </div>
-            <div class="flex w-full mt-2 space-x-3 max-w-md ml-auto justify-end" v-else>
-              <div>
-                <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-                  <p class="text-sm">{{ message.body }}</p>
-                </div>
-                <span class="text-xs text-gray-500 leading-none">{{ message.created_at_formatted }} ago</span>
-              </div>
+            <div class="flex w-full mt-2 space-x-3 max-w-md" v-else>
               <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
                 <img src="../assets/1639256761455.jpeg" class="w-[40px] h-[40px] rounded-full" />
+              </div>
+              <div>
+                <div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
+                  <p class="text-sm">
+                    {{ message.body }}
+                  </p>
+                </div>
+                <span class="text-xs text-gray-500 leading-none">{{ message.created_at_formatted }} ago</span>
               </div>
             </div>
           </template>
@@ -80,7 +89,11 @@ export default (await import("vue")).defineComponent({
   },
   data() {
     return {
-      conversations: [],
+      conversations: [
+        {
+          users:[]
+        }
+      ],
       active_conversation: {},
       body: ""
     }
@@ -94,6 +107,7 @@ export default (await import("vue")).defineComponent({
         .get("/api/chat/")
         .then(response => {
           this.conversations = response.data
+          console.log("yes",this.conversations)
           if (this.conversations.length) {
             this.active_conversation = this.conversations[0].id
           }
@@ -120,6 +134,7 @@ export default (await import("vue")).defineComponent({
         })
         .then(response => {
           this.active_conversation.messages.push(response.data)
+          this.body=""
         })
         .catch(error => {
           console.error(error)

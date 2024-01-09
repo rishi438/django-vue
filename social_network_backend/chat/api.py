@@ -19,7 +19,6 @@ def conversation_list(request):
     conversations = Conversation.objects.filter(users__in=list([request.user]))
     print(conversations)
     serializer = ConversationSerializer(conversations, many=True)
-
     return JsonResponse(serializer.data, safe=False)
 
 
@@ -38,7 +37,7 @@ def conversation_send_message(request, pk):
         pk=pk
     )
 
-    for user in conversation.user.all():
+    for user in conversation.users.all():
         if user != request.user:
             sent_to = user
 
