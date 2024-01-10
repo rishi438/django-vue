@@ -41,7 +41,6 @@ def post_create(request):
         post.created_by = request.user
         user = User.objects.get(pk=request.user.id)
         user.posts_count += 1
-        print(user.posts_count)
         user.save()
         post.save()
         serializer = PostSerializer(post)
