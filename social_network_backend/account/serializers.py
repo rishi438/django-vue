@@ -11,6 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
             "name",
             "email",
             "friends_count",
+            "posts_count",
         )
 
 

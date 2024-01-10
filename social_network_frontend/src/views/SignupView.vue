@@ -71,7 +71,7 @@ import axios from 'axios'
 import { useToastStore } from '../stores/toast'
 
 export default {
-  name: 'Signup',
+  name: 'SignupView',
   setup() {
     const toastStore = useToastStore()
     return {

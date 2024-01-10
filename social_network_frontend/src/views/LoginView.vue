@@ -56,7 +56,7 @@ import axios from 'axios'
 import { useUserStore } from '../stores/user'
 
 export default {
-  name: 'Login',
+  name: 'LoginView',
   setup() {
     let userStore = useUserStore()
     return {

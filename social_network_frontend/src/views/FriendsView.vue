@@ -18,7 +18,7 @@
           >
             {{ user.friends_count }} {{ user.friends_count == 1 ? 'friend' : 'friends' }}
           </RouterLink>
-          <p class="text-xs text-gray-500">120 posts</p>
+          <p class="text-xs text-gray-500">{{ user.posts_count }} posts</p>
         </div>
       </div>
     </div>
@@ -53,7 +53,7 @@
             <p class="text-xs text-gray-500">
               {{ friend.friends_count }} {{ friend.friends_count == 1 ? 'friend' : 'friends' }}
             </p>
-            <p class="text-xs text-gray-500">120 posts</p>
+            <p class="text-xs text-gray-500">{{ friend.posts_count }} posts</p>
           </div>
           <div class="mt-6">
             <button
@@ -97,7 +97,7 @@
             <p class="text-xs text-gray-500">
               {{ user.friends_count }} {{ user.friends_count == 1 ? 'friend' : 'friends' }}
             </p>
-            <p class="text-xs text-gray-500">120 posts</p>
+            <p class="text-xs text-gray-500">{{ user.posts_count }} posts</p>
           </div>
         </div>
       </div>
@@ -113,13 +113,12 @@
 import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 import Trends from '../components/TrendsNetwork.vue'
-import FeedItem from '../components/FeedItem.vue'
 import { useUserStore } from '../stores/user'
 import { RouterLink } from 'vue-router'
 import { useToastStore } from '../stores/toast'
 
 export default {
-  name: 'Friends',
+  name: 'FriendsView',
   setup() {
     const userStore = useUserStore()
     const toastStore = useToastStore()
@@ -131,7 +130,6 @@ export default {
   components: {
     PeopleYouMayKnow,
     Trends,
-    FeedItem,
     RouterLink
   },
   data() {

@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/HomeView.vue'
-import Signup from '../views/SignupView.vue'
-import Login from '../views/LoginView.vue'
-import Messenger from '../views/MessengerView.vue'
-import Search from '../views/SearchView.vue'
-import Notification from '../views/NotificationView.vue'
-import Profile from '../views/ProfileView.vue'
-import Friends from '../views/FriendsView.vue'
+import HomeView from '../views/HomeView.vue'
+import SignupView from '../views/SignupView.vue'
+import LoginView from '../views/LoginView.vue'
+import MessengerView from '../views/MessengerView.vue'
+import SearchView from '../views/SearchView.vue'
+import NotificationView from '../views/NotificationView.vue'
+import ProfileView from '../views/ProfileView.vue'
+import FriendsView from '../views/FriendsView.vue'
 import PostView from '../views/PostDetailsView.vue'
 
 const router = createRouter({
@@ -16,32 +16,32 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: Home
+      component: HomeView
     },
     {
       path: '/signup',
       name: 'signup',
-      component: Signup
+      component: SignupView
     },
     {
       path: '/',
       name: 'login',
-      component: Login
+      component: LoginView
     },
     {
       path: '/chat',
       name: 'messenger',
-      component: Messenger
+      component: MessengerView
     },
     {
       path: '/search',
       name: 'search',
-      component: Search
+      component: SearchView
     },
     {
       path: '/notification',
       name: 'notification',
-      component: Notification
+      component: NotificationView
     },
     {
       path: '/profile/:id',
@@ -49,12 +49,12 @@ const router = createRouter({
         {
           path: '',
           name: 'profile',
-          component: Profile
+          component: ProfileView
         },
         {
           path: 'friends',
           name: 'friends',
-          component: Friends
+          component: FriendsView
         }
       ]
     },

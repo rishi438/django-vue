@@ -17,7 +17,7 @@
             class="text-xs text-gray-500"
             >{{ user.friends_count }} {{ user.friends_count == 1 ? 'friend' : 'friends' }}
           </RouterLink>
-          <p class="text-xs text-gray-500">120 posts</p>
+          <p class="text-xs text-gray-500">{{ user.posts_count }} posts</p>
         </div>
         <div class="flex flex-col">
         <button
@@ -77,7 +77,7 @@ import { useUserStore } from '../stores/user'
 import { useToastStore } from '../stores/toast'
 
 export default (await import('vue')).defineComponent({
-  name: 'Profile',
+  name: 'ProfileView',
   setup() {
     const userStore = useUserStore()
     const toastStore = useToastStore()
@@ -140,7 +140,7 @@ export default (await import('vue')).defineComponent({
         })
         .then((response) => {
           if (response.error) {
-            throw error
+            throw response.error
           }
           this.posts.unshift(response.data)
           this.body = ''
@@ -152,7 +152,7 @@ export default (await import('vue')).defineComponent({
     send_message(){
       axios
           .post(`/api/chat/${this.$route.params.id}/get-or-create/`)
-          .then(response=>{
+          .then(()=>{
               this.$router.push("/chat")
           })
           .catch(error => {
