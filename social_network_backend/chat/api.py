@@ -17,7 +17,6 @@ from .serializers import (
 @api_view(["GET"])
 def conversation_list(request):
     conversations = Conversation.objects.filter(users__in=list([request.user]))
-    print(conversations)
     serializer = ConversationSerializer(conversations, many=True)
     return JsonResponse(serializer.data, safe=False)
 
