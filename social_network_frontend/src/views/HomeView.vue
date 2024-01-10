@@ -19,7 +19,7 @@
             {{ userStore.user.friends_count }}
             {{ userStore.user.friends_count == 1 ? 'friend' : 'friends' }}
           </RouterLink>
-          <p class="text-xs text-gray-500">120 posts</p>
+          <p class="text-xs text-gray-500">{{ userStore.user.posts_count }} posts</p>
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@ import { useUserStore } from '../stores/user'
 import FeedItem from '../components/FeedItem.vue'
 
 export default {
-  name: 'Home',
+  name: 'HomeView',
   components: {
     PeopleYouMayKnow,
     Trends,
@@ -109,9 +109,10 @@ export default {
         })
         .then((response) => {
           if (response.error) {
-            throw error
+            throw response.error
           }
           this.posts.unshift(response.data)
+          this.userStore.set_attribute({"posts_count":1})
           this.body = ''
         })
         .catch((error) => {

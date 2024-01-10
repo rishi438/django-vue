@@ -68,6 +68,15 @@ repos:
     rev: v8.35.0
     hooks:
       - id: eslint
+        types: [file]
+        types_or: [javascript, jsx, ts, tsx, vue]
+        # additional_dependencies:
+        # -   typescript@4.3.5
+        # -   "@typescript-eslint/eslint-plugin@4.28.5"
+        # -   "@typescript-eslint/parser@4.28.5"
+        # -   eslint-plugin-vue@7.14.0
+        # -   vue-eslint-parser@7.9.0
+        # -   eslint-config-prettier@8.3.0
   - repo: https://github.com/PyCQA/bandit
     rev: "1.7.4"
     hooks:

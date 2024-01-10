@@ -55,7 +55,7 @@
               class="text-xs text-gray-500"
               >{{ user.friends_count }} {{ user.friends_count == 1 ? 'friend' : 'friends' }}
             </RouterLink>
-            <p class="text-xs text-gray-500">120 posts</p>
+            <p class="text-xs text-gray-500">{{ user.posts_count }} posts</p>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@ import FeedItem from '../components/FeedItem.vue'
 import { RouterLink } from 'vue-router'
 
 export default {
-  name: 'Search',
+  name: 'SearchView',
   components: {
     PeopleYouMayKnow, // Unused component
     Trends,

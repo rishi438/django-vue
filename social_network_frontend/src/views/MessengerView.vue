@@ -80,7 +80,7 @@ import axios from "axios";
 import { useUserStore } from "../stores/user";
 
 export default (await import("vue")).defineComponent({
-  name: 'Messenger',
+  name: 'MessengerView',
   setup() {
     const userStore = useUserStore()
     return {

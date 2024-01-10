@@ -39,6 +39,10 @@ def post_create(request):
     if form.is_valid():
         post = form.save(commit=False)
         post.created_by = request.user
+        user = User.objects.get(pk=request.user.id)
+        user.posts_count += 1
+        print(user.posts_count)
+        user.save()
         post.save()
         serializer = PostSerializer(post)
         return JsonResponse(serializer.data, safe=False)

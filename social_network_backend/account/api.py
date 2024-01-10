@@ -27,6 +27,7 @@ def me(request):
             "name": request.user.name,
             "email": request.user.email,
             "friends_count": request.user.friends_count,
+            "posts_count": request.user.posts_count,
         }
     )
 
