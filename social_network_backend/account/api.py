@@ -85,8 +85,8 @@ def friends(request, pk):
 def send_friend_request(request, pk):
     user = User.objects.get(pk=pk)
     existing_request = FriendRequest.objects.filter(
-        (Q(created_for=request.user) & Q(created_by=user))
-        | (Q(created_for=user) & Q(created_by=request.user))
+        (Q(created_for=request.user) & Q(created_by=user)) |
+        (Q(created_for=user) & Q(created_by=request.user))
     ).first()
     if existing_request:
         if existing_request.status == FriendRequestStatus.REJECTED.value:
@@ -121,10 +121,8 @@ def handle_friend_request(request, pk, status):
         friend_request.rejection_count = 0
         user.save()
         request_user.save()
-        friend_request.save()
     else:
         friend_request.status = FriendRequestStatus.REJECTED.value
-        friend_request.save()
 
     friend_request.save()
     return JsonResponse({"msg": f"Friend Request {status}"})
