@@ -1,7 +1,7 @@
 from account.serializers import UserSerializer
 from rest_framework import serializers
 
-from .models import Comment, Post
+from .models import Comment, Post, Trends
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -46,4 +46,14 @@ class PostDetailSerializer(serializers.ModelSerializer):
             "comments",
             "created_by",
             "created_at_formatted",
+        )
+
+
+class TrendsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Trends
+        fields = (
+            "id",
+            "hashtag",
+            "occurences",
         )
