@@ -8,6 +8,7 @@ import NotificationView from '../views/NotificationView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import FriendsView from '../views/FriendsView.vue'
 import PostView from '../views/PostDetailsView.vue'
+import TrendView from '../views/TrendView.vue'
 
 const router = createRouter({
   // @ts-ignore
@@ -62,6 +63,11 @@ const router = createRouter({
       path: '/post/:id',
       name: 'post_details',
       component: PostView
+    },
+    {
+      path: '/trends/:id',
+      name: 'trends',
+      component: TrendView
     }
   ]
 })

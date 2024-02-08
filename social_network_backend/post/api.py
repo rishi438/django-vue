@@ -8,8 +8,13 @@ from rest_framework.decorators import (
 )
 
 from .forms import PostForm
-from .models import Comment, Like, Post
-from .serializers import CommentSerializer, PostDetailSerializer, PostSerializer
+from .models import Comment, Like, Post, Trends
+from .serializers import (
+    CommentSerializer,
+    PostDetailSerializer,
+    PostSerializer,
+    TrendsSerializer,
+)
 
 
 @api_view(["GET"])
@@ -18,6 +23,10 @@ def post_list(request):
     for user in request.user.friends.all():
         user_ids.append(user.id)
     posts = Post.objects.filter(created_by__in=user_ids)
+    trend = request.GET.get("trend", "")
+    print(trend)
+    if trend:
+        posts = posts.filter(body__icontains="#" + trend)
     serializer = PostSerializer(posts, many=True)
     return JsonResponse(serializer.data, safe=False)
 
@@ -81,3 +90,10 @@ def post_create_comment(request, pk):
     if serailizer.data:
         return JsonResponse(serailizer.data, safe=False)
     return JsonResponse({"msg": "Error Occured contact Tech Team"})
+
+
+@api_view(["GET"])
+def get_trends(request):
+    serializer = TrendsSerializer(Trends.objects.all(), many=True)
+    print(serializer.data)
+    return JsonResponse(serializer.data, safe=False)
