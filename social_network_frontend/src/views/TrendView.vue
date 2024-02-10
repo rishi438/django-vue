@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-8xl mx-auto grid grid-cols-12 gap-lg-4 gap-2">
-    <div class="main-left lg:col-span-6 md:col-span-5 space-y-2 sm:col-span-7 col-span-12 sm:order-2 order-3">
+    <div class="main-left md:col-span-8 space-y-2 sm:col-span-7 col-span-12 sm:order-2 order-3">
       <div class="p-4 bg-white border border-gray-200 rounded-lg">
         <h2 class="text-xl ">Trending: <span class="text-blue-600">#{{$route.params.id}}</span></h2>
       </div>
@@ -8,7 +8,7 @@
         <FeedItem :post="post" />
       </div>
     </div>
-    <div class="main-right lg:col-span-3 md:col-span-4 space-y-2 sm:col-span-5 col-span-12 sm:order-3 order-2">
+    <div class="main-right md:col-span-4 space-y-2 sm:col-span-5 col-span-12 sm:order-3 order-2">
       <PeopleYouMayKnow />
       <Trends />
     </div>
