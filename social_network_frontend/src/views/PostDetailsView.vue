@@ -4,21 +4,15 @@
       <div class="p-4 bg-white border border-gray-200 rounded-lg" v-if="post.id">
         <FeedItem :post="post" />
       </div>
-      <div
-        class="p-4 ml-6 bg-white border border-gray-200 rounded-lg"
-        v-for="comment in post.comments"
-        v-bind:key="comment.id"
-      >
+      <div class="p-4 ml-6 bg-white border border-gray-200 rounded-lg" v-for="comment in post.comments"
+        v-bind:key="comment.id">
         <CommentItem :comment="comment" />
       </div>
       <div class="bg-white border border-gray-200 rounded-lg">
         <form v-on:submit.prevent="submit_form" method="post">
           <div class="p-4">
-            <textarea
-              v-model="body"
-              class="p-4 w-full bg-gray-100 rounded-lg"
-              placeholder="What do you think?"
-            ></textarea>
+            <textarea v-model="body" class="p-4 w-full bg-gray-100 rounded-lg"
+              placeholder="What do you think?"></textarea>
           </div>
           <div class="p-4 border-t border-gray-100">
             <button class="inline-block py-2 sm:px-6 px-4 bg-teal-500 text-white rounded">
@@ -42,7 +36,7 @@ import Trends from '../components/TrendsNetwork.vue'
 import FeedItem from '../components/FeedItem.vue'
 import CommentItem from '../components/CommentItem.vue'
 
-export default {
+export default (await import ('vue')).defineComponent({
   name: 'PostView',
   components: {
     PeopleYouMayKnow,
@@ -90,5 +84,5 @@ export default {
         })
     }
   }
-}
+});
 </script>

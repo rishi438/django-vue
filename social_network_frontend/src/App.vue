@@ -7,7 +7,7 @@
         </div>
         <div
           class="menu-center space-x-3 sm:space-x-12 sm:flex hidden"
-          v-if="userStore.user.isAuthenticated"
+          v-if="userStore.user.is_authenticated"
         >
           <RouterLink :to="{name:'home'}" :class="{ 'text-teal-500': route_name === 'home' }">
             <svg
@@ -75,9 +75,9 @@
           </RouterLink>
         </div>
         <div class="menu-right">
-          <div v-if="userStore.user.isAuthenticated">
+          <div v-if="userStore.user.is_authenticated">
             <DropDown
-              :removeToken="userStore.removeToken"
+              :remove_token="userStore.remove_token"
               :d_name="option_details"
               :options="list_opt"
             />
@@ -100,7 +100,7 @@
   </nav>
   <main class="px-8 py-6 bg-gray-100 h-full min-h-screen">
     <RouterView />
-    <!-- <RouterView v-if="userStore.user.isAuthenticated" /> -->
+    <!-- <RouterView v-if="userStore.user.is_authenticated" /> -->
   </main>
   <Toast />
 </template>
@@ -139,7 +139,7 @@ export default {
     }
   },
   beforeCreate() {
-    this.userStore.initStore()
+    this.userStore.init_store()
     const token = this.userStore.user.access
     if (token) {
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + token

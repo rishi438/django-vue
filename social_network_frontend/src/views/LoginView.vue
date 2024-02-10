@@ -17,24 +17,16 @@
       </div>
       <div class="main-right">
         <div class="p-12 bg-white border border-gray-200 rounded-lg">
-          <form class="space-y-6" v-on:submit.prevent="submitForm">
+          <form class="space-y-6" v-on:submit.prevent="submit_form">
             <div>
               <label>E-mail</label><br />
-              <input
-                type="email"
-                placeholder="Your e-mail address"
-                v-model="form.email"
-                class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"
-              />
+              <input type="email" placeholder="Your e-mail address" v-model="form.email"
+                class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" />
             </div>
             <div>
               <label>Password</label><br />
-              <input
-                type="password"
-                placeholder="Your password"
-                v-model="form.password"
-                class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"
-              />
+              <input type="password" placeholder="Your password" v-model="form.password"
+                class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" />
             </div>
             <template v-if="errors.length > 0">
               <div class="bg-red-300 text-white rounded-lg p-6">
@@ -76,21 +68,19 @@ export default {
     }
   },
   methods: {
-    async submitForm() {
+    async submit_form() {
       this.errors = []
       if (this.form.email === '') {
-        // @ts-ignore
         this.errors.push('Your e-mail is missing')
       }
       if (this.form.password === '') {
-        // @ts-ignore
         this.errors.push('Your password is missing')
       }
       if (this.errors.length === 0) {
         await axios
           .post('/api/login/', this.form)
           .then((response) => {
-            this.userStore.setToken(response.data)
+            this.userStore.set_token(response.data)
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access
           })
           .catch((error) => {
@@ -99,8 +89,7 @@ export default {
         await axios
           .get('/api/me/')
           .then((response) => {
-            this.userStore.setUserInfo(response.data)
-            // @ts-ignore
+            this.userStore.set_user_info(response.data)
             this.$router.push('/home')
           })
           .catch((error) => {
@@ -109,7 +98,7 @@ export default {
       }
     },
     login_check() {
-      if (this.userStore.user.isAuthenticated) {
+      if (this.userStore.user.is_authenticated) {
         this.$router.push('/home')
       }
     }

@@ -18,39 +18,23 @@
         <form class="space-y-6" v-on:submit.prevent="submit_form">
           <div>
             <label>Name</label><br />
-            <input
-              type="text"
-              placeholder="Your Name"
-              v-model="form.name"
-              class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"
-            />
+            <input type="text" placeholder="Your Name" v-model="form.name"
+              class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" />
           </div>
           <div>
             <label>E-mail</label><br />
-            <input
-              type="email"
-              placeholder="Your e-mail address"
-              v-model="form.email"
-              class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"
-            />
+            <input type="email" placeholder="Your e-mail address" v-model="form.email"
+              class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" />
           </div>
           <div>
             <label>Password</label><br />
-            <input
-              type="password"
-              placeholder="Your password"
-              v-model="form.password1"
-              class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"
-            />
+            <input type="password" placeholder="Your password" v-model="form.password"
+              class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" />
           </div>
           <div>
             <label>Repeat Password</label><br />
-            <input
-              type="password"
-              placeholder="Your password"
-              v-model="form.password2"
-              class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"
-            />
+            <input type="password" placeholder="Your password" v-model="form.confirm_password"
+              class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" />
           </div>
           <template v-if="errors.length > 0">
             <div class="bg-red-300 text-white rounded-lg p-6">
@@ -83,8 +67,8 @@ export default (await import('vue')).defineComponent({
       form: {
         email: '',
         name: '',
-        password1: '',
-        password2: ''
+        password: '',
+        confirm_password: ''
       },
       errors: []
     }
@@ -99,10 +83,10 @@ export default (await import('vue')).defineComponent({
       if (this.form.name === '') {
         this.errors.push('Your name is missing')
       }
-      if (this.form.password1 === '') {
+      if (this.form.password === '') {
         this.errors.push('Your password is missing')
       }
-      if (this.form.password1 !== this.form.password2) {
+      if (this.form.password !== this.form.confirm_password) {
         this.errors.push('Your password does not match')
       }
       if (this.errors.length === 0) {
@@ -110,17 +94,17 @@ export default (await import('vue')).defineComponent({
           .post('/api/signup/', this.form)
           .then((response) => {
             if (response.data.msg == 'User created successfully') {
-              this.toastStore.showToast(
+              this.toastStore.show_toast(
                 5000,
                 `${response.data.msg}. Please log in`,
                 'bg-emerald-500'
               )
               this.form.email = ''
               this.form.name = ''
-              this.form.password1 = ''
-              this.form.password2 = ''
+              this.form.password = ''
+              this.form.confirm_password = ''
             } else {
-              this.toastStore.showToast(5000, response.data.msg, 'bg-red-300')
+              this.toastStore.show_toast(5000, response.data.msg, 'bg-red-300')
             }
           })
           .catch((error) => {

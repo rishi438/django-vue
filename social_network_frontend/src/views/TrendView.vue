@@ -22,7 +22,7 @@ import Trends from '../components/TrendsNetwork.vue'
 import { useUserStore } from '../stores/user'
 import FeedItem from '../components/FeedItem.vue'
 
-export default {
+export default (await import('vue')).defineComponent({
   name: 'HomeView',
   components: {
     PeopleYouMayKnow,
@@ -62,5 +62,5 @@ export default {
         })
     },
   }
-}
+});
 </script>
