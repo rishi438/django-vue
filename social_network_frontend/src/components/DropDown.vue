@@ -2,7 +2,7 @@
   <Menu as="div" class="relative inline-block text-left">
     <div>
       <MenuButton
-        class="justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900s hover:bg-gray-50">
+        class="justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900s hover:bg-stone-200">
         <img v-if="d_name['image']" :src="d_name['url']" class="w-[30px] h-[30px] rounded-full" />
         <span v-else>{{ d_name }}</span>
       </MenuButton>
@@ -13,19 +13,19 @@
       leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
       <MenuItems
         class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-        <div class="py-1">
+        <div>
           <MenuItem v-slot="{ active }" v-for="(option, index) in  options " :key="index">
-          <div v-if="typeof option == 'string'" v-on:click=logout :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-            'block px-4 py-2 text-sm'
+          <div v-if="typeof option == 'string'" v-on:click=logout :class="[active ? 'bg-teal-200 text-gray-900' : 'text-gray-700',
+            'block px-4 py-2 text-sm rounded-md'
           ]">{{ option }}</div>
           <RouterLink v-else-if="option['name'] != 'Profile'"
-              :to="{ name: option['name'].toLowerCase(), params: { id: option['val'].user.id } }"
-            :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700','block px-4 py-2 text-sm']"
+            :to="{ name: option['name'].toLowerCase(), params: { id: option['val'].user.id } }"
+            :class="[active ? 'bg-teal-200 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm rounded-md']"
             @click="$emit('close')">
-              {{ option['name'] }}
+            {{ option['name'] }}
           </RouterLink>
-          <RouterLink v-else :to="{ name: 'profile', params: { id: option['val'].user.id  } }"
-            :class="[active ? 'bg-gray-100 text-gray-900':'text-gray-700' ,'block px-4 py-2 text-sm']"
+          <RouterLink v-else :to="{ name: 'profile', params: { id: option['val'].user.id } }"
+            :class="[active ? 'bg-teal-200 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm rounded-md']"
             @click="$emit('close')">
             {{ option['name'] }}
           </RouterLink>

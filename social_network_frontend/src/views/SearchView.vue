@@ -9,7 +9,7 @@
             class="p-3 w-full bg-gray-100 rounded-lg"
             placeholder="What are you looking for?"
           />
-          <button class="inline-block py-2 px-6 bg-teal-500 text-white rounded-lg self-center">
+          <button class="inline-block py-2 px-6 bg-teal-500 hover:bg-teal-600 text-white rounded-lg self-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

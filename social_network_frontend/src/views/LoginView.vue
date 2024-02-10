@@ -42,7 +42,7 @@
               </div>
             </template>
             <div>
-              <button class="py-3 px-6 bg-teal-500 text-white rounded-lg">Log in</button>
+              <button class="py-3 px-6 bg-teal-500 hover:bg-teal-600 text-white rounded-lg">Log in</button>
             </div>
           </form>
         </div>

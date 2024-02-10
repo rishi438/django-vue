@@ -29,10 +29,10 @@
             ></textarea>
           </div>
           <div class="p-4 border-t border-gray-100 flex justify-between">
-            <button class="inline-block py-2 sm:px-6 px-4 bg-gray-600 text-white rounded">
+            <button class="inline-block py-2 sm:px-6 px-4 bg-gray-600 hover:bg-gray-700 text-white rounded">
               Attach image
             </button>
-            <button class="inline-block py-2 sm:px-6 px-4 bg-teal-500 text-white rounded">
+            <button class="inline-block py-2 sm:px-6 px-4 bg-teal-500 hover:bg-teal-600 text-white rounded">
               Post
             </button>
           </div>

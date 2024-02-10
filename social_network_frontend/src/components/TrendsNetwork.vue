@@ -10,7 +10,7 @@
                     </p>
                 </div>
                 <RouterLink :to="{ name: 'trends', params: { id: trend.hashtag } }" class="py-2 px-3
-           bg-teal-500 text-white text-xs rounded-lg">Explore</RouterLink>
+           bg-teal-500 hover:bg-teal-600 text-white text-xs rounded-lg">Explore</RouterLink>
             </div>
         </div>
     </div>
