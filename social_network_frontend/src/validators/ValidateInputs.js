@@ -1,28 +1,28 @@
 import { defineRule } from 'vee-validate'
 
 defineRule('required', (value) => {
-  if (!value || !value.length) {
-    return 'This field is required'
-  }
-  return true
+    if (!value || !value.length) {
+        return 'This field is required'
+    }
+    return true
 })
 
 defineRule('email', (val) => {
-  if (!val || !val.length) {
+    if (!val || !val.length) {
+        return true
+    }
+    if (!/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/.test(val)) {
+        return 'This field must be a valid email'
+    }
     return true
-  }
-  if (!/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/.test(val)) {
-    return 'This field must be a valid email'
-  }
-  return true
 })
 
 defineRule('minLength', (value, [limit]) => {
-  if (!value || !value.length) {
+    if (!value || !value.length) {
+        return true
+    }
+    if (value.length < limit) {
+        return `This field must be at least ${limit} characters`
+    }
     return true
-  }
-  if (value.length < limit) {
-    return `This field must be at least ${limit} characters`
-  }
-  return true
 })
