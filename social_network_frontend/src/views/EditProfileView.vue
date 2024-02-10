@@ -8,24 +8,36 @@
         <div class="container mx-auto max-w-[50%]">
             <div class="p-12 bg-white border border-gray-200 rounded-lg">
                 <Form class="space-y-6" :validation-schema="schema" @submit="submit_form" v-slot="{ errors }">
-                    <label>Name</label><br />
-                    <Field name="name" placeholder="Name" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" />
-                    <span name="name" class="text-red-600 text-xs line-clamp-6">{{ errors.name }}</span>
-                    <label>Email</label><br />
-                    <Field name="email" placeholder="Email" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" />
-                    <span name="email" class="text-red-600 text-xs line-clamp-6">{{ errors.email }}</span>
-                    <label>Current Password</label><br />
-                    <Field name="c_password" placeholder="Your current password"
-                        class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" />
-                    <span name="c_password" class="text-red-600 text-xs line-clamp-6">{{ errors.name }}</span>
-                    <label>Password</label><br />
-                    <Field name="password_1" placeholder="Your password"
-                        class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" />
-                    <span name="password_1" class="text-red-600 text-xs line-clamp-6">{{ errors.email }}</span>
-                    <label>Re-enter Password</label><br />
-                    <Field name="password_2" placeholder="Re-enter Password"
-                        class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" />
-                    <span name="password_2" class="text-red-600 text-xs line-clamp-6">{{ errors.email }}</span>
+                    <div class="mt-2 text-stone-700">
+                        <label>Name</label><br />
+                        <Field name="name" class="mt-1" placeholder="Name"
+                            :class="['w-full py-4 px-6 border rounded-lg ', !errors.name ?'border-gray-200':'border-red-600']" />
+                        <span name="name" class="ml-2 text-red-600 text-xs line-clamp-6">{{ errors.name }}</span>
+                    </div>
+                    <div class="mt-2 text-stone-700">
+                        <label>Email</label><br />
+                        <Field name="email"  class="mt-1" placeholder="Email"
+                        :class="['w-full py-4 px-6 border rounded-lg', !errors.email ?'border-gray-200':'border-red-600']" />
+                        <span name="email" class="ml-2 text-red-600 text-xs line-clamp-6">{{ errors.email }}</span>
+                    </div>
+                    <div class="mt-2 text-stone-700">
+                        <label>Current Password</label><br />
+                        <Field name="c_password" class="mt-1" placeholder="Your current password"
+                            :class="['w-full py-4 px-6 border rounded-lg', !errors.c_password ?'border-gray-200':'border-red-600']" />
+                        <span name="c_password" class="ml-2 text-red-600 text-xs line-clamp-6">{{ errors.c_password }}</span>
+                    </div>
+                    <div class="mt-2 text-stone-700">
+                        <label>New Password</label><br />
+                        <Field name="password_1" class="mt-1" placeholder="Your password"
+                            :class="['w-full py-4 px-6 border rounded-lg', !errors.password_1 ?'border-gray-200':'border-red-600']" />
+                        <span name="password_1" class="ml-2 text-red-600 text-xs line-clamp-6">{{ errors.password_1 }}</span>
+                    </div>
+                    <div class="mt-2 text-stone-700">
+                        <label>Re-enter Password</label><br />
+                        <Field name="password_2" class="mt-1" placeholder="Re-enter new password"
+                            :class="['w-full py-4 px-6 border rounded-lg', !errors.password_2 ?'border-gray-200':'border-red-600']" />
+                        <span name="password_2" class="ml-2 text-red-600 text-xs">{{ errors.password_2 }}</span>
+                    </div>
                     <div>
                         <button class="py-3 px-6 bg-zinc-500 text-white rounded-lg">Sign up</button>
                     </div>
@@ -62,18 +74,9 @@ export default (await import('vue')).defineComponent({
         Form,
         ErrorMessage
     },
-    data() {
-        return {
-            form: {
-                email: this.userStore.user.email,
-                name: this.userStore.user.name,
-                current_password: '',
-                password1: '',
-                password2: '',
-            },
-            errors: '',
-        }
-    },
+    // data() {
+
+    // },
 
     methods: {
         submit_form() {
