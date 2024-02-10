@@ -12,70 +12,70 @@ import TrendView from '../views/TrendView.vue'
 import EditProfileView from '../views/EditProfileView.vue'
 
 const router = createRouter({
-  // @ts-ignore
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/home',
-      name: 'home',
-      component: HomeView
-    },
-    {
-      path: '/signup',
-      name: 'signup',
-      component: SignupView
-    },
-    {
-      path: '/',
-      name: 'login',
-      component: LoginView
-    },
-    {
-      path: '/chat',
-      name: 'messenger',
-      component: MessengerView
-    },
-    {
-      path: '/search',
-      name: 'search',
-      component: SearchView
-    },
-    {
-      path: '/notification',
-      name: 'notification',
-      component: NotificationView
-    },
-    {
-      path: '/profile/:id',
-      children: [
+    // @ts-ignore
+    history: createWebHistory(import.meta.env.BASE_URL),
+    routes: [
         {
-          path: '',
-          name: 'profile',
-          component: ProfileView
+            path: '/home',
+            name: 'home',
+            component: HomeView
         },
         {
-          path: 'friends',
-          name: 'friends',
-          component: FriendsView
+            path: '/signup',
+            name: 'signup',
+            component: SignupView
         },
         {
-          path: 'edit',
-          name: 'edit',
-          component: EditProfileView
+            path: '/',
+            name: 'login',
+            component: LoginView
+        },
+        {
+            path: '/chat',
+            name: 'messenger',
+            component: MessengerView
+        },
+        {
+            path: '/search',
+            name: 'search',
+            component: SearchView
+        },
+        {
+            path: '/notification',
+            name: 'notification',
+            component: NotificationView
+        },
+        {
+            path: '/profile/:id',
+            children: [
+                {
+                    path: '',
+                    name: 'profile',
+                    component: ProfileView
+                },
+                {
+                    path: 'friends',
+                    name: 'friends',
+                    component: FriendsView
+                },
+                {
+                    path: 'edit',
+                    name: 'edit',
+                    component: EditProfileView
+                }
+            ]
+        },
+        {
+            path: '/post/:id',
+            name: 'post_details',
+            component: PostView
+        },
+        {
+            path: '/trends/:id',
+            name: 'trends',
+            component: TrendView
         }
-      ]
-    },
-    {
-      path: '/post/:id',
-      name: 'post_details',
-      component: PostView
-    },
-    {
-      path: '/trends/:id',
-      name: 'trends',
-      component: TrendView
-    }
-  ]
+    ]
 })
 
 export default router

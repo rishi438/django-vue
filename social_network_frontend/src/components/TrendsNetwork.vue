@@ -5,12 +5,16 @@
             <div class="flex items-center justify-between" v-for="trend in trends" :key="trend.id">
                 <div class="flex items-center space-x-2">
                     <p class="text-xs">
-                        <strong>#{{ trend.hashtag }}</strong><br />
+                        <strong>#{{ trend.hashtag }}</strong
+                        ><br />
                         <span class="text-gray-500">{{ trend.occurences }} posts</span>
                     </p>
                 </div>
-                <RouterLink :to="{ name: 'trends', params: { id: trend.hashtag } }" class="py-2 px-3
-           bg-teal-500 hover:bg-teal-600 text-white text-xs rounded-lg">Explore</RouterLink>
+                <RouterLink
+                    :to="{ name: 'trends', params: { id: trend.hashtag } }"
+                    class="py-2 px-3 bg-teal-500 hover:bg-teal-600 text-white text-xs rounded-lg"
+                    >Explore</RouterLink
+                >
             </div>
         </div>
     </div>
@@ -32,11 +36,11 @@ export default (await import('vue')).defineComponent({
         get_trends() {
             axios
                 .get('/api/post/trends/')
-                .then(res => {
+                .then((res) => {
                     this.trends = res.data
                 })
-                .catch(err => {
-                    console.error("Error occured: ", err)
+                .catch((err) => {
+                    console.error('Error occured: ', err)
                 })
         }
     }
