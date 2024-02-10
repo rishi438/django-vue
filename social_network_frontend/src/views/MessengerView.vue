@@ -14,14 +14,8 @@
                                 src="../assets/1639256761455.jpeg"
                                 class="w-[40px] h-[40px] rounded-full"
                             />
-                            <template
-                                v-for="user in conversation.users"
-                                :key="user.id"
-                            >
-                                <p
-                                    class="text-xs"
-                                    v-if="user.id !== userStore.user.id"
-                                >
+                            <template v-for="user in conversation.users" :key="user.id">
+                                <p class="text-xs" v-if="user.id !== userStore.user.id">
                                     <strong>{{ user.name }}</strong>
                                 </p>
                             </template>
@@ -33,37 +27,25 @@
                 </ul>
             </div>
         </div>
-        <div
-            class="main-center md:col-span-3 md:block hidden col-span-4 space-y-4"
-        >
+        <div class="main-center md:col-span-3 md:block hidden col-span-4 space-y-4">
             <div class="bg-white border border-gray-200 rounded-lg">
                 <div class="flex flex-col flex-grow p-4">
-                    <template
-                        v-for="message in active_conversation.messages"
-                        :key="message.id"
-                    >
+                    <template v-for="message in active_conversation.messages" :key="message.id">
                         <div
                             class="flex w-full mt-2 space-x-3 max-w-md ml-auto justify-end"
                             v-if="message.created_by.id === userStore.user.id"
                         >
                             <div>
-                                <div
-                                    class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg"
-                                >
+                                <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
                                     <p class="text-sm">
                                         {{ message.body }}
                                     </p>
                                 </div>
                                 <span class="text-xs text-gray-500 leading-none"
-                                    >{{
-                                        message.created_at_formatted
-                                    }}
-                                    ago</span
+                                    >{{ message.created_at_formatted }} ago</span
                                 >
                             </div>
-                            <div
-                                class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"
-                            >
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
                                 <img
                                     src="../assets/1639256761455.jpeg"
                                     class="w-[40px] h-[40px] rounded-full"
@@ -71,27 +53,20 @@
                             </div>
                         </div>
                         <div class="flex w-full mt-2 space-x-3 max-w-md" v-else>
-                            <div
-                                class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"
-                            >
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
                                 <img
                                     src="../assets/1639256761455.jpeg"
                                     class="w-[40px] h-[40px] rounded-full"
                                 />
                             </div>
                             <div>
-                                <div
-                                    class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg"
-                                >
+                                <div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
                                     <p class="text-sm">
                                         {{ message.body }}
                                     </p>
                                 </div>
                                 <span class="text-xs text-gray-500 leading-none"
-                                    >{{
-                                        message.created_at_formatted
-                                    }}
-                                    ago</span
+                                    >{{ message.created_at_formatted }} ago</span
                                 >
                             </div>
                         </div>
@@ -107,12 +82,8 @@
                             placeholder="What do you want to say?"
                         ></textarea>
                     </div>
-                    <div
-                        class="p-4 border-t border-gray-100 flex justify-between"
-                    >
-                        <button
-                            class="inline-block py-2 px-6 bg-teal-500 text-white rounded-lg"
-                        >
+                    <div class="p-4 border-t border-gray-100 flex justify-between">
+                        <button class="inline-block py-2 px-6 bg-teal-500 text-white rounded-lg">
                             Send
                         </button>
                     </div>
@@ -123,16 +94,16 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { useUserStore } from '../stores/user';
+import axios from 'axios'
+import { useUserStore } from '../stores/user'
 
 export default (await import('vue')).defineComponent({
     name: 'MessengerView',
     setup() {
-        const userStore = useUserStore();
+        const userStore = useUserStore()
         return {
             userStore
-        };
+        }
     },
     data() {
         return {
@@ -143,35 +114,35 @@ export default (await import('vue')).defineComponent({
             ],
             active_conversation: {},
             body: ''
-        };
+        }
     },
     mounted() {
-        this.get_conversations();
+        this.get_conversations()
     },
     methods: {
         get_conversations() {
             axios
                 .get('/api/chat/')
                 .then((response) => {
-                    this.conversations = response.data;
+                    this.conversations = response.data
                     if (this.conversations.length) {
-                        this.active_conversation = this.conversations[0].id;
+                        this.active_conversation = this.conversations[0].id
                     }
-                    this.get_messages();
+                    this.get_messages()
                 })
                 .catch((error) => {
-                    console.error(error);
-                });
+                    console.error(error)
+                })
         },
         get_messages() {
             axios
                 .get(`/api/chat/${this.active_conversation}/`)
                 .then((response) => {
-                    this.active_conversation = response.data;
+                    this.active_conversation = response.data
                 })
                 .catch((error) => {
-                    console.error(error);
-                });
+                    console.error(error)
+                })
         },
         submit_form() {
             axios
@@ -179,17 +150,17 @@ export default (await import('vue')).defineComponent({
                     body: this.body
                 })
                 .then((response) => {
-                    this.active_conversation.messages.push(response.data);
-                    this.body = '';
+                    this.active_conversation.messages.push(response.data)
+                    this.body = ''
                 })
                 .catch((error) => {
-                    console.error(error);
-                });
+                    console.error(error)
+                })
         },
         set_active_conversation(id) {
-            this.active_conversation = id;
-            this.get_messages();
+            this.active_conversation = id
+            this.get_messages()
         }
     }
-});
+})
 </script>
