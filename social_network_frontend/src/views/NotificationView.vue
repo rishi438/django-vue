@@ -1,6 +1,4 @@
-<template>
-  Working
-</template>
+<template>Working</template>
 
 <script>
 console.log('***Under Development***')
