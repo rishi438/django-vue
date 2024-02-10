@@ -107,7 +107,6 @@ export default (await import("vue")).defineComponent({
         .get("/api/chat/")
         .then(response => {
           this.conversations = response.data
-          console.log("yes",this.conversations)
           if (this.conversations.length) {
             this.active_conversation = this.conversations[0].id
           }

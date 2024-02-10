@@ -150,18 +150,16 @@ export default {
           this.friend_requests = response.data.requests
           this.friends = response.data.friends
           this.user = response.data.user
-          console.log(response)
         })
         .catch((error) => {
           console.log('error', error)
         })
     },
     handler_request(status, id) {
-      console.log(status, id)
       axios
         .post(`/api/friends/${id}/${status}/`)
         .then((response) => {
-          console.log('data', response.data)
+          console.log(response)
           window.location.reload()
         })
         .catch((error) => {

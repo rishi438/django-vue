@@ -15,7 +15,7 @@
     </div>
     <div class="main-left">
       <div class="p-12 bg-white border border-gray-200 rounded-lg">
-        <form class="space-y-6" v-on:submit.prevent="submitForm">
+        <form class="space-y-6" v-on:submit.prevent="submit_form">
           <div>
             <label>Name</label><br />
             <input
@@ -70,7 +70,7 @@
 import axios from 'axios'
 import { useToastStore } from '../stores/toast'
 
-export default {
+export default (await import('vue')).defineComponent({
   name: 'SignupView',
   setup() {
     const toastStore = useToastStore()
@@ -90,28 +90,21 @@ export default {
     }
   },
   methods: {
-    submitForm() {
-      // @ts-ignore
+    submit_form() {
       this.error = []
-
-      if (this.form.email === '') {
-        // @ts-ignore
-        this.errors.push('Your e-mail is missing')
+      let email_regex = /^[a-zA-Z0-9,_+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (email_regex.test(this.form.email)) {
+        this.errors.push('Your e-mail is missing or invalid')
       }
-
       if (this.form.name === '') {
-        // @ts-ignore
         this.errors.push('Your name is missing')
       }
       if (this.form.password1 === '') {
-        // @ts-ignore
         this.errors.push('Your password is missing')
       }
       if (this.form.password1 !== this.form.password2) {
-        // @ts-ignore
         this.errors.push('Your password does not match')
       }
-
       if (this.errors.length === 0) {
         axios
           .post('/api/signup/', this.form)
@@ -136,5 +129,5 @@ export default {
       }
     }
   }
-}
+})
 </script>
