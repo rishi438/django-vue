@@ -1,6 +1,6 @@
 # Social-network
 
-#### It is similar clone of Facebook. 
+#### This is social network UI. 
 
 ## Customize configuration
 
