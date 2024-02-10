@@ -80,10 +80,9 @@ export default {
         })
         .then((response) => {
           if (response.error) {
-            throw error
+            throw response.error
           }
           this.post.comments.push(response.data)
-          console.log(this.post)
           this.body = ''
         })
         .catch((error) => {

@@ -3,7 +3,7 @@
     <div class="max-w-screen-2xl mx-auto">
       <div class="flex items-center justify-between">
         <div class="menu-left">
-          <a href="/" class="text-xl">Network</a>
+          <a href="" class="text-xl">Network</a>
         </div>
         <div
           class="menu-center space-x-3 sm:space-x-12 sm:flex hidden"
@@ -98,7 +98,7 @@
       </div>
     </div>
   </nav>
-  <main class="px-8 py-6 bg-gray-100 h-full max-h-full">
+  <main class="px-8 py-6 bg-gray-100 h-full min-h-screen">
     <RouterView />
     <!-- <RouterView v-if="userStore.user.isAuthenticated" /> -->
   </main>
@@ -121,7 +121,7 @@ export default {
     }
   },
   data() {
-    let list_opt = [{ name: 'Profile', user: this.userStore }, 'Logout']
+    let list_opt = [{ name: 'Profile', val: this.userStore},{name:'Edit', val: this.userStore}, 'Logout']
     let option_details = { image: true, url: '../src/assets/1639256761455.jpeg' }
     return {
       list_opt,

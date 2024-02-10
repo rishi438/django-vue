@@ -19,6 +19,25 @@
       </div>
     </div>
     <div class="main-left lg:col-span-6 md:col-span-5 space-y-2 sm:col-span-7 col-span-12 sm:order-2 order-3">
+      <div class="bg-white border border-gray-200 rounded-lg">
+        <form v-on:submit.prevent="submit_form" method="post">
+          <div class="p-4">
+            <textarea
+              v-model="body"
+              class="p-4 w-full bg-gray-100 rounded-lg"
+              placeholder="What are you thinking about?"
+            ></textarea>
+          </div>
+          <div class="p-4 border-t border-gray-100 flex justify-between">
+            <button class="inline-block py-2 sm:px-6 px-4 bg-gray-600 text-white rounded">
+              Attach image
+            </button>
+            <button class="inline-block py-2 sm:px-6 px-4 bg-teal-500 text-white rounded">
+              Post
+            </button>
+          </div>
+        </form>
+      </div>
       <div class="p-4 bg-white border border-gray-200 rounded-lg" v-for="post in posts" v-bind:key="post.id">
         <FeedItem :post="post" />
       </div>

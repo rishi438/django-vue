@@ -60,7 +60,7 @@ export let useUserStore = defineStore({
 
     removeToken() {
       console.log('removeToken')
-
+      this.user.isAuthenticated = false
       this.user.refresh = null
       this.user.access = null
       this.user.id = false

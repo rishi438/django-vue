@@ -34,7 +34,6 @@ export default (await import('vue')).defineComponent({
                 .get('/api/post/trends/')
                 .then(res => {
                     this.trends = res.data
-                    console.log(res)
                 })
                 .catch(err => {
                     console.error("Error occured: ", err)
