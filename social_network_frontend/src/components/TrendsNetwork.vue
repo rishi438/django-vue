@@ -21,28 +21,29 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+
 export default (await import('vue')).defineComponent({
     name: 'trends',
     data() {
         return {
             trends: []
-        }
+        };
     },
     mounted() {
-        this.get_trends()
+        this.get_trends();
     },
     methods: {
         get_trends() {
             axios
                 .get('/api/post/trends/')
                 .then((res) => {
-                    this.trends = res.data
+                    this.trends = res.data;
                 })
                 .catch((err) => {
-                    console.error('Error occured: ', err)
+                    console.error('Error occured: ', err);
                 })
         }
     }
-})
+});
 </script>

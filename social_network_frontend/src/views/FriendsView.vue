@@ -114,22 +114,22 @@
 </template>
 
 <script>
-import axios from 'axios'
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import Trends from '../components/TrendsNetwork.vue'
-import { useUserStore } from '../stores/user'
-import { RouterLink } from 'vue-router'
-import { useToastStore } from '../stores/toast'
+import axios from 'axios';
+import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue';
+import Trends from '../components/TrendsNetwork.vue';
+import { useUserStore } from '../stores/user';
+import { RouterLink } from 'vue-router';
+import { useToastStore } from '../stores/toast';
 
 export default (await import('vue')).defineComponent({
     name: 'FriendsView',
     setup() {
-        const userStore = useUserStore()
-        const toastStore = useToastStore()
+        const userStore = useUserStore();
+        const toastStore = useToastStore();
         return {
             userStore,
             toastStore
-        }
+        };
     },
     components: {
         PeopleYouMayKnow,
@@ -141,35 +141,35 @@ export default (await import('vue')).defineComponent({
             user: {},
             friend_requests: [],
             friends: []
-        }
+        };
     },
     mounted() {
-        this.get_friends()
+        this.get_friends();
     },
     methods: {
         get_friends() {
             axios
                 .get(`/api/friends/${this.$route.params.id}/`)
                 .then((response) => {
-                    this.friend_requests = response.data.requests
-                    this.friends = response.data.friends
-                    this.user = response.data.user
+                    this.friend_requests = response.data.requests;
+                    this.friends = response.data.friends;
+                    this.user = response.data.user;
                 })
                 .catch((error) => {
-                    console.log('error', error)
+                    console.log('error', error);
                 })
         },
         handler_request(status, id) {
             axios
                 .post(`/api/friends/${id}/${status}/`)
                 .then((response) => {
-                    console.log(response)
-                    window.location.reload()
+                    console.log(response);
+                    window.location.reload();
                 })
                 .catch((error) => {
-                    console.error('Error Occured: ', error)
+                    console.error('Error Occured: ', error);
                 })
         }
     }
-})
+});
 </script>

@@ -25,12 +25,12 @@
 </template>
 
 <script>
-import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router';
 
 export default (await import('vue')).defineComponent({
     props: {
         comment: Object
     },
     components: { RouterLink }
-})
+});
 </script>

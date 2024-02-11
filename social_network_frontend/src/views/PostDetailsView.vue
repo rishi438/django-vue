@@ -38,11 +38,11 @@
 </template>
 
 <script>
-import axios from 'axios'
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import Trends from '../components/TrendsNetwork.vue'
-import FeedItem from '../components/FeedItem.vue'
-import CommentItem from '../components/CommentItem.vue'
+import axios from 'axios';
+import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue';
+import Trends from '../components/TrendsNetwork.vue';
+import FeedItem from '../components/FeedItem.vue';
+import CommentItem from '../components/CommentItem.vue';
 
 export default (await import('vue')).defineComponent({
     name: 'PostView',
@@ -53,7 +53,7 @@ export default (await import('vue')).defineComponent({
         CommentItem
     },
     mounted() {
-        this.get_post()
+        this.get_post();
     },
     data() {
         return {
@@ -62,17 +62,17 @@ export default (await import('vue')).defineComponent({
                 comments: {}
             },
             body: ''
-        }
+        };
     },
     methods: {
         get_post() {
             axios
                 .get(`/api/post/${this.$route.params.id}/`)
                 .then((response) => {
-                    this.post = response.data.post
+                    this.post = response.data.post;
                 })
                 .catch((error) => {
-                    console.log('error', error)
+                    console.log('error', error);
                 })
         },
         submit_form() {
@@ -82,15 +82,15 @@ export default (await import('vue')).defineComponent({
                 })
                 .then((response) => {
                     if (response.error) {
-                        throw response.error
+                        throw response.error;
                     }
-                    this.post.comments.push(response.data)
-                    this.body = ''
+                    this.post.comments.push(response.data);
+                    this.body = '';
                 })
                 .catch((error) => {
-                    console.error('error occured', error)
+                    console.error('error occured', error);
                 })
         }
     }
-})
+});
 </script>

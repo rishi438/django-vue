@@ -77,22 +77,22 @@
 </template>
 
 <script>
-import axios from 'axios'
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import Trends from '../components/TrendsNetwork.vue'
-import FeedItem from '../components/FeedItem.vue'
-import { useUserStore } from '../stores/user'
-import { useToastStore } from '../stores/toast'
+import axios from 'axios';
+import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue';
+import Trends from '../components/TrendsNetwork.vue';
+import FeedItem from '../components/FeedItem.vue';
+import { useUserStore } from '../stores/user';
+import { useToastStore } from '../stores/toast';
 
 export default (await import('vue')).defineComponent({
     name: 'ProfileView',
     setup() {
-        const userStore = useUserStore()
-        const toastStore = useToastStore()
+        const userStore = useUserStore();
+        const toastStore = useToastStore();
         return {
             userStore,
             toastStore
-        }
+        };
     },
     components: {
         PeopleYouMayKnow,
@@ -104,12 +104,12 @@ export default (await import('vue')).defineComponent({
             posts: [],
             user: {},
             body: ''
-        }
+        };
     },
     watch: {
         '$route.params.id': {
             handler() {
-                this.get_feed()
+                this.get_feed();
             },
             deep: true,
             immediate: true
@@ -121,24 +121,24 @@ export default (await import('vue')).defineComponent({
                 .post(`/api/friends/${this.$route.params.id}/request/`)
                 .then((response) => {
                     if (response.data.msg == 'Friend request already sent!') {
-                        this.toastStore.showToast(5000, response.data.msg, 'bg-red-400')
+                        this.toastStore.show_toast(5000, response.data.msg, 'bg-red-400');
                     } else {
-                        this.toastStore.showToast(5000, response.data.msg, 'bg-green-500')
+                        this.toastStore.show_toast(5000, response.data.msg, 'bg-green-500');
                     }
                 })
                 .catch((error) => {
-                    console.error('Error Occured: ', error)
+                    console.error('Error Occured: ', error);
                 })
         },
         get_feed() {
             axios
                 .get(`/api/post/profile/${this.$route.params.id}/`)
                 .then((response) => {
-                    this.posts = response.data.post
-                    this.user = response.data.user
+                    this.posts = response.data.post;
+                    this.user = response.data.user;
                 })
                 .catch((error) => {
-                    console.log('error', error)
+                    console.log('error', error);
                 })
         },
         submit_form() {
@@ -148,25 +148,25 @@ export default (await import('vue')).defineComponent({
                 })
                 .then((response) => {
                     if (response.error) {
-                        throw response.error
-                    }
-                    this.posts.unshift(response.data)
-                    this.body = ''
+                        throw response.error;
+                    };
+                    this.posts.unshift(response.data);
+                    this.body = '';
                 })
                 .catch((error) => {
-                    console.error('error occured', error)
+                    console.error('error occured', error);
                 })
         },
         send_message() {
             axios
                 .post(`/api/chat/${this.$route.params.id}/get-or-create/`)
                 .then(() => {
-                    this.$router.push('/chat')
+                    this.$router.push('/chat');
                 })
                 .catch((error) => {
-                    console.error(error)
+                    console.error(error);
                 })
         }
     }
-})
+});
 </script>

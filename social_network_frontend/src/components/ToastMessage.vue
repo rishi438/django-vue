@@ -9,6 +9,7 @@
 </template>
 
 <script setup>
-import { useToastStore } from '@/stores/toast'
-let store = useToastStore()
+import { useToastStore } from '@/stores/toast';
+
+let store = useToastStore();
 </script>

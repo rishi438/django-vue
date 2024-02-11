@@ -74,8 +74,9 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { RouterLink } from 'vue-router'
+import axios from 'axios';
+import { RouterLink } from 'vue-router';
+
 export default (await import('vue')).defineComponent({
     props: {
         post: Object
@@ -87,13 +88,13 @@ export default (await import('vue')).defineComponent({
                 .post(`/api/post/${post_id}/like/`)
                 .then((response) => {
                     if (response.data.msg == 'liked') {
-                        this.post.likes_count += 1
+                        this.post.likes_count += 1;
                     }
                 })
                 .catch((error) => {
-                    console.error('Error occured: ', error)
+                    console.error('Error occured: ', error);
                 })
         }
     }
-})
+});
 </script>

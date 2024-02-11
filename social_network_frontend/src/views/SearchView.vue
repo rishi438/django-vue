@@ -78,11 +78,11 @@
 </template>
 
 <script>
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import axios from 'axios'
-import Trends from '../components/TrendsNetwork.vue'
-import FeedItem from '../components/FeedItem.vue'
-import { RouterLink } from 'vue-router'
+import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue';
+import axios from 'axios';
+import Trends from '../components/TrendsNetwork.vue';
+import FeedItem from '../components/FeedItem.vue';
+import { RouterLink } from 'vue-router';
 
 export default (await import('vue')).defineComponent({
     name: 'SearchView',
@@ -97,7 +97,7 @@ export default (await import('vue')).defineComponent({
             query: '',
             users: [],
             posts: []
-        }
+        };
     },
     methods: {
         submit_form() {
@@ -106,13 +106,13 @@ export default (await import('vue')).defineComponent({
                     query: this.query
                 })
                 .then((response) => {
-                    this.users = response.data.users
-                    this.posts = response.data.posts
+                    this.users = response.data.users;
+                    this.posts = response.data.posts;
                 })
                 .catch((error) => {
-                    console.error('Error Occured: ', error)
+                    console.error('Error Occured: ', error);
                 })
         }
     }
-})
+});
 </script>
