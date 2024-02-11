@@ -9,6 +9,7 @@ export let useToastStore = defineStore({
         classes: '',
         isVisible: false
     }),
+
     actions: {
         show_toast(ms, message, classes) {
             this.ms = parseInt(ms)
@@ -21,7 +22,6 @@ export let useToastStore = defineStore({
             setTimeout(() => {
                 this.classes = this.classes.replace('-translate-y-28', '')
             }, this.ms - 500)
-
             setTimeout(() => {
                 this.isVisible = false
             }, this.ms)

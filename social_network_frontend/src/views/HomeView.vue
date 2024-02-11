@@ -67,11 +67,11 @@
 </template>
 
 <script>
-import axios from 'axios'
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import Trends from '../components/TrendsNetwork.vue'
-import { useUserStore } from '../stores/user'
-import FeedItem from '../components/FeedItem.vue'
+import axios from 'axios';
+import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue';
+import Trends from '../components/TrendsNetwork.vue';
+import FeedItem from '../components/FeedItem.vue';
+import { useUserStore } from '../stores/user';
 
 export default (await import('vue')).defineComponent({
     name: 'HomeView',
@@ -81,29 +81,29 @@ export default (await import('vue')).defineComponent({
         FeedItem
     },
     setup() {
-        const userStore = useUserStore()
+        const userStore = useUserStore();
         return {
             userStore
-        }
+        };
     },
     mounted() {
-        this.get_feed()
+        this.get_feed();
     },
     data() {
         return {
             posts: [],
             body: ''
-        }
+        };
     },
     methods: {
         get_feed() {
             axios
                 .get('/api/post/')
                 .then((response) => {
-                    this.posts = response.data
+                    this.posts = response.data;
                 })
                 .catch((error) => {
-                    console.log('error', error)
+                    console.log('error', error);
                 })
         },
         submit_form() {
@@ -113,16 +113,16 @@ export default (await import('vue')).defineComponent({
                 })
                 .then((response) => {
                     if (response.error) {
-                        throw response.error
+                        throw response.error;
                     }
-                    this.posts.unshift(response.data)
-                    this.userStore.set_attribute({ posts_count: 1 })
-                    this.body = ''
+                    this.posts.unshift(response.data);
+                    this.userStore.set_attribute({ posts_count: 1 });
+                    this.body = '';
                 })
                 .catch((error) => {
-                    console.error('error occured', error)
+                    console.error('error occured', error);
                 })
         }
     }
-})
+});
 </script>

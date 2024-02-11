@@ -118,29 +118,29 @@
 </template>
 
 <script>
-import Toast from '@/components/ToastMessage.vue'
-import { useUserStore } from '@/stores/user'
-import DropDown from '@/components/DropDown.vue'
-import axios from 'axios'
+import axios from 'axios';
+import Toast from '@/components/ToastMessage.vue';
+import DropDown from '@/components/DropDown.vue';
+import { useUserStore } from '@/stores/user';
 
-export default {
+export default (await import('vue')).defineComponent({
     setup() {
-        let userStore = useUserStore()
+        let userStore = useUserStore();
         return {
             userStore
-        }
+        };
     },
     data() {
         let list_opt = [
             { name: 'Profile', val: this.userStore },
             { name: 'Edit', val: this.userStore },
             'Logout'
-        ]
-        let option_details = { image: true, url: '../src/assets/1639256761455.jpeg' }
+        ];
+        let option_details = { image: true, url: '../src/assets/1639256761455.jpeg' };
         return {
             list_opt,
             option_details
-        }
+        };
     },
     components: {
         Toast,
@@ -148,18 +148,17 @@ export default {
     },
     computed: {
         route_name() {
-            // @ts-ignore
-            return this.$route.name
+            return this.$route.name;
         }
     },
     beforeCreate() {
-        this.userStore.init_store()
-        const token = this.userStore.user.access
+        this.userStore.init_store();
+        const token = this.userStore.user.access;
         if (token) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
         } else {
-            axios.defaults.headers.common['Authorization'] = ''
+            axios.defaults.headers.common['Authorization'] = '';
         }
     }
-}
+});
 </script>

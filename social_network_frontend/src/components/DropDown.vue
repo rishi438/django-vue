@@ -72,10 +72,10 @@
 </template>
 
 <script setup>
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { RouterLink, useRouter } from 'vue-router'
-const router = useRouter()
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+import { RouterLink, useRouter } from 'vue-router';
 
+const router = useRouter()
 const props = defineProps({
     remove_token: {
         type: Function
@@ -88,13 +88,13 @@ const props = defineProps({
         type: Array,
         required: true
     }
-})
+});
 const logout = async () => {
     try {
-        await props.remove_token?.()
-        router.push('/')
+        await props.remove_token?.();
+        router.push('/');
     } catch (error) {
-        console.error('error occured: ', error)
+        console.error('error occured: ', error);
     }
-}
+};
 </script>

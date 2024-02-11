@@ -59,19 +59,19 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { useUserStore } from '../stores/user'
+import axios from 'axios';
+import { useUserStore } from '../stores/user';
 
-export default {
+export default (await import('vue')).defineComponent({
     name: 'LoginView',
     setup() {
-        let userStore = useUserStore()
+        let userStore = useUserStore();
         return {
             userStore
-        }
+        };
     },
     mounted() {
-        this.login_check()
+        this.login_check();
     },
     data() {
         return {
@@ -80,44 +80,44 @@ export default {
                 password: ''
             },
             errors: []
-        }
+        };
     },
     methods: {
         async submit_form() {
             this.errors = []
             if (this.form.email === '') {
-                this.errors.push('Your e-mail is missing')
+                this.errors.push('Your e-mail is missing');
             }
             if (this.form.password === '') {
-                this.errors.push('Your password is missing')
+                this.errors.push('Your password is missing');
             }
             if (this.errors.length === 0) {
                 await axios
                     .post('/api/login/', this.form)
                     .then((response) => {
-                        this.userStore.set_token(response.data)
+                        this.userStore.set_token(response.data);
                         axios.defaults.headers.common['Authorization'] =
-                            'Bearer ' + response.data.access
+                            'Bearer ' + response.data.access;
                     })
                     .catch((error) => {
-                        console.log('error ', error)
+                        console.log('error ', error);
                     })
                 await axios
                     .get('/api/me/')
                     .then((response) => {
-                        this.userStore.set_user_info(response.data)
-                        this.$router.push('/home')
+                        this.userStore.set_user_info(response.data);
+                        this.$router.push('/home');
                     })
                     .catch((error) => {
-                        console.log('error ', error)
+                        console.log('error ', error);
                     })
             }
         },
         login_check() {
             if (this.userStore.user.is_authenticated) {
-                this.$router.push('/home')
+                this.$router.push('/home');
             }
         }
     }
-}
+});
 </script>

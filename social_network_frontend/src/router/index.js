@@ -12,7 +12,6 @@ import TrendView from '../views/TrendView.vue'
 import EditProfileView from '../views/EditProfileView.vue'
 
 const router = createRouter({
-    // @ts-ignore
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {

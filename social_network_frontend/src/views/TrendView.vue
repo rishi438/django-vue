@@ -24,11 +24,11 @@
 </template>
 
 <script>
-import axios from 'axios'
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import Trends from '../components/TrendsNetwork.vue'
-import { useUserStore } from '../stores/user'
-import FeedItem from '../components/FeedItem.vue'
+import axios from 'axios';
+import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue';
+import Trends from '../components/TrendsNetwork.vue';
+import FeedItem from '../components/FeedItem.vue';
+import { useUserStore } from '../stores/user';
 
 export default (await import('vue')).defineComponent({
     name: 'HomeView',
@@ -38,15 +38,15 @@ export default (await import('vue')).defineComponent({
         FeedItem
     },
     setup() {
-        const userStore = useUserStore()
+        const userStore = useUserStore();
         return {
             userStore
-        }
+        };
     },
     watch: {
         '$route.params.id': {
             handler() {
-                this.get_trend_feed()
+                this.get_trend_feed();
             },
             deep: true,
             immediate: true
@@ -56,19 +56,19 @@ export default (await import('vue')).defineComponent({
         return {
             posts: [],
             body: ''
-        }
+        };
     },
     methods: {
         get_trend_feed() {
             axios
                 .get(`/api/post/?trend=${this.$route.params.id}`)
                 .then((response) => {
-                    this.posts = response.data
+                    this.posts = response.data;
                 })
                 .catch((error) => {
-                    console.log('error', error)
+                    console.log('error', error);
                 })
         }
     }
-})
+});
 </script>

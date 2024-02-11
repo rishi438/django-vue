@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { defineStore } from 'pinia'
 import axios from 'axios'
+
 // eslint-disable-next-line no-undef
 export let useUserStore = defineStore({
     id: 'user',
@@ -15,6 +16,7 @@ export let useUserStore = defineStore({
             refresh: null
         }
     }),
+
     actions: {
         init_store() {
             if (localStorage.getItem('user.access')) {
@@ -59,7 +61,6 @@ export let useUserStore = defineStore({
         },
 
         remove_token() {
-            console.log('remove_token')
             this.user.is_authenticated = false
             this.user.refresh = null
             this.user.access = null
