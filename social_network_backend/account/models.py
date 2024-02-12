@@ -8,6 +8,8 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin,
 )
+
+# from django.contrib.admin.forms import AdminPasswordChangeForm
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils import timezone
@@ -57,6 +59,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["name"]
     objects = CustomUserManager()
+
+
+# class UserPasswordUpdate(AdminPasswordChangeForm):
+#     def save(self, commit: bool = True) -> AbstractBaseUser:
+#         password = self.cleaned_data["password1"]
+#         self.user.set_password(password)
+#         return super().save(commit)
 
 
 @unique

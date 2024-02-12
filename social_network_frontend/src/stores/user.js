@@ -66,17 +66,18 @@ export let useUserStore = defineStore({
             this.user.access = null
             this.user.id = false
             this.user.name = false
-            this.user.id = false
             this.user.email = false
             this.user.friends_count = false
             this.user.posts_count = false
 
+            localStorage.setItem('user.is_authenticated', '')
             localStorage.setItem('user.access', '')
             localStorage.setItem('user.refresh', '')
             localStorage.setItem('user.id', '')
             localStorage.setItem('user.name', '')
             localStorage.setItem('user.email', '')
             localStorage.setItem('user.friends_count', '')
+            localStorage.setItem('user.posts_count', '')
         },
 
         set_user_info(user) {

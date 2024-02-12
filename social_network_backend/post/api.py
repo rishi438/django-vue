@@ -24,7 +24,6 @@ def post_list(request):
         user_ids.append(user.id)
     posts = Post.objects.filter(created_by__in=user_ids)
     trend = request.GET.get("trend", "")
-    print(trend)
     if trend:
         posts = posts.filter(body__icontains="#" + trend)
     serializer = PostSerializer(posts, many=True)
