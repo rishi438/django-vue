@@ -1,5 +1,6 @@
 <template>
-    <nav class="py-4 px-8 border-b border-gray-200">
+    <div class="bg-gray-100 h-full min-h-screen">
+    <nav class="py-4 px-8 border-b border-gray-200 bg-white">
         <div class="max-w-screen-2xl mx-auto">
             <div class="flex items-center justify-between">
                 <div class="menu-left">
@@ -110,11 +111,12 @@
             </div>
         </div>
     </nav>
-    <main class="px-8 py-6 bg-gray-100 h-full min-h-screen">
+    <main class="px-8 py-6">
         <RouterView />
         <!-- <RouterView v-if="userStore.user.is_authenticated" /> -->
     </main>
     <Toast />
+</div>
 </template>
 
 <script>

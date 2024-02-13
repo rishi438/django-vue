@@ -41,22 +41,14 @@ export let useUserStore = defineStore({
         },
 
         set_attribute(data) {
-            let post_count, friends_count
             for (const key in data) {
-                switch (key) {
-                    case 'posts_count':
-                        post_count = parseInt(this.user.posts_count, 10)
-                        this.user.posts_count = post_count + parseInt(data.posts_count, 10)
-                        localStorage.setItem('user.posts_count', this.user.posts_count)
-                        break
-                    case 'friends_count':
-                        friends_count = parseInt(this.user.friends_count, 10)
-                        this.user.friends_count = friends_count + parseInt(data.friends_count, 10)
-                        localStorage.setItem('user.friends_count', this.user.friends_count)
-                        break
-                    default:
-                        break
+                const value = this.user[key]
+                if (!isNaN(value)) {
+                    this.user[key] = parseInt(value) + parseInt(data[key])
+                } else {
+                    this.user[key] = data[key]
                 }
+                localStorage.setItem(`user.${key}`, this.user[key])
             }
         },
 
