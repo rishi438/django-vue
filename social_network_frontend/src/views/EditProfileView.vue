@@ -107,32 +107,32 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
-import { useToastStore } from '../stores/toast'
-import { useUserStore } from '../stores/user'
-import { Field, Form } from 'vee-validate'
+import axios from 'axios';
+import { useToastStore } from '../stores/toast';
+import { useUserStore } from '../stores/user';
+import { Field, Form } from 'vee-validate';
 
 export default (await import('vue')).defineComponent({
     setup() {
-        const toastStore = useToastStore()
-        const userStore = useUserStore()
+        const toastStore = useToastStore();
+        const userStore = useUserStore();
         const initial_values = {
             email: userStore.user.email,
             name: userStore.user.name
-        }
+        };
         const schema = {
             email: { required: true },
             name: 'required',
             current_password: 'required|minLength:8',
             password1: 'required|minLength:8',
             password2: 'required:true|minLength:8|confirmed:password1'
-        }
+        };
         return {
             schema,
             toastStore,
             userStore,
             initial_values
-        }
+        };
     },
     components: {
         Field,
@@ -148,15 +148,15 @@ export default (await import('vue')).defineComponent({
                             5000,
                             `${response.data.msg}. Please log in`,
                             'bg-emerald-500'
-                        )
+                        );
                     } else {
-                        this.toastStore.show_toast(5000, response.data.msg, 'bg-red-300')
+                        this.toastStore.show_toast(5000, response.data.msg, 'bg-red-300');
                     }
                 })
                 .catch((error) => {
-                    console.log('error', error)
+                    console.log('error', error);
                 })
         }
     }
-})
+});
 </script>
