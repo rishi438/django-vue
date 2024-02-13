@@ -143,10 +143,10 @@ export default (await import('vue')).defineComponent({
             axios
                 .post(`/api/profile/${this.$route.params.id}/edit/`, vals)
                 .then((response) => {
-                    if (response.data.msg == 'User created successfully') {
+                    if (response.data.msg == 'User details updated successfully!') {
                         this.toastStore.show_toast(
                             5000,
-                            `${response.data.msg}. Please log in`,
+                            `${response.data.msg}`,
                             'bg-emerald-500'
                         );
                     } else {
