@@ -19,4 +19,7 @@ urlpatterns = [
         api.handle_friend_request,
         name="handle_friend_request",
     ),
+    path(
+        "profile/<uuid:pk>/edit/", api.user_details_update, name="user_details_update"
+    ),
 ]

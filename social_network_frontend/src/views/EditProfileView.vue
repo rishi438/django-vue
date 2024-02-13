@@ -1,17 +1,19 @@
 <template>
     <div class="max-w-7xl mx-auto grid grid-cols-1 gap-4">
-        <div class="container mx-auto max-w-[50%]">
+        <div class="container mx-auto md:max-w-[80%] lg:max-w-[50%]">
             <div class="p-5 bg-white border border-gray-200 rounded-lg">
                 <h3 class="text-2xl text-center">Edit profile</h3>
             </div>
         </div>
-        <div class="container mx-auto max-w-[50%]">
+        <div class="container mx-auto md:max-w-[80%] lg:max-w-[50%]">
             <div class="p-12 bg-white border border-gray-200 rounded-lg">
                 <Form
                     class="space-y-6"
                     :validation-schema="schema"
                     @submit="submit_form"
                     v-slot="{ errors }"
+                    :initial-values="initial_values"
+                    ref="my_form"
                 >
                     <div class="mt-2 text-stone-700">
                         <label>Name</label><br />
@@ -33,6 +35,7 @@
                         <Field
                             name="email"
                             class="mt-1"
+                            type="email"
                             placeholder="Email"
                             :class="[
                                 'w-full py-4 px-6 border rounded-lg',
@@ -46,46 +49,53 @@
                     <div class="mt-2 text-stone-700">
                         <label>Current Password</label><br />
                         <Field
-                            name="curr_password"
+                            name="current_password"
                             class="mt-1"
+                            type="password"
                             placeholder="Your current password"
                             :class="[
                                 'w-full py-4 px-6 border rounded-lg',
-                                !errors.curr_password ? 'border-gray-200' : 'border-red-600'
+                                !errors.current_password ? 'border-gray-200' : 'border-red-600'
                             ]"
                         />
-                        <span name="curr_password" class="ml-2 text-red-600 text-xs line-clamp-6">
-                            {{ errors.curr_password }}</span
+                        <span
+                            name="current_password"
+                            class="ml-2 text-red-600 text-xs line-clamp-6"
+                        >
+                            {{ errors.current_password }}</span
                         >
                     </div>
                     <div class="mt-2 text-stone-700">
                         <label>New Password</label><br />
                         <Field
-                            name="password"
+                            name="password1"
                             class="mt-1"
-                            placeholder="Your password"
+                            type="password"
+                            placeholder="Your new password"
                             :class="[
                                 'w-full py-4 px-6 border rounded-lg',
-                                !errors.password ? 'border-gray-200' : 'border-red-600'
+                                !errors.password1 ? 'border-gray-200' : 'border-red-600'
                             ]"
                         />
-                        <span name="password" class="ml-2 text-red-600 text-xs line-clamp-6">
-                            {{ errors.password }}</span
+                        <span name="password1" class="ml-2 text-red-600 text-xs line-clamp-6">
+                            {{ errors.password1 }}</span
                         >
                     </div>
                     <div class="mt-2 text-stone-700">
-                        <label>Re-enter Password</label><br />
+                        <label>Confirm Password</label><br />
                         <Field
-                            name="confirm_password"
+                            name="password2"
+                            type="password"
                             class="mt-1"
-                            placeholder="Re-enter new password"
+                            placeholder="Confirm new password"
                             :class="[
                                 'w-full py-4 px-6 border rounded-lg',
-                                !errors.confirm_password ? 'border-gray-200' : 'border-red-600'
+                                !errors.password2 ? 'border-gray-200' : 'border-red-600'
                             ]"
+                            :data-vv-as="'password1'"
                         />
-                        <span name="confirm_password" class="ml-2 text-red-600 text-xs">{{
-                            errors.confirm_password
+                        <span name="password2" class="ml-2 text-red-600 text-xs">{{
+                            errors.password2
                         }}</span>
                     </div>
                     <div>
@@ -106,53 +116,46 @@ export default (await import('vue')).defineComponent({
     setup() {
         const toastStore = useToastStore();
         const userStore = useUserStore();
+        const initial_values = {
+            email: userStore.user.email,
+            name: userStore.user.name
+        };
         const schema = {
-            email: { required: true, email: userStore.user.email },
+            email: { required: true },
             name: 'required',
-            curr_password: 'required|minLength:8',
-            password: 'required|minLength:8',
-            confirm_password: 'required|minLength:8'
+            current_password: 'required|minLength:8',
+            password1: 'required|minLength:8',
+            password2: 'required:true|minLength:8|confirmed:password1'
         };
         return {
             schema,
             toastStore,
-            userStore
+            userStore,
+            initial_values
         };
     },
     components: {
         Field,
         Form
     },
-    data() {
-        return {
-            form: this.schema,
-            errors: ''
-        };
-    },
     methods: {
-        submit_form() {
-            if (this.errors !== '') {
-                axios
-                    .post('/api/profile/edit/', this.form)
-                    .then((response) => {
-                        if (response.data.msg == 'User created successfully') {
-                            this.toastStore.show_toast(
-                                5000,
-                                `${response.data.msg}. Please log in`,
-                                'bg-emerald-500'
-                            );
-                            // this.form.email = '';
-                            // this.form.name = '';
-                            // this.form.password = '';
-                            // this.form.confirm_password = '';
-                        } else {
-                            this.toastStore.show_toast(5000, response.data.msg, 'bg-red-300');
-                        }
-                    })
-                    .catch((error) => {
-                        console.log('error', error);
-                    })
-            }
+        submit_form(vals) {
+            axios
+                .post(`/api/profile/${this.$route.params.id}/edit/`, vals)
+                .then((response) => {
+                    if (response.data.msg == 'User details updated successfully!') {
+                        this.toastStore.show_toast(
+                            5000,
+                            `${response.data.msg}`,
+                            'bg-emerald-500'
+                        );
+                    } else {
+                        this.toastStore.show_toast(5000, response.data.msg, 'bg-red-300');
+                    }
+                })
+                .catch((error) => {
+                    console.log('error', error);
+                })
         }
     }
 });

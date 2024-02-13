@@ -1,4 +1,6 @@
 from account.serializers import FriendRequestSerializer, UserSerializer
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.db.models import Q
 from django.http import JsonResponse
 from rest_framework.decorators import (
@@ -7,7 +9,7 @@ from rest_framework.decorators import (
     permission_classes,
 )
 
-from .forms import SigupForm
+from .forms import SigupForm, UserDetailsForm
 from .models import FriendRequest, FriendRequestStatus, User
 
 
@@ -45,20 +47,57 @@ def signup(request):
         response(dict): return data and status
     """
     data = request.data
-    message = "User created successfully"
+    message = "User created successfully!"
     form = SigupForm(
         {
             "email": data.get("email"),
             "name": data.get("name"),
-            "password1": data.get("password1"),
-            "password2": data.get("password2"),
+            "password1": data.get("password"),
+            "password2": data.get("confirm_password"),
         }
     )
     if form.is_valid():
         form.save()
         # send verfication email later!
     else:
-        message = "Error: Invalid Form please contact Tech Team"
+        message = "Error occurred please contact Tech Team!"
+    return JsonResponse({"msg": message})
+
+
+@api_view(["POST"])
+def user_details_update(request, pk):
+    data = request.data
+    user = request.user
+
+    if user.check_password(data["current_password"]):
+        user = User.objects.get(pk=request.user.id)
+        form = UserDetailsForm(request.data or None, instance=user)
+        message = "Error occurred, please contact the Tech Team!"
+        if data["password1"] and data["password2"]:
+            password_form = PasswordChangeForm(
+                user,
+                {
+                    "old_password": data["current_password"],
+                    "new_password1": data["password1"],
+                    "new_password2": data["password2"],
+                },
+            )
+            if password_form.is_valid() and form.is_valid():
+                user.set_password(data["password1"])
+                user.save()
+                form.save()
+                update_session_auth_hash(request, user)
+                message = "User details updated successfully!"
+            else:
+                message = "Error occurred, please contact the Tech Team!"
+        else:
+            if form.is_valid():
+                form.save()
+                message = "User details updated successfully!"
+            else:
+                message = "Error occurred, please contact the Tech Team!"
+    else:
+        message = "Entered incorrect current password!"
     return JsonResponse({"msg": message})
 
 
@@ -85,8 +124,8 @@ def friends(request, pk):
 def send_friend_request(request, pk):
     user = User.objects.get(pk=pk)
     existing_request = FriendRequest.objects.filter(
-        (Q(created_for=request.user) & Q(created_by=user)) |
-        (Q(created_for=user) & Q(created_by=request.user))
+        (Q(created_for=request.user) & Q(created_by=user))
+        | (Q(created_for=user) & Q(created_by=request.user))
     ).first()
     if existing_request:
         if existing_request.status == FriendRequestStatus.REJECTED.value:

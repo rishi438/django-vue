@@ -26,3 +26,10 @@ defineRule('minLength', (value, [limit]) => {
     }
     return true
 })
+
+defineRule('confirmed', (value, [target], ctx) => {
+    if (value === ctx.form[target]) {
+        return true
+    }
+    return 'Passwords must match'
+})

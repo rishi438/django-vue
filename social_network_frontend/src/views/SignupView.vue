@@ -46,10 +46,10 @@
                         />
                     </div>
                     <div>
-                        <label>Repeat Password</label><br />
+                        <label>Confirm Password</label><br />
                         <input
                             type="password"
-                            placeholder="Your password"
+                            placeholder="Confirm password"
                             v-model="form.confirm_password"
                             class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"
                         />
@@ -94,8 +94,8 @@ export default (await import('vue')).defineComponent({
     methods: {
         submit_form() {
             this.error = [];
-            let email_regex = /^[a-zA-Z0-9,_+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if (email_regex.test(this.form.email)) {
+            let email_regex = /^[a-zA-Z0-9,_+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+            if (!email_regex.test(this.form.email)) {
                 this.errors.push('Your e-mail is missing or invalid');
             }
             if (this.form.name === '') {
