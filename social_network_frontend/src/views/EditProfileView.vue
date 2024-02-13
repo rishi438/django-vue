@@ -13,7 +13,7 @@
                     @submit="submit_form"
                     v-slot="{ errors }"
                     :initial-values="initial_values"
-                    ref="my_form"
+                    ref="user_edit_form"
                 >
                     <div class="mt-2 text-stone-700">
                         <label>Name</label><br />
@@ -140,6 +140,7 @@ export default (await import('vue')).defineComponent({
     },
     methods: {
         submit_form(vals) {
+            console.log(vals)
             axios
                 .post(`/api/profile/${this.$route.params.id}/edit/`, vals)
                 .then((response) => {
@@ -149,6 +150,9 @@ export default (await import('vue')).defineComponent({
                             `${response.data.msg}`,
                             'bg-emerald-500'
                         );
+                        console.log(vals)
+                        this.userStore.set_attribute({name:vals.name, email:vals.email});
+                        // this.$refs.user_edit_form.resetForm();
                     } else {
                         this.toastStore.show_toast(5000, response.data.msg, 'bg-red-300');
                     }

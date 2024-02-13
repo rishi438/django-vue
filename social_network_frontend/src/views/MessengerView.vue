@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4" v-if="!conversations">
         <div class="main-left md:col-span-1 col-span-4">
             <div class="bg-white border border-gray-200 text-center rounded-lg">
                 <ul class="space-y-4" role="list">
@@ -91,19 +91,22 @@
             </div>
         </div>
     </div>
+    <div v-else class="text-4xl flex h-[calc(100vh-128px)] justify-center items-center">
+        Add friends to start conversation
+    </div>
 </template>
 
 <script>
-import axios from 'axios';
-import { useUserStore } from '../stores/user';
+import axios from 'axios'
+import { useUserStore } from '../stores/user'
 
 export default (await import('vue')).defineComponent({
     name: 'MessengerView',
     setup() {
-        const userStore = useUserStore();
+        const userStore = useUserStore()
         return {
             userStore
-        };
+        }
     },
     data() {
         return {
@@ -114,34 +117,34 @@ export default (await import('vue')).defineComponent({
             ],
             active_conversation: {},
             body: ''
-        };
+        }
     },
     mounted() {
-        this.get_conversations();
+        this.get_conversations()
     },
     methods: {
         get_conversations() {
             axios
                 .get('/api/chat/')
                 .then((response) => {
-                    this.conversations = response.data;
+                    this.conversations = response.data
                     if (this.conversations.length) {
-                        this.active_conversation = this.conversations[0].id;
+                        this.active_conversation = this.conversations[0].id
                     }
-                    this.get_messages();
+                    this.get_messages()
                 })
                 .catch((error) => {
-                    console.error(error);
+                    console.error(error)
                 })
         },
         get_messages() {
             axios
                 .get(`/api/chat/${this.active_conversation}/`)
                 .then((response) => {
-                    this.active_conversation = response.data;
+                    this.active_conversation = response.data
                 })
                 .catch((error) => {
-                    console.error(error);
+                    console.error(error)
                 })
         },
         submit_form() {
@@ -150,17 +153,17 @@ export default (await import('vue')).defineComponent({
                     body: this.body
                 })
                 .then((response) => {
-                    this.active_conversation.messages.push(response.data);
-                    this.body = '';
+                    this.active_conversation.messages.push(response.data)
+                    this.body = ''
                 })
                 .catch((error) => {
-                    console.error(error);
+                    console.error(error)
                 })
         },
         set_active_conversation(id) {
-            this.active_conversation = id;
-            this.get_messages();
+            this.active_conversation = id
+            this.get_messages()
         }
     }
-});
+})
 </script>

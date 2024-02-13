@@ -1,13 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+    font-family: 'Roboto';
+    src: url(./font/Roboto/Roboto.ttf) format('truetype');
+}
 
 .profile-img {
-  height: 200px;
-  width: 200px;
-  object-fit: cover;
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
 }
 
 .group\/item:hover {
-  cursor: pointer;
+    cursor: pointer;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-weight: 300;
 }
