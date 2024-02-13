@@ -1,17 +1,19 @@
 <template>
     <div class="max-w-7xl mx-auto grid grid-cols-1 gap-4">
-        <div class="container mx-auto max-w-[50%]">
+        <div class="container mx-auto md:max-w-[80%] lg:max-w-[50%]">
             <div class="p-5 bg-white border border-gray-200 rounded-lg">
                 <h3 class="text-2xl text-center">Edit profile</h3>
             </div>
         </div>
-        <div class="container mx-auto max-w-[50%]">
+        <div class="container mx-auto md:max-w-[80%] lg:max-w-[50%]">
             <div class="p-12 bg-white border border-gray-200 rounded-lg">
                 <Form
                     class="space-y-6"
                     :validation-schema="schema"
                     @submit="submit_form"
                     v-slot="{ errors }"
+                    :initial-values="initial_values"
+                    ref="my_form"
                 >
                     <div class="mt-2 text-stone-700">
                         <label>Name</label><br />
@@ -33,6 +35,7 @@
                         <Field
                             name="email"
                             class="mt-1"
+                            type="email"
                             placeholder="Email"
                             :class="[
                                 'w-full py-4 px-6 border rounded-lg',
@@ -48,6 +51,7 @@
                         <Field
                             name="current_password"
                             class="mt-1"
+                            type="password"
                             placeholder="Your current password"
                             :class="[
                                 'w-full py-4 px-6 border rounded-lg',
@@ -66,6 +70,7 @@
                         <Field
                             name="password1"
                             class="mt-1"
+                            type="password"
                             placeholder="Your new password"
                             :class="[
                                 'w-full py-4 px-6 border rounded-lg',
@@ -80,12 +85,14 @@
                         <label>Confirm Password</label><br />
                         <Field
                             name="password2"
+                            type="password"
                             class="mt-1"
                             placeholder="Confirm new password"
                             :class="[
                                 'w-full py-4 px-6 border rounded-lg',
                                 !errors.password2 ? 'border-gray-200' : 'border-red-600'
                             ]"
+                            :data-vv-as="'password1'"
                         />
                         <span name="password2" class="ml-2 text-red-600 text-xs">{{
                             errors.password2
@@ -109,32 +116,30 @@ export default (await import('vue')).defineComponent({
     setup() {
         const toastStore = useToastStore()
         const userStore = useUserStore()
+        const initial_values = {
+            email: userStore.user.email,
+            name: userStore.user.name
+        }
         const schema = {
-            email: { required: true, email: userStore.user.email },
+            email: { required: true },
             name: 'required',
             current_password: 'required|minLength:8',
             password1: 'required|minLength:8',
-            password2: 'required|minLength:8'
+            password2: 'required:true|minLength:8|confirmed:password1'
         }
         return {
             schema,
             toastStore,
-            userStore
+            userStore,
+            initial_values
         }
     },
     components: {
         Field,
         Form
     },
-    data() {
-        return {
-            form: this.schema,
-            errors: ''
-        }
-    },
     methods: {
         submit_form(vals) {
-            console.log(vals)
             axios
                 .post(`/api/profile/${this.$route.params.id}/edit/`, vals)
                 .then((response) => {

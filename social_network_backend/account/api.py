@@ -71,24 +71,31 @@ def user_details_update(request, pk):
 
     if user.check_password(data["current_password"]):
         user = User.objects.get(pk=request.user.id)
-        for field in ["name", "email", "avatar"]:
-            if field in data:
-                setattr(user, field, data[field])
-        user.save()
-        message = "User details updated successfully!"
-
-        if (
-            data["password1"]
-            and data["password2"]
-            and data["password1"] == data["password2"]
-        ):
-            password_form = PasswordChangeForm(user, data)
-            if password_form.is_valid():
+        form = UserDetailsForm(request.data or None, instance=user)
+        message = "Error occurred, please contact the Tech Team!"
+        if data["password1"] and data["password2"]:
+            password_form = PasswordChangeForm(
+                user,
+                {
+                    "old_password": data["current_password"],
+                    "new_password1": data["password1"],
+                    "new_password2": data["password2"],
+                },
+            )
+            if password_form.is_valid() and form.is_valid():
                 user.set_password(data["password1"])
                 user.save()
+                form.save()
                 update_session_auth_hash(request, user)
+                message = "User details updated successfully!"
+            else:
+                message = "Error occurred, please contact the Tech Team!"
         else:
-            message = "Error occurred, please contact the Tech Team!"
+            if form.is_valid():
+                form.save()
+                message = "User details updated successfully!"
+            else:
+                message = "Error occurred, please contact the Tech Team!"
     else:
         message = "Entered incorrect current password!"
     return JsonResponse({"msg": message})
