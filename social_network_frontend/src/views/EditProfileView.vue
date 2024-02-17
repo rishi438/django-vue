@@ -195,7 +195,6 @@ export default (await import('vue')).defineComponent({
             const file = e.target.files[0]
             const img_file = await this.file_handler(file)
             this.img_avatar = img_file
-            console.log(this.img_avatar)
         },
         async file_handler(file) {
             if (!file) return
@@ -210,9 +209,6 @@ export default (await import('vue')).defineComponent({
             let form_data = new FormData()
             for (let val in vals) {
                 if (vals[val] != (undefined || undefined)) form_data.append(val, vals[val])
-            }
-            for (let [key, val] of form_data) {
-                console.log(key, val)
             }
             axios
                 .post(`/api/profile/${this.$route.params.id}/edit/`, form_data, {

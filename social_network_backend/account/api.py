@@ -29,7 +29,6 @@ def me(request):
             id=request.user.id
         )  # Use id=request.user.id to filter by user ID
         user_serializer = UserSerializer(user)
-        print(user_serializer.data)
         return JsonResponse(user_serializer.data)
     except User.DoesNotExist:
         return JsonResponse({"error": "User does not exist"}, status=404)
@@ -72,7 +71,6 @@ def user_details_update(request, pk):
     data = request.data
     user = User.objects.get(pk=request.user.id)
     message = ""
-    print(request.data)
     if request.user.id == pk:
         if user.check_password(data.get("current_password")):
             form = UserDetailsForm(request.data or None, request.FILES, instance=user)
@@ -94,7 +92,6 @@ def user_details_update(request, pk):
                 else:
                     message = "Error occurred, please contact the Tech Team!"
             else:
-                print("dsada ", form["avatar"])
                 if form.is_valid():
                     form.save()
                     message = "User details updated successfully!"

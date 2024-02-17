@@ -94,5 +94,4 @@ def post_create_comment(request, pk):
 @api_view(["GET"])
 def get_trends(request):
     serializer = TrendsSerializer(Trends.objects.all(), many=True)
-    print(serializer.data)
     return JsonResponse(serializer.data, safe=False)

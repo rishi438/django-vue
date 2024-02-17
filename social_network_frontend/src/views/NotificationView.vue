@@ -1,9 +1,10 @@
 <template>Working</template>
 
 <script>
-console.log('***Under Development***');
-
-export default {
-    name: 'NotificationView'
-};
+export default (await import('vue')).defineComponent({
+    name: 'NotificationView',
+    setup(){
+        console.log('***Under Development***');
+    }
+});
 </script>
