@@ -2,7 +2,7 @@
     <Menu as="div" class="relative inline-block text-left">
         <div>
             <MenuButton
-                class="justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900s hover:bg-stone-200"
+                class="justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-normal text-gray-900s hover:bg-stone-200"
             >
                 <img
                     v-if="d_name.image"

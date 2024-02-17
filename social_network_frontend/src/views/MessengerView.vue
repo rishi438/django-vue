@@ -15,9 +15,9 @@
                                 class="w-[40px] h-[40px] rounded-full"
                             />
                             <template v-for="user in conversation.users" :key="user.id">
-                                <p class="text-xs" v-if="user.id !== userStore.user.id">
-                                    <strong>{{ user.name }}</strong>
-                                </p>
+                                <div class="text-sm font-medium" v-if="user.id !== userStore.user.id">
+                                    {{ user.name }}
+                                </div>
                             </template>
                         </div>
                         <span class="text-xs text-gray-500">{{

@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto grid grid-cols-1 gap-4">
         <div class="container mx-auto md:max-w-[80%] lg:max-w-[50%]">
             <div class="p-5 bg-white border border-gray-200 rounded-lg">
-                <h3 class="text-2xl text-center">Edit profile</h3>
+                <h3 class="text-2xl text-center font-medium">Edit profile</h3>
             </div>
         </div>
         <div class="container mx-auto md:max-w-[80%] lg:max-w-[50%]">

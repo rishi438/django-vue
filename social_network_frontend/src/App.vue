@@ -111,7 +111,7 @@
             </div>
         </div>
     </nav>
-    <main class="px-8 py-6">
+    <main class="md:px-8 px-2 py-6">
         <RouterView />
         <!-- <RouterView v-if="userStore.user.is_authenticated" /> -->
     </main>

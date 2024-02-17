@@ -7,9 +7,9 @@
                         src="/src/assets/images/kung-fu-panda.jpeg"
                         class="profile-img lg:w-[150px] lg:h-[150px] md:h-[80px] md:w-[80px] mb-6 rounded-full mx-auto"
                     />
-                    <p>
-                        <strong>{{ userStore.user.name }}</strong>
-                    </p>
+                    <div class="font-medium">
+                        {{ userStore.user.name }}
+                    </div>
                 </div>
                 <div class="mt-6 flex space-x-8 justify-around">
                     <RouterLink

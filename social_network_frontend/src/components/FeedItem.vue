@@ -2,13 +2,11 @@
     <div class="mb-6 flex justify-between">
         <div class="flex items-center space-x-6">
             <img src="../assets/images/kung-fu-panda.jpeg" class="w-[40px] h-[40px] rounded-full" />
-            <p>
-                <strong>
-                    <RouterLink :to="{ name: 'profile', params: { id: post.created_by.id } }"
-                        >{{ post.created_by.name }}
-                    </RouterLink>
-                </strong>
-            </p>
+            <div class="text-base font-medium">
+                <RouterLink :to="{ name: 'profile', params: { id: post.created_by.id } }"
+                    >{{ post.created_by.name }}
+                </RouterLink>
+            </div>
         </div>
         <div class="z-0 flex items-end">
             <p class="text-xs text-gray-600 mb-[-5px]">
@@ -74,8 +72,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { RouterLink } from 'vue-router';
+import axios from 'axios'
+import { RouterLink } from 'vue-router'
 
 export default (await import('vue')).defineComponent({
     props: {
@@ -88,13 +86,13 @@ export default (await import('vue')).defineComponent({
                 .post(`/api/post/${post_id}/like/`)
                 .then((response) => {
                     if (response.data.msg == 'liked') {
-                        this.post.likes_count += 1;
+                        this.post.likes_count += 1
                     }
                 })
                 .catch((error) => {
-                    console.error('Error occured: ', error);
+                    console.error('Error occured: ', error)
                 })
         }
     }
-});
+})
 </script>
