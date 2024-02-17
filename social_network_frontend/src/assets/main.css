@@ -3,7 +3,11 @@
 @tailwind utilities;
 @font-face {
     font-family: 'Roboto';
-    src: url(./font/Roboto/Roboto.ttf) format('truetype');
+    src: url(./font/Roboto/Roboto-Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Roboto Medium';
+    src: url(./font/Roboto/Roboto-Medium.ttf) format('truetype');
 }
 
 .profile-img {
@@ -19,4 +23,12 @@
 body {
     font-family: 'Roboto', Arial, sans-serif;
     font-weight: 300;
+}
+
+label {
+    font-size: medium;
+    font-weight: 600;
+}
+.font-medium {
+    font-family: 'Roboto Medium', 'Arial', 'sans-serif';
 }

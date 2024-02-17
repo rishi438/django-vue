@@ -4,12 +4,14 @@
             <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
                 <div class="text-center py-4">
                     <img
-                        src="/src/assets/1639256761455.jpeg"
+                        :src="
+                            userStore.user.avatar_url ? userStore.user.avatar_url : kungFuPandaImage
+                        "
                         class="profile-img lg:w-[150px] lg:h-[150px] md:h-[80px] md:w-[80px] mb-6 rounded-full mx-auto"
                     />
-                    <p>
-                        <strong>{{ user.name }}</strong>
-                    </p>
+                    <div class="font-normal">
+                        {{ userStore.user.name }}
+                    </div>
                 </div>
                 <div class="mt-6 flex space-x-8 justify-around">
                     <RouterLink
@@ -39,7 +41,7 @@
                 >
                     <div class="text-center">
                         <img
-                            src="../assets/1639256761455.jpeg"
+                            src="../assets/images/kung-fu-panda.jpeg"
                             class="mb-6 rounded-full w-[180px] h-[180px] mx-auto"
                         />
                         <p>
@@ -85,7 +87,7 @@
                 >
                     <div class="text-center">
                         <img
-                            src="../assets/1639256761455.jpeg"
+                            src="../assets/images/kung-fu-panda.jpeg"
                             class="mb-6 rounded-full w-[150px] h-[150px] mx-auto"
                         />
                         <p>
@@ -114,22 +116,23 @@
 </template>
 
 <script>
-import axios from 'axios';
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue';
-import Trends from '../components/TrendsNetwork.vue';
-import { useUserStore } from '../stores/user';
-import { RouterLink } from 'vue-router';
-import { useToastStore } from '../stores/toast';
+import axios from 'axios'
+import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
+import Trends from '../components/TrendsNetwork.vue'
+import { useUserStore } from '../stores/user'
+import { RouterLink } from 'vue-router'
+import { useToastStore } from '../stores/toast'
+import kungFuPandaImage from '@/assets/images/kung-fu-panda.jpeg'
 
 export default (await import('vue')).defineComponent({
     name: 'FriendsView',
     setup() {
-        const userStore = useUserStore();
-        const toastStore = useToastStore();
+        const userStore = useUserStore()
+        const toastStore = useToastStore()
         return {
             userStore,
             toastStore
-        };
+        }
     },
     components: {
         PeopleYouMayKnow,
@@ -140,36 +143,37 @@ export default (await import('vue')).defineComponent({
         return {
             user: {},
             friend_requests: [],
-            friends: []
-        };
+            friends: [],
+            kungFuPandaImage
+        }
     },
     mounted() {
-        this.get_friends();
+        this.get_friends()
     },
     methods: {
         get_friends() {
             axios
                 .get(`/api/friends/${this.$route.params.id}/`)
                 .then((response) => {
-                    this.friend_requests = response.data.requests;
-                    this.friends = response.data.friends;
-                    this.user = response.data.user;
+                    this.friend_requests = response.data.requests
+                    this.friends = response.data.friends
+                    this.user = response.data.user
                 })
                 .catch((error) => {
-                    console.log('error', error);
+                    console.log('error', error)
                 })
         },
         handler_request(status, id) {
             axios
                 .post(`/api/friends/${id}/${status}/`)
                 .then((response) => {
-                    console.log(response);
-                    window.location.reload();
+                    console.log(response)
+                    window.location.reload()
                 })
                 .catch((error) => {
-                    console.error('Error Occured: ', error);
+                    console.error('Error Occured: ', error)
                 })
         }
     }
-});
+})
 </script>

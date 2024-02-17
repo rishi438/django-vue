@@ -1,14 +1,14 @@
 <template>
     <div class="p-4 bg-white border border-gray-200 rounded-lg">
-        <h3 class="mb-6 text-xl">People you may know</h3>
+        <h3 class="mb-6 font-medium text-xl">People you may know</h3>
         <div class="space-y-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2">
                     <img
-                        src="../assets/1639256761455.jpeg"
+                        src="../assets/images/kung-fu-panda.jpeg"
                         class="w-[40px] h-[40px] rounded-full"
                     />
-                    <p class="text-xs"><strong>Rishi</strong></p>
+                    <div class="text-sm font-normal"><strong>Rishi</strong></div>
                 </div>
                 <a
                     href="#"
@@ -19,10 +19,10 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2">
                     <img
-                        src="../assets/1639256761455.jpeg"
+                        src="../assets/images/kung-fu-panda.jpeg"
                         class="w-[40px] h-[40px] rounded-full"
                     />
-                    <p class="text-xs"><strong>Rishi</strong></p>
+                    <div class="text-sm font-normal"><strong>Rishi</strong></div>
                 </div>
                 <a
                     href="#"
@@ -33,10 +33,10 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2">
                     <img
-                        src="../assets/1639256761455.jpeg"
+                        src="../assets/images/kung-fu-panda.jpeg"
                         class="w-[40px] h-[40px] rounded-full"
                     />
-                    <p class="text-xs"><strong>Rishi</strong></p>
+                    <div class="text-sm font-normal"><strong>Rishi</strong></div>
                 </div>
                 <a
                     href="#"

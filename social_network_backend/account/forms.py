@@ -13,4 +13,16 @@ class SigupForm(UserCreationForm):
 class UserDetailsForm(ModelForm):
     class Meta:
         model = User
-        fields = ["name", "email"]
+        fields = ["name", "email", "avatar"]
+
+    def clean_avatar(self):
+        avatar = self.cleaned_data["avatar"]
+        return avatar
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if self.cleaned_data["avatar"]:
+            user.avatar = self.cleaned_data["avatar"]
+        if commit:
+            user.save()
+        return user
