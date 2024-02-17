@@ -40,7 +40,7 @@
                 >
                     <div class="text-center">
                         <img
-                            src="../assets/images/kung-fu-panda.jpeg"
+                            :src="user.avatar_url ? user.avatar_url : kungFuPandaImage"
                             class="mb-6 rounded-full w-[130px] h-[130px] mx-auto"
                         />
                         <p>
@@ -78,11 +78,12 @@
 </template>
 
 <script>
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue';
-import axios from 'axios';
-import Trends from '../components/TrendsNetwork.vue';
-import FeedItem from '../components/FeedItem.vue';
-import { RouterLink } from 'vue-router';
+import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
+import axios from 'axios'
+import Trends from '../components/TrendsNetwork.vue'
+import FeedItem from '../components/FeedItem.vue'
+import { RouterLink } from 'vue-router'
+import kungFuPandaImage from '@/assets/images/kung-fu-panda.jpeg'
 
 export default (await import('vue')).defineComponent({
     name: 'SearchView',
@@ -96,8 +97,9 @@ export default (await import('vue')).defineComponent({
         return {
             query: '',
             users: [],
-            posts: []
-        };
+            posts: [],
+            kungFuPandaImage
+        }
     },
     methods: {
         submit_form() {
@@ -106,13 +108,13 @@ export default (await import('vue')).defineComponent({
                     query: this.query
                 })
                 .then((response) => {
-                    this.users = response.data.users;
-                    this.posts = response.data.posts;
+                    this.users = response.data.users
+                    this.posts = response.data.posts
                 })
                 .catch((error) => {
-                    console.error('Error Occured: ', error);
+                    console.error('Error Occured: ', error)
                 })
         }
     }
-});
+})
 </script>

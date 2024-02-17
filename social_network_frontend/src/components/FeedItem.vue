@@ -1,7 +1,10 @@
 <template>
     <div class="mb-6 flex justify-between">
         <div class="flex items-center space-x-6">
-            <img src="../assets/images/kung-fu-panda.jpeg" class="w-[40px] h-[40px] rounded-full" />
+            <img
+                :src="post.created_by.avatar_url ? post.created_by.avatar_url : kungFuPandaImage"
+                class="w-[40px] h-[40px] rounded-full"
+            />
             <div class="text-base font-medium">
                 <RouterLink :to="{ name: 'profile', params: { id: post.created_by.id } }"
                     >{{ post.created_by.name }}
@@ -74,10 +77,16 @@
 <script>
 import axios from 'axios'
 import { RouterLink } from 'vue-router'
+import kungFuPandaImage from '@/assets/images/kung-fu-panda.jpeg'
 
 export default (await import('vue')).defineComponent({
     props: {
         post: Object
+    },
+    data() {
+        return {
+            kungFuPandaImage
+        }
     },
     components: { RouterLink },
     methods: {

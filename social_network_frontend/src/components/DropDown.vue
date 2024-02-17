@@ -4,11 +4,7 @@
             <MenuButton
                 class="justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-normal text-gray-900s hover:bg-stone-200"
             >
-                <img
-                    v-if="d_name.image"
-                    :src="d_name.url"
-                    class="w-[30px] h-[30px] rounded-full"
-                />
+                <img v-if="d_name.image" :src="d_name.url" class="w-[30px] h-[30px] rounded-full" />
                 <span v-else>{{ d_name }}</span>
             </MenuButton>
         </div>
@@ -72,8 +68,8 @@
 </template>
 
 <script setup>
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
-import { RouterLink, useRouter } from 'vue-router';
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { RouterLink, useRouter } from 'vue-router'
 
 const router = useRouter()
 const props = defineProps({
@@ -87,14 +83,17 @@ const props = defineProps({
     options: {
         type: Array,
         required: true
+    },
+    mounted() {
+        this.d_name.image
     }
-});
+})
 const logout = async () => {
     try {
-        await props.remove_token?.();
-        router.push('/');
+        await props.remove_token?.()
+        router.push('/')
     } catch (error) {
-        console.error('error occured: ', error);
+        console.error('error occured: ', error)
     }
-};
+}
 </script>

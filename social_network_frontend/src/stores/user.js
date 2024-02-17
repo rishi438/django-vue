@@ -96,6 +96,10 @@ export let useUserStore = defineStore({
                     console.log(error)
                     this.remove_token()
                 })
+        },
+
+        set_image() {
+            this.user.avatar_url ? this.user.avatar_url : '/src/assets/images/kung-fu-panda.jpeg'
         }
     }
 })

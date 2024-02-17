@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 grid-cols-1 gap-4">
             <div class="main-left">
                 <div class="p-12 bg-white border border-gray-200 rounded-lg">
-                    <div class="mb-6 text-2xl">Log In</div>
+                    <div class="mb-6 text-2xl font-medium">Log In</div>
                     <p class="mb-6 text-gray-500">
                         Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate. Lorem ipsum dolor
                         sit mate. Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate. Lorem
@@ -11,7 +11,7 @@
                     </p>
                     <p class="font-bold">
                         doesn't have an account?
-                        <RouterLink :to="{ name: 'signup' }" class="underline">
+                        <RouterLink :to="{ name: 'signup' }" class="underline text-blue-600">
                             Click here</RouterLink
                         >
                         to Signup!
@@ -59,19 +59,19 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { useUserStore } from '../stores/user';
+import axios from 'axios'
+import { useUserStore } from '../stores/user'
 
 export default (await import('vue')).defineComponent({
     name: 'LoginView',
     setup() {
-        let userStore = useUserStore();
+        let userStore = useUserStore()
         return {
             userStore
-        };
+        }
     },
     mounted() {
-        this.login_check();
+        this.login_check()
     },
     data() {
         return {
@@ -80,46 +80,46 @@ export default (await import('vue')).defineComponent({
                 password: ''
             },
             errors: []
-        };
+        }
     },
     methods: {
         async submit_form() {
             this.errors = []
             if (this.form.email === '') {
-                this.errors.push('Your e-mail is missing');
+                this.errors.push('Your e-mail is missing')
             }
             if (this.form.password === '') {
-                this.errors.push('Your password is missing');
+                this.errors.push('Your password is missing')
             }
             if (this.errors.length === 0) {
                 await axios
                     .post('/api/login/', this.form)
                     .then((response) => {
-                        this.userStore.set_token(response.data);
+                        this.userStore.set_token(response.data)
                         axios.defaults.headers.common['Authorization'] =
-                            'Bearer ' + response.data.access;
+                            'Bearer ' + response.data.access
                     })
                     .catch((error) => {
-                        console.log('error ', error);
+                        console.log('error ', error)
                     })
-                if (this.userStore.user.is_authenticated){
+                if (this.userStore.user.is_authenticated) {
                     await axios
                         .get('/api/me/')
                         .then((response) => {
-                            this.userStore.set_attribute(response.data,true);
-                            this.$router.push('/home');
+                            this.userStore.set_attribute(response.data, true)
+                            this.$router.push('/home')
                         })
                         .catch((error) => {
-                            console.log('error ', error);
+                            console.log('error ', error)
                         })
                 }
             }
         },
         login_check() {
             if (this.userStore.user.is_authenticated) {
-                this.$router.push('/home');
+                this.$router.push('/home')
             }
         }
     }
-});
+})
 </script>

@@ -24,15 +24,17 @@ def me(request):
     Returns:
         response(dict): return data and status
     """
-    return JsonResponse(
-        {
-            "id": request.user.id,
-            "name": request.user.name,
-            "email": request.user.email,
-            "friends_count": request.user.friends_count,
-            "posts_count": request.user.posts_count,
-        }
-    )
+    try:
+        user = User.objects.get(
+            id=request.user.id
+        )  # Use id=request.user.id to filter by user ID
+        user_serializer = UserSerializer(user)
+        print(user_serializer.data)
+        return JsonResponse(user_serializer.data)
+    except User.DoesNotExist:
+        return JsonResponse({"error": "User does not exist"}, status=404)
+    except Exception as ex:
+        return JsonResponse({"error": str(ex)}, status=400)
 
 
 @api_view(["POST"])
@@ -70,10 +72,11 @@ def user_details_update(request, pk):
     data = request.data
     user = User.objects.get(pk=request.user.id)
     message = ""
+    print(request.data)
     if request.user.id == pk:
-        if user.check_password(data["current_password"]):
+        if user.check_password(data.get("current_password")):
             form = UserDetailsForm(request.data or None, request.FILES, instance=user)
-            if data["password1"] and data["password2"]:
+            if data.get("password1", None) and data.get("password2", None):
                 password_form = PasswordChangeForm(
                     user,
                     {
@@ -91,6 +94,7 @@ def user_details_update(request, pk):
                 else:
                     message = "Error occurred, please contact the Tech Team!"
             else:
+                print("dsada ", form["avatar"])
                 if form.is_valid():
                     form.save()
                     message = "User details updated successfully!"

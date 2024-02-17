@@ -15,7 +15,7 @@
                     :initial-values="initial_values"
                     ref="user_edit_form"
                 >
-                    <Field name="file" v-slot="{ handleChange, handleBlur }">
+                    <Field name="avatar" v-slot="{ handleChange, handleBlur }">
                         <label>Profile picture</label><br />
                         <img
                             :src="img_avatar"
@@ -153,9 +153,9 @@ export default (await import('vue')).defineComponent({
         const initial_values = {
             email: userStore.user.email,
             name: userStore.user.name,
-            current_password:null,
-            password1:null,
-            password2:null,
+            current_password: null,
+            password1: null,
+            password2: null
         }
         const schema = {
             email: 'required:email',
@@ -176,10 +176,10 @@ export default (await import('vue')).defineComponent({
         Form
     },
     data() {
-        const img_avatar = '/src/assets/images/kung-fu-panda.jpeg'
+        const img_avatar = this.userStore.user.avatar_url
         return {
-            password_change: false,
-            img_avatar
+            img_avatar,
+            password_change: false
         }
     },
     methods: {
@@ -195,6 +195,7 @@ export default (await import('vue')).defineComponent({
             const file = e.target.files[0]
             const img_file = await this.file_handler(file)
             this.img_avatar = img_file
+            console.log(this.img_avatar)
         },
         async file_handler(file) {
             if (!file) return
@@ -206,17 +207,32 @@ export default (await import('vue')).defineComponent({
             }
         },
         submit_form(vals) {
+            let form_data = new FormData()
+            for (let val in vals) {
+                if (vals[val] != (undefined || undefined)) form_data.append(val, vals[val])
+            }
+            for (let [key, val] of form_data) {
+                console.log(key, val)
+            }
             axios
-                .post(`/api/profile/${this.$route.params.id}/edit/`, vals)
-                .then(async(response) => {
+                .post(`/api/profile/${this.$route.params.id}/edit/`, form_data, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(async (response) => {
                     if (response.data.msg == 'User details updated successfully!') {
                         this.toastStore.show_toast(5000, `${response.data.msg}`, 'bg-emerald-500')
-                        await this.userStore.set_attribute({ name: vals.name, email: vals.email })
+                        await this.userStore.set_attribute({
+                            name: vals.name,
+                            email: vals.email,
+                            avatar_url: this.img_avatar
+                        })
                         this.$refs.user_edit_form.resetForm()
                         this.$refs.user_edit_form.setValues({
-                                email: this.userStore.user.email,
-                                name: this.userStore.user.name
-                            })
+                            email: this.userStore.user.email,
+                            name: this.userStore.user.name
+                        })
                     } else {
                         this.toastStore.show_toast(5000, response.data.msg, 'bg-red-300')
                     }

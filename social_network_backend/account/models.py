@@ -8,11 +8,10 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin,
 )
-
-# from django.contrib.admin.forms import AdminPasswordChangeForm
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils import timezone
+from utils.constant import BASE_URL
 
 
 class CustomUserManager(BaseUserManager):
@@ -46,7 +45,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=225, unique=True, default="")
-    avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
+    avatar = models.ImageField(
+        upload_to="avatars",
+        blank=True,
+        null=True,
+    )
     friends = models.ManyToManyField("self")
     friends_count = models.IntegerField(default=0)
     posts_count = models.IntegerField(default=0)
@@ -60,12 +63,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ["name"]
     objects = CustomUserManager()
 
-
-# class UserPasswordUpdate(AdminPasswordChangeForm):
-#     def save(self, commit: bool = True) -> AbstractBaseUser:
-#         password = self.cleaned_data["password1"]
-#         self.user.set_password(password)
-#         return super().save(commit)
+    def avatar_url(self):
+        if self.avatar:
+            return BASE_URL + self.avatar.url
+        else:
+            return ""
 
 
 @unique

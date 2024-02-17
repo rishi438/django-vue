@@ -4,7 +4,7 @@
             <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
                 <div class="text-center py-4">
                     <img
-                        src="/src/assets/images/kung-fu-panda.jpeg"
+                        :src="userStore.set_image()"
                         class="profile-img lg:w-[150px] lg:h-[150px] md:h-[80px] md:w-[80px] mb-6 rounded-full mx-auto"
                     />
                     <div class="font-medium">

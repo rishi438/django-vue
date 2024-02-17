@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto grid md:grid-cols-2 grid-cols-1 gap-4">
         <div class="main-right">
             <div class="p-12 bg-white border border-gray-200 rounded-lg">
-                <div class="mb-6 text-2xl">Sign Up</div>
+                <div class="mb-6 text-2xl font-medium">Sign Up</div>
                 <p class="mb-6 text-gray-500">
                     Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate. Lorem ipsum dolor sit
                     mate. Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate. Lorem ipsum dolor
@@ -10,7 +10,9 @@
                 </p>
                 <p class="font-bold">
                     have an account?
-                    <RouterLink :to="{ name: 'login' }" class="underline"> Click here</RouterLink>
+                    <RouterLink :to="{ name: 'login' }" class="underline text-blue-600">
+                        Click here</RouterLink
+                    >
                     to login!
                 </p>
             </div>
@@ -75,10 +77,10 @@ import { useToastStore } from '../stores/toast'
 export default (await import('vue')).defineComponent({
     name: 'SignupView',
     setup() {
-        const toastStore = useToastStore();
+        const toastStore = useToastStore()
         return {
             toastStore
-        };
+        }
     },
     data() {
         return {
@@ -89,23 +91,23 @@ export default (await import('vue')).defineComponent({
                 confirm_password: ''
             },
             errors: []
-        };
+        }
     },
     methods: {
         submit_form() {
-            this.error = [];
-            let email_regex = /^[a-zA-Z0-9,_+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+            this.error = []
+            let email_regex = /^[a-zA-Z0-9,_+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/
             if (!email_regex.test(this.form.email)) {
-                this.errors.push('Your e-mail is missing or invalid');
+                this.errors.push('Your e-mail is missing or invalid')
             }
             if (this.form.name === '') {
-                this.errors.push('Your name is missing');
+                this.errors.push('Your name is missing')
             }
             if (this.form.password === '') {
-                this.errors.push('Your password is missing');
+                this.errors.push('Your password is missing')
             }
             if (this.form.password !== this.form.confirm_password) {
-                this.errors.push('Your password does not match');
+                this.errors.push('Your password does not match')
             }
             if (this.errors.length === 0) {
                 axios
@@ -116,20 +118,20 @@ export default (await import('vue')).defineComponent({
                                 5000,
                                 `${response.data.msg} Please log in`,
                                 'bg-emerald-500'
-                            );
-                            this.form.email = '';
-                            this.form.name = '';
-                            this.form.password = '';
-                            this.form.confirm_password = '';
+                            )
+                            this.form.email = ''
+                            this.form.name = ''
+                            this.form.password = ''
+                            this.form.confirm_password = ''
                         } else {
-                            this.toastStore.show_toast(5000, response.data.msg, 'bg-red-300');
+                            this.toastStore.show_toast(5000, response.data.msg, 'bg-red-300')
                         }
                     })
                     .catch((error) => {
-                        console.log('error', error);
+                        console.log('error', error)
                     })
             }
         }
     }
-});
+})
 </script>

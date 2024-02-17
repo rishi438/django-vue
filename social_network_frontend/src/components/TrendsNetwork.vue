@@ -4,11 +4,14 @@
         <div class="space-y-4">
             <div class="flex items-center justify-between" v-for="trend in trends" :key="trend.id">
                 <div class="flex items-center space-x-2">
-                    <p class="text-sm font-normal">
-                        <strong>#{{ trend.hashtag }}</strong
-                        ><br />
-                        <span class="text-gray-500">{{ trend.occurences }} posts</span>
-                    </p>
+                    <div class="font-normal flex flex-col">
+                        <strong
+                            ><span class="text-blue-800 text-[16px]"
+                                >#{{ trend.hashtag }}</span
+                            ></strong
+                        >
+                        <span class="text-gray-500 text-[12px]">{{ trend.occurences }} posts</span>
+                    </div>
                 </div>
                 <RouterLink
                     :to="{ name: 'trends', params: { id: trend.hashtag } }"
