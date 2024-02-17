@@ -40,7 +40,7 @@
                 >
                     <div class="text-center">
                         <img
-                            src="../assets/1639256761455.jpeg"
+                            src="../assets/images/kung-fu-panda.jpeg"
                             class="mb-6 rounded-full w-[130px] h-[130px] mx-auto"
                         />
                         <p>

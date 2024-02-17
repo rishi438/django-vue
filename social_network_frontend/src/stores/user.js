@@ -13,7 +13,8 @@ export let useUserStore = defineStore({
             name: null,
             email: null,
             access: null,
-            refresh: null
+            refresh: null,
+            avatar_url: null
         }
     }),
 
@@ -27,6 +28,7 @@ export let useUserStore = defineStore({
                 this.user.email = localStorage.getItem('user.email')
                 this.user.friends_count = localStorage.getItem('user.friends_count')
                 this.user.posts_count = localStorage.getItem('user.posts_count')
+                this.user.avatar_url = localStorage.getItem('user.avatar_url')
                 this.user.is_authenticated = true
                 this.refresh_token()
             }
@@ -40,11 +42,15 @@ export let useUserStore = defineStore({
             localStorage.setItem('user.refresh', data.refresh)
         },
 
-        set_attribute(data) {
+        set_attribute(data, initial_store = false) {
             for (const key in data) {
-                const value = this.user[key]
-                if (!isNaN(value)) {
-                    this.user[key] = parseInt(value) + parseInt(data[key])
+                if (!initial_store) {
+                    const value = this.user[key]
+                    if (!isNaN(value)) {
+                        this.user[key] = parseInt(value) + parseInt(data[key])
+                    } else {
+                        this.user[key] = data[key]
+                    }
                 } else {
                     this.user[key] = data[key]
                 }
@@ -61,6 +67,7 @@ export let useUserStore = defineStore({
             this.user.email = false
             this.user.friends_count = false
             this.user.posts_count = false
+            this.user.avatar_url = null
 
             localStorage.setItem('user.is_authenticated', '')
             localStorage.setItem('user.access', '')
@@ -70,19 +77,7 @@ export let useUserStore = defineStore({
             localStorage.setItem('user.email', '')
             localStorage.setItem('user.friends_count', '')
             localStorage.setItem('user.posts_count', '')
-        },
-
-        set_user_info(user) {
-            this.user.id = user.id
-            this.user.name = user.name
-            this.user.email = user.email
-            this.user.friends_count = user.friends_count
-            this.user.posts_count = user.posts_count
-            localStorage.setItem('user.id', this.user.id)
-            localStorage.setItem('user.name', this.user.name)
-            localStorage.setItem('user.email', this.user.email)
-            localStorage.setItem('user.friends_count', this.user.friends_count)
-            localStorage.setItem('user.posts_count', this.user.posts_count)
+            localStorage.setItem('user.avatar_url', '')
         },
 
         refresh_token() {

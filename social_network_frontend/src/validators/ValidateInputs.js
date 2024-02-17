@@ -1,8 +1,8 @@
 import { defineRule } from 'vee-validate'
 
-defineRule('required', (value) => {
+defineRule('required', (value, check) => {
     if (!value || !value.length) {
-        return 'This field is required'
+        return `${check} is required`
     }
     return true
 })

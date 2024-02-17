@@ -4,7 +4,7 @@
             <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
                 <div class="text-center">
                     <img
-                        src="/src/assets/1639256761455.jpeg"
+                        src="/src/assets/images/kung-fu-panda.jpeg"
                         class="profile-img lg:w-[150px] lg:h-[150px] md:h-[90px] md:w-[90px] mb-6 rounded-full mx-auto"
                     />
                     <p>

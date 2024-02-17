@@ -84,7 +84,6 @@ export default (await import('vue')).defineComponent({
     },
     methods: {
         async submit_form() {
-            console.log(this.userStore.user.is_authenticated)
             this.errors = []
             if (this.form.email === '') {
                 this.errors.push('Your e-mail is missing');
@@ -107,7 +106,7 @@ export default (await import('vue')).defineComponent({
                     await axios
                         .get('/api/me/')
                         .then((response) => {
-                            this.userStore.set_user_info(response.data);
+                            this.userStore.set_attribute(response.data,true);
                             this.$router.push('/home');
                         })
                         .catch((error) => {
@@ -117,7 +116,6 @@ export default (await import('vue')).defineComponent({
             }
         },
         login_check() {
-            console.log(this.userStore.user.is_authenticated)
             if (this.userStore.user.is_authenticated) {
                 this.$router.push('/home');
             }

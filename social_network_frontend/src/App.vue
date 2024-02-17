@@ -124,6 +124,7 @@ import axios from 'axios';
 import Toast from '@/components/ToastMessage.vue';
 import DropDown from '@/components/DropDown.vue';
 import { useUserStore } from '@/stores/user';
+import kungFuPandaImage from '@/assets/images/kung-fu-panda.jpeg';
 
 export default (await import('vue')).defineComponent({
     setup() {
@@ -138,7 +139,7 @@ export default (await import('vue')).defineComponent({
             { name: 'Edit', val: this.userStore },
             'Logout'
         ];
-        let option_details = { image: true, url: '../src/assets/1639256761455.jpeg' };
+        let option_details = { image: true, url:kungFuPandaImage};
         return {
             list_opt,
             option_details

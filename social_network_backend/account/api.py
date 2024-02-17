@@ -1,3 +1,4 @@
+import requests
 from account.serializers import FriendRequestSerializer, UserSerializer
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
@@ -71,7 +72,7 @@ def user_details_update(request, pk):
     message = ""
     if request.user.id == pk:
         if user.check_password(data["current_password"]):
-            form = UserDetailsForm(request.data or None, instance=user)
+            form = UserDetailsForm(request.data or None, request.FILES, instance=user)
             if data["password1"] and data["password2"]:
                 password_form = PasswordChangeForm(
                     user,
@@ -153,14 +154,17 @@ def handle_friend_request(request, pk, status):
         created_by=user
     )
     if status == FriendRequestStatus.ACCEPTED.name:
-        friend_request.status = FriendRequestStatus.ACCEPTED.value
-        user.friends.add(request.user)
-        user.friends_count += 1
-        request_user = request.user
-        request_user.friends_count += 1
-        friend_request.rejection_count = 0
-        user.save()
-        request_user.save()
+        url = f"http://localhost:8000/api/chat/{pk}/get-or-create/"
+        chat_response = requests.post(url, headers=request.headers, data=request.data)
+        if chat_response.status_code == 200:
+            friend_request.status = FriendRequestStatus.ACCEPTED.value
+            user.friends.add(request.user)
+            user.friends_count += 1
+            request_user = request.user
+            request_user.friends_count += 1
+            friend_request.rejection_count = 0
+            user.save()
+            request_user.save()
     else:
         friend_request.status = FriendRequestStatus.REJECTED.value
 

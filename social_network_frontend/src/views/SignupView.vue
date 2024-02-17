@@ -111,10 +111,10 @@ export default (await import('vue')).defineComponent({
                 axios
                     .post('/api/signup/', this.form)
                     .then((response) => {
-                        if (response.data.msg == 'User created successfully') {
+                        if (response.data.msg == 'User created successfully!') {
                             this.toastStore.show_toast(
                                 5000,
-                                `${response.data.msg}. Please log in`,
+                                `${response.data.msg} Please log in`,
                                 'bg-emerald-500'
                             );
                             this.form.email = '';

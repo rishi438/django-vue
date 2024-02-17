@@ -13,4 +13,4 @@ class SigupForm(UserCreationForm):
 class UserDetailsForm(ModelForm):
     class Meta:
         model = User
-        fields = ["name", "email"]
+        fields = ["name", "email", "avatar"]

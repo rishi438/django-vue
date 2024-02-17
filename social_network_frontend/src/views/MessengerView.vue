@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4" v-if="!conversations">
+    <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4" v-if="conversations.length">
         <div class="main-left md:col-span-1 col-span-4">
             <div class="bg-white border border-gray-200 text-center rounded-lg">
                 <ul class="space-y-4" role="list">
@@ -11,7 +11,7 @@
                     >
                         <div class="flex items-center space-x-2">
                             <img
-                                src="../assets/1639256761455.jpeg"
+                                src="../assets/images/kung-fu-panda.jpeg"
                                 class="w-[40px] h-[40px] rounded-full"
                             />
                             <template v-for="user in conversation.users" :key="user.id">
@@ -47,7 +47,7 @@
                             </div>
                             <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
                                 <img
-                                    src="../assets/1639256761455.jpeg"
+                                    src="../assets/images/kung-fu-panda.jpeg"
                                     class="w-[40px] h-[40px] rounded-full"
                                 />
                             </div>
@@ -55,7 +55,7 @@
                         <div class="flex w-full mt-2 space-x-3 max-w-md" v-else>
                             <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
                                 <img
-                                    src="../assets/1639256761455.jpeg"
+                                    src="../assets/images/kung-fu-panda.jpeg"
                                     class="w-[40px] h-[40px] rounded-full"
                                 />
                             </div>
@@ -131,7 +131,7 @@ export default (await import('vue')).defineComponent({
                     if (this.conversations.length) {
                         this.active_conversation = this.conversations[0].id
                     }
-                    this.get_messages()
+                    // this.get_messages()
                 })
                 .catch((error) => {
                     console.error(error)

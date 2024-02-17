@@ -5,7 +5,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2">
                     <img
-                        src="../assets/1639256761455.jpeg"
+                        src="../assets/images/kung-fu-panda.jpeg"
                         class="w-[40px] h-[40px] rounded-full"
                     />
                     <p class="text-xs"><strong>Rishi</strong></p>
@@ -19,7 +19,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2">
                     <img
-                        src="../assets/1639256761455.jpeg"
+                        src="../assets/images/kung-fu-panda.jpeg"
                         class="w-[40px] h-[40px] rounded-full"
                     />
                     <p class="text-xs"><strong>Rishi</strong></p>
@@ -33,7 +33,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2">
                     <img
-                        src="../assets/1639256761455.jpeg"
+                        src="../assets/images/kung-fu-panda.jpeg"
                         class="w-[40px] h-[40px] rounded-full"
                     />
                     <p class="text-xs"><strong>Rishi</strong></p>

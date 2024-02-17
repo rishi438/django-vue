@@ -1,7 +1,7 @@
 <template>
     <div class="mb-6 flex justify-between">
         <div class="flex items-center space-x-6">
-            <img src="../assets/1639256761455.jpeg" class="w-[40px] h-[40px] rounded-full" />
+            <img src="../assets/images/kung-fu-panda.jpeg" class="w-[40px] h-[40px] rounded-full" />
             <p>
                 <strong>
                     <RouterLink

@@ -4,7 +4,7 @@
             <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
                 <div class="text-center py-4">
                     <img
-                        src="/src/assets/1639256761455.jpeg"
+                        src="/src/assets/images/kung-fu-panda.jpeg"
                         class="profile-img lg:w-[150px] lg:h-[150px] md:h-[80px] md:w-[80px] mb-6 rounded-full mx-auto"
                     />
                     <p>
@@ -39,7 +39,7 @@
                 >
                     <div class="text-center">
                         <img
-                            src="../assets/1639256761455.jpeg"
+                            src="../assets/images/kung-fu-panda.jpeg"
                             class="mb-6 rounded-full w-[180px] h-[180px] mx-auto"
                         />
                         <p>
@@ -85,7 +85,7 @@
                 >
                     <div class="text-center">
                         <img
-                            src="../assets/1639256761455.jpeg"
+                            src="../assets/images/kung-fu-panda.jpeg"
                             class="mb-6 rounded-full w-[150px] h-[150px] mx-auto"
                         />
                         <p>
