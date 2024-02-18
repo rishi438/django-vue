@@ -33,7 +33,7 @@ def me(request):
     except User.DoesNotExist:
         return JsonResponse({"error": "User does not exist"}, status=404)
     except Exception as ex:
-        return JsonResponse({"error": str(ex)}, status=400)
+        return JsonResponse({"error": ex}, status=400)
 
 
 @api_view(["POST"])
