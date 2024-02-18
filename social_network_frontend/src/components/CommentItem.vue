@@ -1,7 +1,12 @@
 <template>
     <div class="mb-6 flex justify-between">
         <div class="flex items-center space-x-6">
-            <img src="../assets/images/kung-fu-panda.jpeg" class="w-[40px] h-[40px] rounded-full" />
+            <img
+                :src="
+                    comment.created_by.avatar_url ? comment.created_by.avatar_url : kungFuPandaImage
+                "
+                class="w-[40px] h-[40px] rounded-full"
+            />
             <div class="text-sm font-medium">
                 <RouterLink
                     :to="{
@@ -24,10 +29,16 @@
 
 <script>
 import { RouterLink } from 'vue-router'
+import kungFuPandaImage from '@/assets/images/kung-fu-panda.jpeg'
 
 export default (await import('vue')).defineComponent({
     props: {
         comment: Object
+    },
+    data(){
+        return{
+            kungFuPandaImage,
+        }
     },
     components: { RouterLink }
 })
