@@ -41,7 +41,7 @@
                 >
                     <div class="text-center">
                         <img
-                            src="../assets/images/kung-fu-panda.jpeg"
+                            :src="friend.avatar_url ? friend.avatar_url : kungFuPandaImage"
                             class="mb-6 rounded-full w-[180px] h-[180px] mx-auto"
                         />
                         <p>
@@ -87,7 +87,7 @@
                 >
                     <div class="text-center">
                         <img
-                            src="../assets/images/kung-fu-panda.jpeg"
+                            :src="friend.avatar_url ? friend.avatar_url : kungFuPandaImage"
                             class="mb-6 rounded-full w-[150px] h-[150px] mx-auto"
                         />
                         <p>
@@ -117,11 +117,11 @@
 
 <script>
 import axios from 'axios'
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import Trends from '../components/TrendsNetwork.vue'
-import { useUserStore } from '../stores/user'
+import PeopleYouMayKnow from '@/components/PeopleYouMayKnow.vue'
+import Trends from '@/components/TrendsNetwork.vue'
+import { useUserStore } from '@/stores/user'
 import { RouterLink } from 'vue-router'
-import { useToastStore } from '../stores/toast'
+import { useToastStore } from '@/stores/toast'
 import kungFuPandaImage from '@/assets/images/kung-fu-panda.jpeg'
 
 export default (await import('vue')).defineComponent({

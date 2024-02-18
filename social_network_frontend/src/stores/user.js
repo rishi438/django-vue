@@ -99,7 +99,9 @@ export let useUserStore = defineStore({
         },
 
         set_image() {
-            this.user.avatar_url ? this.user.avatar_url : '/src/assets/images/kung-fu-panda.jpeg'
+            return this.user.avatar_url
+                ? this.user.avatar_url
+                : '/src/assets/images/kung-fu-panda.jpeg'
         }
     }
 })

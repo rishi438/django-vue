@@ -10,13 +10,15 @@
                         v-on:click="set_active_conversation(conversation.id)"
                     >
                         <div class="flex items-center space-x-2">
-                            <img
-                                src="../assets/images/kung-fu-panda.jpeg"
-                                class="w-[40px] h-[40px] rounded-full"
-                            />
                             <template v-for="user in conversation.users" :key="user.id">
-                                <div class="text-sm font-medium" v-if="user.id !== userStore.user.id">
-                                    {{ user.name }}
+                                <div v-if="userStore.user.id != user.id" class="flex items-center">
+                                    <img
+                                        :src="user.avatar_url ? user.avatar_url : kungFuPandaImage"
+                                        class="w-[40px] h-[40px] rounded-full"
+                                    />
+                                    <div class="text-sm font-medium ml-2">
+                                        {{ user.name }}
+                                    </div>
                                 </div>
                             </template>
                         </div>
@@ -47,7 +49,9 @@
                             </div>
                             <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
                                 <img
-                                    src="../assets/images/kung-fu-panda.jpeg"
+                                    :src="
+                                        userStore.user.avatar_url ? userStore.user.avatar_url : kungFuPandaImage
+                                    "
                                     class="w-[40px] h-[40px] rounded-full"
                                 />
                             </div>
@@ -55,7 +59,9 @@
                         <div class="flex w-full mt-2 space-x-3 max-w-md" v-else>
                             <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
                                 <img
-                                    src="../assets/images/kung-fu-panda.jpeg"
+                                    :src="
+                                        message.avatar_url ? message.avatar_url : kungFuPandaImage
+                                    "
                                     class="w-[40px] h-[40px] rounded-full"
                                 />
                             </div>
@@ -98,12 +104,13 @@
 
 <script>
 import axios from 'axios'
-import { useUserStore } from '../stores/user'
+import { useUserStore } from '@/stores/user'
+import kungFuPandaImage from '@/assets/images/kung-fu-panda.jpeg'
 
 export default (await import('vue')).defineComponent({
     name: 'MessengerView',
     setup() {
-        const userStore = useUserStore()
+        const userStore = useUserStore();
         return {
             userStore
         }
@@ -116,7 +123,8 @@ export default (await import('vue')).defineComponent({
                 }
             ],
             active_conversation: {},
-            body: ''
+            body: '',
+            kungFuPandaImage
         }
     },
     mounted() {
@@ -131,7 +139,7 @@ export default (await import('vue')).defineComponent({
                     if (this.conversations.length) {
                         this.active_conversation = this.conversations[0].id
                     }
-                    // this.get_messages()
+                    this.get_messages()
                 })
                 .catch((error) => {
                     console.error(error)

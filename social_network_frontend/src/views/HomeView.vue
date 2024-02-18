@@ -68,10 +68,10 @@
 
 <script>
 import axios from 'axios'
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import Trends from '../components/TrendsNetwork.vue'
-import FeedItem from '../components/FeedItem.vue'
-import { useUserStore } from '../stores/user'
+import PeopleYouMayKnow from '@/components/PeopleYouMayKnow.vue'
+import Trends from '@/components/TrendsNetwork.vue'
+import FeedItem from '@/components/FeedItem.vue'
+import { useUserStore } from '@/stores/user'
 
 export default (await import('vue')).defineComponent({
     name: 'HomeView',
