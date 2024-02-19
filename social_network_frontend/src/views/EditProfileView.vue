@@ -37,7 +37,7 @@
                             />
                             <img
                                 src="/src/assets/images/clip-icon.svg"
-                                class="file-upload-icon w-[25px] h-[25px] duration-300 hover:scale-75 object-contain mx-auto relative top-[5px] cursor-pointer"
+                                class="file-upload-icon w-[23px] h-[23px] duration-200 hover:scale-125 object-contain mx-auto relative top-[8px] cursor-pointer"
                                 alt="Upload image"
                             />
                         </label>
@@ -106,10 +106,18 @@
                             :disabled="!password_change"
                             :class="[
                                 'w-full py-4 px-6 border rounded-lg',
-                                !errors.password1 ? 'border-gray-200' : 'border-red-600'
+                                !errors.password1 || !password_change
+                                    ? 'border-gray-200'
+                                    : 'border-red-600'
                             ]"
                         />
-                        <span name="password1" class="ml-2 text-red-600 text-xs line-clamp-6">
+                        <span
+                            name="password1"
+                            :class="[
+                                'ml-2 text-red-600 text-xs line-clamp-6',
+                                !password_change ? 'hidden' : null
+                            ]"
+                        >
                             {{ errors.password1 }}</span
                         >
                     </div>
@@ -123,12 +131,19 @@
                             :disabled="!password_change"
                             :class="[
                                 'w-full py-4 px-6 border rounded-lg',
-                                !errors.password2 ? 'border-gray-200' : 'border-red-600'
+                                !errors.password2 || !password_change
+                                    ? 'border-gray-200'
+                                    : 'border-red-600'
                             ]"
                         />
-                        <span name="password2" class="ml-2 text-red-600 text-xs">{{
-                            errors.password2
-                        }}</span>
+                        <span
+                            name="password2"
+                            :class="[
+                                'ml-2 text-red-600 text-xs line-clamp-6',
+                                !password_change ? 'hidden' : null
+                            ]"
+                            >{{ errors.password2 }}</span
+                        >
                     </div>
                     <div>
                         <button class="py-3 px-6 bg-zinc-500 text-white rounded-lg">
@@ -193,8 +208,10 @@ export default (await import('vue')).defineComponent({
         },
         async handle_file(e) {
             const file = e.target.files[0]
-            const img_file = await this.file_handler(file)
-            this.img_avatar = img_file
+            if (file) {
+                const img_file = await this.file_handler(file)
+                this.img_avatar = img_file
+            }
         },
         async file_handler(file) {
             if (!file) return
