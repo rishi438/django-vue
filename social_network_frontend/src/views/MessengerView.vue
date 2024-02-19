@@ -11,7 +11,7 @@
                     >
                         <div class="flex items-center space-x-2">
                             <template v-for="user in conversation.users" :key="user.id">
-                                <div v-if="userStore.user.id != user.id" class="flex items-center">
+                                <div v-if="userStore.user.id != user.id" class="flex items-center text-left">
                                     <img
                                         :src="user.avatar_url ? user.avatar_url : kungFuPandaImage"
                                         class="w-[40px] h-[40px] rounded-full"
