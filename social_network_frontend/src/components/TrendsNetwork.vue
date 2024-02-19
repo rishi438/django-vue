@@ -6,7 +6,7 @@
                 <div class="flex items-center space-x-2">
                     <div class="font-normal flex flex-col">
                         <strong
-                            ><span class="text-blue-800 text-[16px]"
+                            ><span class="text-blue-800 text-[15px]"
                                 >#{{ trend.hashtag }}</span
                             ></strong
                         >
