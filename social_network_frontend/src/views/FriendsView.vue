@@ -104,10 +104,10 @@
                     </div>
                     <div class="mt-6 flex space-x-8 justify-around">
                         <p class="text-xs text-gray-500">
-                            {{ user.friends_count }}
-                            {{ user.friends_count == 1 ? 'friend' : 'friends' }}
+                            {{ friend.friends_count }}
+                            {{ friend.friends_count == 1 ? 'friend' : 'friends' }}
                         </p>
-                        <p class="text-xs text-gray-500">{{ user.posts_count }} posts</p>
+                        <p class="text-xs text-gray-500">{{ friend.posts_count }} posts</p>
                     </div>
                 </div>
             </div>
