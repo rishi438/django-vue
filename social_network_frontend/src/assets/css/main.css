@@ -29,6 +29,28 @@ label {
     font-size: medium;
     font-weight: 600;
 }
+
 .font-medium {
     font-family: 'Roboto Medium', 'Arial', 'sans-serif';
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #374151;
 }

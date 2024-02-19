@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4" v-if="conversations.length">
         <div class="main-left md:col-span-1 col-span-4">
             <div class="bg-white border border-gray-200 text-center rounded-lg">
-                <ul class="space-y-4" role="list">
+                <ul class="space-y-4 overflow-hidden overflow-y-auto max-h-[75vh]" role="list">
                     <li
                         class="p-4 group/item flex items-center justify-between hover:bg-teal-200 hover:ring-teal-200 rounded-lg"
                         v-for="conversation in conversations"
@@ -30,8 +30,8 @@
             </div>
         </div>
         <div class="main-center md:col-span-3 md:block hidden col-span-4 space-y-4">
-            <div class="bg-white border border-gray-200 rounded-lg">
-                <div class="flex flex-col flex-grow p-4">
+            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto max-h-[53vh]">
+                <div class="flex flex-col flex-grow p-4" v-if="active_conversation.messages?.length">
                     <template v-for="message in active_conversation.messages" :key="message.id">
                         <div
                             class="flex w-full mt-2 space-x-3 max-w-md ml-auto justify-end"
@@ -112,11 +112,13 @@ export default (await import('vue')).defineComponent({
     setup() {
         const userStore = useUserStore();
         return {
-            userStore
+            userStore,
         }
     },
     data() {
+        const prev_id = this.$router.options.history.state.back.split("/").pop();
         return {
+            prev_id,
             conversations: [
                 {
                     users: []
@@ -137,7 +139,8 @@ export default (await import('vue')).defineComponent({
                 .then((response) => {
                     this.conversations = response.data
                     if (this.conversations.length) {
-                        this.active_conversation = this.conversations[0].id
+                        let check = this.conversations.filter(chat => chat.users.some(user => user.id === this.prev_id))
+                        this.active_conversation = check.length?check[0].id:this.conversations[0].id
                     }
                     this.get_messages()
                 })
@@ -169,8 +172,10 @@ export default (await import('vue')).defineComponent({
                 })
         },
         set_active_conversation(id) {
-            this.active_conversation = id
-            this.get_messages()
+            if(id){
+                this.active_conversation = id
+                this.get_messages()
+            }
         }
     }
 })

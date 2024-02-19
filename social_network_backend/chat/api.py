@@ -23,11 +23,12 @@ def conversation_list(request):
 
 @api_view(["GET"])
 def conversation_detail(request, pk):
-    conversation = Conversation.objects.filter(users__in=list([request.user])).get(
-        pk=pk
-    )
-    serializer = ConversationDetailSerializer(conversation)
-    return JsonResponse(serializer.data, safe=False)
+    try:
+        conversation = Conversation.objects.filter(users=request.user).get(pk=pk)
+        serializer = ConversationDetailSerializer(conversation)
+        return JsonResponse(serializer.data)
+    except Conversation.DoesNotExist:
+        return JsonResponse({"msg": "Conversation does not exist"})
 
 
 @api_view(["POST"])
