@@ -5,7 +5,11 @@
                 <div class="text-center py-4">
                     <img
                         :src="
-                            userStore.user.avatar_url ? userStore.user.avatar_url : kungFuPandaImage
+                            userStore.user.id === this.$route.params.id
+                                ? userStore.user.avatar_url
+                                : user.avatar_url
+                                ? user.avatar_url
+                                : kungFuPandaImage
                         "
                         class="profile-img lg:w-[150px] lg:h-[150px] md:h-[80px] md:w-[80px] mb-6 rounded-full mx-auto"
                     />

@@ -20,7 +20,7 @@
                     </RouterLink>
                     <p class="text-xs text-gray-500">{{ user.posts_count }} posts</p>
                 </div>
-                <div class="flex flex-col" v-show="userStore.user.id != user.id">
+                <div class="flex flex-col" v-show="userStore.user.id != user.id && !is_friend">
                     <button
                         class="mt-6 flex-auto py-2 sm:px-6 px-4 bg-cyan-500 text-white rounded"
                         @click="send_friend_request"
@@ -103,8 +103,12 @@ export default (await import('vue')).defineComponent({
             posts: [],
             user: {},
             body: '',
+            is_friend:[],
             kungFuPandaImage
         }
+    },
+    mounted(){
+        this.get_friends();
     },
     watch: {
         '$route.params.id': {
@@ -166,7 +170,19 @@ export default (await import('vue')).defineComponent({
                 .catch((error) => {
                     console.error(error)
                 })
-        }
+        },
+        get_friends() {
+            axios
+                .get(`/api/friends/${this.userStore.user.id}/`)
+                .then((response) => {
+                    this.friends = response.data.friends
+                    this.is_friend=this.friends.some(member=> (member.id==this.$route.params.id))
+                })
+                .catch((error) => {
+                    console.log('error', error)
+                })
+        },
+
     }
 })
 </script>
