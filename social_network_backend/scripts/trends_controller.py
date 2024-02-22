@@ -17,6 +17,15 @@ from post.models import Post, Trends
 
 
 def extract_hastags(text, trends):
+    """This funtion extracts Hastags
+
+    Args:
+        text (str): hastag text
+        trends (list): empty list
+
+    Returns:
+        trends(list): list of words with most comman tags
+    """
     for word in text.split():
         if word[0] == "#":
             trends.append(word[1:])

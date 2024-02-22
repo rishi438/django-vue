@@ -63,7 +63,7 @@ export default (await import('vue')).defineComponent({
             axios
                 .get(`/api/post/?trend=${this.$route.params.id}`)
                 .then((response) => {
-                    this.posts = response.data;
+                    this.posts = response.data.payload;
                 })
                 .catch((error) => {
                     console.log('error', error);

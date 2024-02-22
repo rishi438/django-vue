@@ -93,8 +93,8 @@ export let useUserStore = defineStore({
                     ] = `Bearer ${response.data.access}`
                 })
                 .catch((error) => {
-                    console.log(error)
                     this.remove_token()
+                    console.log(error)
                 })
         },
 

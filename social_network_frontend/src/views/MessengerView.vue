@@ -137,7 +137,7 @@ export default (await import('vue')).defineComponent({
             axios
                 .get('/api/chat/')
                 .then((response) => {
-                    this.conversations = response.data
+                    this.conversations = response.data.payload
                     if (this.conversations.length) {
                         let check = this.conversations.filter(chat => chat.users.some(user => user.id === this.prev_id))
                         this.active_conversation = check.length?check[0].id:this.conversations[0].id
@@ -152,7 +152,7 @@ export default (await import('vue')).defineComponent({
             axios
                 .get(`/api/chat/${this.active_conversation}/`)
                 .then((response) => {
-                    this.active_conversation = response.data
+                    this.active_conversation = response.data.payload
                 })
                 .catch((error) => {
                     console.error(error)
@@ -164,7 +164,7 @@ export default (await import('vue')).defineComponent({
                     body: this.body
                 })
                 .then((response) => {
-                    this.active_conversation.messages.push(response.data)
+                    this.active_conversation.messages.push(response.data.payload)
                     this.body = ''
                 })
                 .catch((error) => {

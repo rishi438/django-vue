@@ -69,7 +69,7 @@ export default (await import('vue')).defineComponent({
             axios
                 .get(`/api/post/${this.$route.params.id}/`)
                 .then((response) => {
-                    this.post = response.data.post
+                    this.post = response.data.payload.post
                 })
                 .catch((error) => {
                     console.log('error', error)
@@ -81,10 +81,10 @@ export default (await import('vue')).defineComponent({
                     body: this.body
                 })
                 .then((response) => {
-                    if (response.error) {
-                        throw response.error
+                    if (!response.data.status) {
+                        throw response.data.msg
                     }
-                    this.post.comments.push(response.data)
+                    this.post.comments.push(response.data.payload)
                     this.body = ''
                 })
                 .catch((error) => {

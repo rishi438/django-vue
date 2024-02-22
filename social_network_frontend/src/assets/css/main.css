@@ -3,11 +3,11 @@
 @tailwind utilities;
 @font-face {
     font-family: 'Roboto';
-    src: url(./font/Roboto/Roboto-Regular.ttf) format('truetype');
+    src: url(../font/Roboto/Roboto-Regular.ttf) format('truetype');
 }
 @font-face {
     font-family: 'Roboto Medium';
-    src: url(./font/Roboto/Roboto-Medium.ttf) format('truetype');
+    src: url(../font/Roboto/Roboto-Medium.ttf) format('truetype');
 }
 
 .profile-img {
@@ -32,7 +32,6 @@ label {
 
 .font-medium {
     font-family: 'Roboto Medium', 'Arial', 'sans-serif';
-    font-weight: 600;
 }
 
 /* width */
@@ -54,4 +53,17 @@ label {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #374151;
+}
+
+.toast-fall {
+    animation: fallAnimation 0.5s ease;
+}
+
+@keyframes fallAnimation {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }

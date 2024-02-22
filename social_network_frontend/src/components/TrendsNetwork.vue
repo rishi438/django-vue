@@ -40,8 +40,8 @@ export default (await import('vue')).defineComponent({
         get_trends() {
             axios
                 .get('/api/post/trends/')
-                .then((res) => {
-                    this.trends = res.data
+                .then((response) => {
+                    this.trends = response.data.payload
                 })
                 .catch((err) => {
                     console.error('Error occured: ', err)

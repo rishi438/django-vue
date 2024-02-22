@@ -14,7 +14,10 @@
                         class="profile-img lg:w-[150px] lg:h-[150px] md:h-[80px] md:w-[80px] mb-6 rounded-full mx-auto"
                     />
                     <div class="font-normal">
-                        {{ userStore.user.name }}
+                        {{ userStore.user.id === this.$route.params.id
+                            ? userStore.user.name
+                            : user.name
+                        }}
                     </div>
                 </div>
                 <div class="mt-6 flex space-x-8 justify-around">
@@ -159,9 +162,9 @@ export default (await import('vue')).defineComponent({
             axios
                 .get(`/api/friends/${this.$route.params.id}/`)
                 .then((response) => {
-                    this.friend_requests = response.data.requests
-                    this.friends = response.data.friends
-                    this.user = response.data.user
+                    if (response.data.payload?.requests) this.friend_requests = response.data.payload.requests
+                    this.friends = response.data.payload.friends
+                    this.user = response.data.payload.user
                 })
                 .catch((error) => {
                     console.log('error', error)
@@ -171,7 +174,6 @@ export default (await import('vue')).defineComponent({
             axios
                 .post(`/api/friends/${id}/${status}/`)
                 .then((response) => {
-                    console.log(response)
                     window.location.reload()
                 })
                 .catch((error) => {

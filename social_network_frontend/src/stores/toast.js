@@ -4,27 +4,21 @@ export let useToastStore = defineStore({
     id: 'toast',
 
     state: () => ({
-        ms: 0,
         message: '',
-        classes: '',
-        isVisible: false
+        time: 5000,
+        is_visible: false,
+        status: false
     }),
 
     actions: {
-        show_toast(ms, message, classes) {
-            this.ms = parseInt(ms)
-            this.message = message
-            this.classes = classes
-            this.isVisible = true
+        show_toast(message, status, time) {
+            if (time) this.time = parseInt(time)
+            if (status) this.status = status
+            if (message) this.message = message
+            this.is_visible = true
             setTimeout(() => {
-                this.classes += ' -translate-y-28'
-            }, 10)
-            setTimeout(() => {
-                this.classes = this.classes.replace('-translate-y-28', '')
-            }, this.ms - 500)
-            setTimeout(() => {
-                this.isVisible = false
-            }, this.ms)
+                this.is_visible = false
+            }, this.time)
         }
     }
 })

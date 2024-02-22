@@ -11,7 +11,7 @@ from django.contrib.auth.models import (
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils import timezone
-from utils.constant import BASE_URL
+from utils.environment import BASE_URL
 
 
 class CustomUserManager(BaseUserManager):
@@ -44,7 +44,7 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     email = models.EmailField(unique=True)
-    name = models.CharField(max_length=225, unique=True, default="")
+    name = models.CharField(max_length=225, default="")
     avatar = models.ImageField(
         upload_to="avatars",
         blank=True,
