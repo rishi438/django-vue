@@ -72,6 +72,8 @@ import PeopleYouMayKnow from '@/components/PeopleYouMayKnow.vue'
 import Trends from '@/components/TrendsNetwork.vue'
 import FeedItem from '@/components/FeedItem.vue'
 import { useUserStore } from '@/stores/user'
+import { useToastStore } from '@/stores/toast'
+
 
 export default (await import('vue')).defineComponent({
     name: 'HomeView',
@@ -82,8 +84,10 @@ export default (await import('vue')).defineComponent({
     },
     setup() {
         const userStore = useUserStore()
+        const toastStore = useToastStore()
         return {
-            userStore
+            userStore,
+            toastStore
         }
     },
     mounted() {
@@ -100,7 +104,7 @@ export default (await import('vue')).defineComponent({
             axios
                 .get('/api/post/')
                 .then((response) => {
-                    this.posts = response.data
+                    this.posts = response.data.payload
                 })
                 .catch((error) => {
                     console.log('error', error)
@@ -112,8 +116,8 @@ export default (await import('vue')).defineComponent({
                     body: this.body
                 })
                 .then((response) => {
-                    if (response.error) {
-                        throw response.error
+                    if (!response.data.status) {
+                        this.toastStore.show_toast(response.data.msg, response.data.status)
                     }
                     this.posts.unshift(response.data)
                     this.userStore.set_attribute({ posts_count: 1 })

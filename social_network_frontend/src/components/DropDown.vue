@@ -84,9 +84,6 @@ const props = defineProps({
         type: Array,
         required: true
     },
-    mounted() {
-        this.d_name.image
-    }
 })
 const logout = async () => {
     try {

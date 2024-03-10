@@ -49,7 +49,7 @@
                             class="mt-1"
                             placeholder="Name"
                             :class="[
-                                'w-full py-4 px-6 border rounded-lg ',
+                                'w-full py-2 px-6 border rounded-lg ',
                                 !errors.name ? 'border-gray-200' : 'border-red-600'
                             ]"
                         />
@@ -65,7 +65,7 @@
                             type="email"
                             placeholder="Email"
                             :class="[
-                                'w-full py-4 px-6 border rounded-lg',
+                                'w-full py-2 px-6 border rounded-lg',
                                 !errors.email ? 'border-gray-200' : 'border-red-600'
                             ]"
                         />
@@ -81,7 +81,7 @@
                             type="password"
                             placeholder="Your current password"
                             :class="[
-                                'w-full py-4 px-6 border rounded-lg',
+                                'w-full py-2 px-6 border rounded-lg',
                                 !errors.current_password ? 'border-gray-200' : 'border-red-600'
                             ]"
                         />
@@ -105,7 +105,7 @@
                             placeholder="Your new password"
                             :disabled="!password_change"
                             :class="[
-                                'w-full py-4 px-6 border rounded-lg',
+                                'w-full py-2 px-6 border rounded-lg',
                                 !errors.password1 || !password_change
                                     ? 'border-gray-200'
                                     : 'border-red-600'
@@ -130,7 +130,7 @@
                             placeholder="Confirm new password"
                             :disabled="!password_change"
                             :class="[
-                                'w-full py-4 px-6 border rounded-lg',
+                                'w-full py-2 px-6 border rounded-lg',
                                 !errors.password2 || !password_change
                                     ? 'border-gray-200'
                                     : 'border-red-600'
@@ -145,7 +145,7 @@
                             >{{ errors.password2 }}</span
                         >
                     </div>
-                    <div>
+                    <div class="flex justify-end">
                         <button class="py-3 px-6 bg-zinc-500 text-white rounded-lg">
                             Save Changes
                         </button>
@@ -157,9 +157,10 @@
 </template>
 <script>
 import axios from 'axios'
-import { useToastStore } from '../stores/toast'
-import { useUserStore } from '../stores/user'
+import { useToastStore } from '@/stores/toast'
+import { useUserStore } from '@/stores/user'
 import { Field, Form } from 'vee-validate'
+import kungFuPandaImage from '@/assets/images/kung-fu-panda.jpeg'
 
 export default (await import('vue')).defineComponent({
     setup() {
@@ -192,6 +193,8 @@ export default (await import('vue')).defineComponent({
     },
     data() {
         const img_avatar = this.userStore.user.avatar_url
+            ? this.userStore.user.avatar_url
+            : kungFuPandaImage
         return {
             img_avatar,
             password_change: false
@@ -234,8 +237,8 @@ export default (await import('vue')).defineComponent({
                     }
                 })
                 .then(async (response) => {
-                    if (response.data.msg == 'User details updated successfully!') {
-                        this.toastStore.show_toast(5000, `${response.data.msg}`, 'bg-emerald-500')
+                    if (response.data.status) {
+                        this.toastStore.show_toast(response.data.msg, response.data.status)
                         await this.userStore.set_attribute({
                             name: vals.name,
                             email: vals.email,
@@ -247,7 +250,7 @@ export default (await import('vue')).defineComponent({
                             name: this.userStore.user.name
                         })
                     } else {
-                        this.toastStore.show_toast(5000, response.data.msg, 'bg-red-300')
+                        this.toastStore.show_toast(response.data.msg, response.data.status)
                     }
                 })
                 .catch((error) => {

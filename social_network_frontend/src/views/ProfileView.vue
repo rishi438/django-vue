@@ -76,11 +76,11 @@
 
 <script>
 import axios from 'axios'
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import Trends from '../components/TrendsNetwork.vue'
-import FeedItem from '../components/FeedItem.vue'
-import { useUserStore } from '../stores/user'
-import { useToastStore } from '../stores/toast'
+import PeopleYouMayKnow from '@/components/PeopleYouMayKnow.vue'
+import Trends from '@/components/TrendsNetwork.vue'
+import FeedItem from '@/components/FeedItem.vue'
+import { useUserStore } from '@/stores/user'
+import { useToastStore } from '@/stores/toast'
 import kungFuPandaImage from '@/assets/images/kung-fu-panda.jpeg'
 
 export default (await import('vue')).defineComponent({
@@ -125,9 +125,9 @@ export default (await import('vue')).defineComponent({
                 .post(`/api/friends/${this.$route.params.id}/request/`)
                 .then((response) => {
                     if (response.data.msg == 'Friend request already sent!') {
-                        this.toastStore.show_toast(5000, response.data.msg, 'bg-red-400')
+                        this.toastStore.show_toast(response.data.msg, response.data.status)
                     } else {
-                        this.toastStore.show_toast(5000, response.data.msg, 'bg-green-500')
+                        this.toastStore.show_toast(response.data.msg, response.data.status)
                     }
                 })
                 .catch((error) => {
@@ -138,8 +138,8 @@ export default (await import('vue')).defineComponent({
             axios
                 .get(`/api/post/profile/${this.$route.params.id}/`)
                 .then((response) => {
-                    this.posts = response.data.post
-                    this.user = response.data.user
+                    this.posts = response.data.payload.posts
+                    this.user = response.data.payload.user
                 })
                 .catch((error) => {
                     console.log('error', error)
@@ -175,7 +175,7 @@ export default (await import('vue')).defineComponent({
             axios
                 .get(`/api/friends/${this.userStore.user.id}/`)
                 .then((response) => {
-                    this.friends = response.data.friends
+                    this.friends = response.data.payload.friends
                     this.is_friend=this.friends.some(member=> (member.id==this.$route.params.id))
                 })
                 .catch((error) => {

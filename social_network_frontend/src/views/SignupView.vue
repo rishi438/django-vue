@@ -57,7 +57,7 @@
                         />
                     </div>
                     <template v-if="errors.length > 0">
-                        <div class="bg-red-300 text-white rounded-lg p-6">
+                        <div class="bg-red-400 text-white rounded-lg p-6">
                             <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
                         </div>
                     </template>
@@ -72,7 +72,7 @@
 
 <script>
 import axios from 'axios'
-import { useToastStore } from '../stores/toast'
+import { useToastStore } from '@/stores/toast'
 
 export default (await import('vue')).defineComponent({
     name: 'SignupView',
@@ -95,7 +95,8 @@ export default (await import('vue')).defineComponent({
     },
     methods: {
         submit_form() {
-            this.error = []
+            this.errors = []
+            console.log(this.errors)
             let email_regex = /^[a-zA-Z0-9,_+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/
             if (!email_regex.test(this.form.email)) {
                 this.errors.push('Your e-mail is missing or invalid')
@@ -113,18 +114,17 @@ export default (await import('vue')).defineComponent({
                 axios
                     .post('/api/signup/', this.form)
                     .then((response) => {
-                        if (response.data.msg == 'User created successfully!') {
+                        if (response.data.status) {
                             this.toastStore.show_toast(
-                                5000,
                                 `${response.data.msg} Please log in`,
-                                'bg-emerald-500'
+                                response.data.status
                             )
                             this.form.email = ''
                             this.form.name = ''
                             this.form.password = ''
                             this.form.confirm_password = ''
                         } else {
-                            this.toastStore.show_toast(5000, response.data.msg, 'bg-red-300')
+                            this.toastStore.show_toast(response.data.msg, response.data.status)
                         }
                     })
                     .catch((error) => {

@@ -104,9 +104,10 @@ export default (await import('vue')).defineComponent({
                     })
                 if (this.userStore.user.is_authenticated) {
                     await axios
-                        .get('/api/me/')
+                        .get('/api/user_details/')
                         .then((response) => {
-                            this.userStore.set_attribute(response.data, true)
+                            this.userStore.set_attribute(response.data.payload, true)
+                            console.log(response.data)
                             this.$router.push('/home')
                         })
                         .catch((error) => {

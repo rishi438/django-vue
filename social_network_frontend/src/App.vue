@@ -111,11 +111,11 @@
                 </div>
             </div>
         </nav>
+        <Toast />
         <main class="md:px-8 px-2 py-6">
             <RouterView />
             <!-- <RouterView v-if="userStore.user.is_authenticated" /> -->
         </main>
-        <Toast />
     </div>
 </template>
 
@@ -130,7 +130,7 @@ export default (await import('vue')).defineComponent({
     setup() {
         let userStore = useUserStore()
         return {
-            userStore
+            userStore,
         }
     },
     data() {
@@ -139,13 +139,8 @@ export default (await import('vue')).defineComponent({
             { name: 'Edit', val: this.userStore },
             'Logout'
         ]
-        let option_details = {
-            image: true,
-            url: this.userStore.user.avatar_url ? this.userStore.user.avatar_url : kungFuPandaImage
-        }
         return {
             list_opt,
-            option_details
         }
     },
     components: {
@@ -155,6 +150,12 @@ export default (await import('vue')).defineComponent({
     computed: {
         route_name() {
             return this.$route.name
+        },
+        option_details(){
+            return {
+            image: true,
+            url: this.userStore.user.avatar_url ? this.userStore.user.avatar_url : kungFuPandaImage
+        }
         }
     },
     beforeCreate() {
@@ -165,6 +166,6 @@ export default (await import('vue')).defineComponent({
         } else {
             axios.defaults.headers.common['Authorization'] = ''
         }
-    }
+    },
 })
 </script>

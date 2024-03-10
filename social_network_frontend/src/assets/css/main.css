@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+    font-family: 'Roboto';
+    src: url(../font/Roboto/Roboto-Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Roboto Medium';
+    src: url(../font/Roboto/Roboto-Medium.ttf) format('truetype');
+}
+
+.profile-img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
+
+.group\/item:hover {
+    cursor: pointer;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-weight: 300;
+}
+
+label {
+    font-size: medium;
+    font-weight: 600;
+}
+
+.font-medium {
+    font-family: 'Roboto Medium', 'Arial', 'sans-serif';
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #374151;
+}
+
+.toast-fall {
+    animation: fallAnimation 0.5s ease;
+}
+
+@keyframes fallAnimation {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
