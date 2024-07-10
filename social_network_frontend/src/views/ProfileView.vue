@@ -103,12 +103,12 @@ export default (await import('vue')).defineComponent({
             posts: [],
             user: {},
             body: '',
-            is_friend:[],
+            is_friend: [],
             kungFuPandaImage
         }
     },
-    mounted(){
-        this.get_friends();
+    mounted() {
+        this.get_friends()
     },
     watch: {
         '$route.params.id': {
@@ -176,13 +176,14 @@ export default (await import('vue')).defineComponent({
                 .get(`/api/friends/${this.userStore.user.id}/`)
                 .then((response) => {
                     this.friends = response.data.payload.friends
-                    this.is_friend=this.friends.some(member=> (member.id==this.$route.params.id))
+                    this.is_friend = this.friends.some(
+                        (member) => member.id == this.$route.params.id
+                    )
                 })
                 .catch((error) => {
                     console.log('error', error)
                 })
-        },
-
+        }
     }
 })
 </script>
