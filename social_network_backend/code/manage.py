@@ -6,8 +6,11 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "social_network_backend.settings")
+    os.environ.setdefault(
+        "DJANGO_SETTINGS_MODULE", "code.social_network_backend.settings"
+    )
     try:
+        print("==>", sys.argv)
         from django.core.management import execute_from_command_line
     except ImportError as exc:
         raise ImportError(
