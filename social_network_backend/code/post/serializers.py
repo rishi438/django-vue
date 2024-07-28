@@ -1,4 +1,5 @@
-from account.serializers import UserSerializer
+from code.account.serializers import UserSerializer
+
 from rest_framework import serializers
 
 from .models import Comment, Post, Trends

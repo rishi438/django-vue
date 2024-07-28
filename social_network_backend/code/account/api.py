@@ -1,5 +1,8 @@
+from code.account.serializers import FriendRequestSerializer, UserSerializer
+from code.utils.constant import API_RESPONSE_OBJ, RESPONSE_MSG_API, RESPONSE_STATUS_API
+from code.utils.environment import BASE_URL
+
 import requests
-from account.serializers import FriendRequestSerializer, UserSerializer
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.db.models import Q
@@ -9,8 +12,6 @@ from rest_framework.decorators import (
     authentication_classes,
     permission_classes,
 )
-from utils.constant import API_RESPONSE_OBJ, RESPONSE_MSG_API, RESPONSE_STATUS_API
-from utils.environment import BASE_URL
 
 from .forms import SigupForm, UserDetailsForm
 from .models import FriendRequest, FriendRequestStatus, User

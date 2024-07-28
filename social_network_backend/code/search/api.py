@@ -1,14 +1,15 @@
-from account.models import User
-from account.serializers import UserSerializer
+from code.account.models import User
+from code.account.serializers import UserSerializer
+from code.post.models import Post
+from code.post.serializers import PostSerializer
+from code.utils.constant import API_RESPONSE_OBJ, RESPONSE_MSG_API, RESPONSE_STATUS_API
+
 from django.http import JsonResponse
-from post.models import Post
-from post.serializers import PostSerializer
 from rest_framework.decorators import (
     api_view,
     authentication_classes,
     permission_classes,
 )
-from utils.constant import API_RESPONSE_OBJ, RESPONSE_MSG_API, RESPONSE_STATUS_API
 
 
 @api_view(["POST"])

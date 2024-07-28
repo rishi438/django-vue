@@ -10,7 +10,6 @@ def main():
         "DJANGO_SETTINGS_MODULE", "code.social_network_backend.settings"
     )
     try:
-        print("==>", sys.argv)
         from django.core.management import execute_from_command_line
     except ImportError as exc:
         raise ImportError(

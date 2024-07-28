@@ -5,7 +5,6 @@ import environ
 env = environ.Env()
 environ.Env.read_env()
 
-DEBUG = True
 SECRET_KEY = NotImplemented
 
 ALLOWED_HOSTS = ["*"]
@@ -40,10 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "account",
-    "post",
-    "search",
-    "chat",
+    "code.account",
+    "code.post",
+    "code.search",
+    "code.chat",
     "rest_framework",
     "rest_framework_simplejwt",
     "corsheaders",

@@ -1,6 +1,6 @@
+from code.account.models import User
 from uuid import uuid4
 
-from account.models import User
 from django.db import models
 from django.utils.timesince import timesince
 

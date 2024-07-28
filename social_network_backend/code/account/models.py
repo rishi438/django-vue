@@ -1,4 +1,5 @@
 import uuid
+from code.utils.environment import BASE_URL
 from enum import IntEnum, unique
 from typing import Any
 from uuid import uuid4
@@ -11,7 +12,6 @@ from django.contrib.auth.models import (
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils import timezone
-from utils.environment import BASE_URL
 
 
 class CustomUserManager(BaseUserManager):

@@ -1,11 +1,12 @@
-from account.models import User
+from code.account.models import User
+from code.utils.constant import API_RESPONSE_OBJ, RESPONSE_MSG_API, RESPONSE_STATUS_API
+
 from django.http import JsonResponse
 from rest_framework.decorators import (
     api_view,
     authentication_classes,
     permission_classes,
 )
-from utils.constant import API_RESPONSE_OBJ, RESPONSE_MSG_API, RESPONSE_STATUS_API
 
 from .models import Conversation, ConversationMessage
 from .serializers import (

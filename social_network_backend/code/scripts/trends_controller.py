@@ -11,9 +11,8 @@ sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), ".."))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "social_network_backend.settings")
 django.setup()
 
+from code.post.models import Post, Trends
 from collections import Counter
-
-from post.models import Post, Trends
 
 
 def extract_hastags(text, trends):
